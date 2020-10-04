@@ -1,0 +1,63 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@common/*": [
+        "src/app/common/*"
+      ],
+      "@store/*": [
+        "src/app/store/*"
+      ],
+      "ae-toolbar": [
+        "dist/ae-toolbar/ae-toolbar",
+        "dist/ae-toolbar"
+      ],
+      "ae-form": [
+        "dist/ae-form/ae-form",
+        "dist/ae-form"
+      ],
+      "ae-table": [
+        "dist/ae-table/ae-table",
+        "dist/ae-table"
+      ],
+      "ae-chat": [
+        "dist/ae-chat/ae-chat",
+        "dist/ae-chat"
+      ],
+      "ae-full-card": [
+        "dist/ae-full-card/ae-full-card",
+        "dist/ae-full-card"
+      ],
+      "ae-avatar": [
+        "dist/ae-avatar/ae-avatar",
+        "dist/ae-avatar"
+      ],
+      "ae-component-document": [
+        "dist/ae-component-document/ae-component-document",
+        "dist/ae-component-document"
+      ],
+      "ae-side-nav": [
+        "dist/ae-side-nav/ae-side-nav",
+        "dist/ae-side-nav"
+      ],
+      "ae-material": [
+        "dist/ae-material/ae-material",
+        "dist/ae-material"
+      ]
+    },
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "es2020",
+    "lib": [
+      "es2018",
+      "dom"
+    ]
+  }
+}

@@ -1,0 +1,1 @@
+### NGRX Store Configurations; actions and reducers.
