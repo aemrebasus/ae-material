@@ -16,14 +16,8 @@ export interface AeView {
   templateUrl: './ae-view.component.html',
   styleUrls: ['./ae-view.component.css']
 })
-export class AeViewComponent implements OnInit {
+export class AeViewComponent {
 
   @Input() input: AeView;
-
-  constructor() { }
-
-  ngOnInit(): void {
-
-  }
 
 }

@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AeDocComponent } from './ae-doc.component';
 import { AeAvatarModule } from '../ae-avatar/ae-avatar.module';
@@ -29,7 +29,9 @@ import { AeDetailsModule } from '../ae-details/ae-details.module';
     AeTableModule,
     AeDetailsModule,
   ],
-  exports: [AeDocComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  exports: [
+    AeDocComponent,
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
 })
 export class AeDocModule { }

@@ -22,11 +22,8 @@ const sampleCard: AeCard = {
   templateUrl: './ae-card.component.html',
   styleUrls: ['./ae-card.component.css']
 })
-export class AeCardComponent implements OnInit {
-  @Input() input: AeCard = sampleCard;
-  constructor() { }
+export class AeCardComponent {
 
-  ngOnInit(): void {
-  }
+  @Input() input: AeCard = sampleCard;
 
 }

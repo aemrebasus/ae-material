@@ -21,14 +21,8 @@ const sampleToolbar: AeToolbar = {
   templateUrl: './ae-toolbar.component.html',
   styleUrls: ['./ae-toolbar.component.css']
 })
-export class AeToolbarComponent implements OnInit {
+export class AeToolbarComponent {
 
   @Input() input: AeToolbar = sampleToolbar;
-
-  constructor() {
-  }
-
-  ngOnInit(): void {
-  }
 
 }

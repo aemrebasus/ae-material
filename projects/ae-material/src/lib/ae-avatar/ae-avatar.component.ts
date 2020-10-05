@@ -20,15 +20,8 @@ const sampleAvatar = {
   templateUrl: './ae-avatar.component.html',
   styleUrls: ['./ae-avatar.component.css']
 })
-export class AeAvatarComponent implements OnInit {
+export class AeAvatarComponent {
 
   @Input() input: AeAvatar = sampleAvatar;
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-
 
 }

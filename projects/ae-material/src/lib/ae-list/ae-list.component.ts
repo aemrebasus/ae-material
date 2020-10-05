@@ -19,17 +19,13 @@ const sampleList: AeList = {
 };
 
 
-
 @Component({
   selector: 'ae-list',
   templateUrl: './ae-list.component.html',
   styleUrls: ['./ae-list.component.css']
 })
-export class AeListComponent implements OnInit {
+export class AeListComponent {
 
   @Input() input: AeList = sampleList;
-
-  ngOnInit(): void {
-  }
 
 }
