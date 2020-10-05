@@ -54,6 +54,14 @@ export const components: { [key: string]: AeView } = {
         component: 'AeTableComponent',
         selector: 'ae-table',
         interface: 'AeTable'
+    },
+
+    details: {
+        name: 'Details',
+        module: 'AeDetailsModule',
+        component: 'AeDetailsComponent',
+        selector: 'ae-details',
+        interface: 'AeDetail'
     }
 
     // TODO: Add the new components here.

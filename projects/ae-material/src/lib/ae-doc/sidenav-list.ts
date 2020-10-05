@@ -67,6 +67,14 @@ export function sideNavData(store: Store): AeSideNav {
                     action: () => store.dispatch(setView(components.table))
                 },
 
+                {
+                    value: 'Details',
+                    route: 'details',
+                    icon: 'details',
+                    tooltip: 'Details Component',
+                    action: () => store.dispatch(setView(components.details))
+                }
+
 
 
             ]

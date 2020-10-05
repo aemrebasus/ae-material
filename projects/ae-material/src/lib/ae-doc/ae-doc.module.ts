@@ -20,6 +20,8 @@ import { reducer } from './actions';
 import { AeSideNavComponent } from '../ae-side-nav/ae-side-nav.component';
 import { AeTableComponent } from '../ae-table/ae-table.component';
 import { AeTableModule } from '../ae-table/ae-table.module';
+import { AeDetailsComponent } from '../ae-details/ae-details.component';
+import { AeDetailsModule } from '../ae-details/ae-details.module';
 
 const routes: Routes = [
   {
@@ -33,7 +35,8 @@ const routes: Routes = [
       { path: 'side-nav', component: AeSideNavComponent },
       { path: 'toolbar', component: AeToolbarComponent },
       { path: 'list', component: AeListComponent },
-      { path: 'table', component: AeTableComponent }
+      { path: 'table', component: AeTableComponent },
+      { path: 'details', component: AeDetailsComponent }
     ]
   },
 ];
@@ -54,8 +57,8 @@ const routes: Routes = [
     AeListModule,
     AeSideNavModule,
     AeViewModule,
-    AeTableModule
-
+    AeTableModule,
+    AeDetailsModule,
   ],
   exports: [AeDocComponent]
 })

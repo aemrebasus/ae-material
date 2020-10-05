@@ -2,29 +2,34 @@
 import { AfterViewInit, Input, Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 
+/**
+ * @field dataSource  : MatTableDataSource<T> T is an Entity type.
+ * @field navigateToView : when it is set true, when user clicks on the item, it displays the item details on the dedicated component
+ */
 export interface AeTable<T = any> {
-  // displayedColumns?: string[];
   dataSource: MatTableDataSource<T>;
-
+  onClick?: (id: string) => void;
 }
 
 
 const sampleData: AeTable = {
   dataSource: new MatTableDataSource([
-    { firstName: '1', lastName: '1' },
-    { firstName: '2', lastName: '2' },
-    { firstName: '3', lastName: '3' },
-    { firstName: '4', lastName: '4' },
-    { firstName: '5', lastName: '5' },
-    { firstName: '6', lastName: '6' },
-    { firstName: '7', lastName: '7' },
-
-  ])
+    { id: '1', firstName: '1', lastName: '1' },
+    { id: '2', firstName: '2', lastName: '2' },
+    { id: '3', firstName: '3', lastName: '3' },
+    { id: '4', firstName: '4', lastName: '4' },
+    { id: '5', firstName: '5', lastName: '5' },
+    { id: '6', firstName: '6', lastName: '6' },
+    { id: '7', firstName: '7', lastName: '7' },
+  ]),
+  onClick: (id) => {
+    alert(`You clicked the item with the id ${id}`);
+  }
 };
 
 
@@ -35,50 +40,48 @@ const sampleData: AeTable = {
 })
 export class AeTableComponent implements AfterViewInit, OnDestroy, OnInit {
 
-  tableDataSub: Subscription;
-
   @Input() input: AeTable = sampleData;
-
-
-  displayedColumns: string[];
-  dataSource: MatTableDataSource<any>;
-
   @ViewChild(MatPaginator) paginator: MatPaginator;
+
+
+  tableDataSub: Subscription;
+  displayedColumns: string[];
+
 
   sortBy: string;
   sortType: boolean;
 
-  constructor(private activatedRoute: ActivatedRoute) { }
+  constructor(private activatedRoute: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
 
-    this.tableDataSub = this.activatedRoute.data
-      .pipe(map(d => d.resolved))
-      .subscribe(tableData => {
-        if (tableData) {
-
-          this.dataSource = new MatTableDataSource(tableData);
-          this.displayedColumns = Object.keys(tableData[0]);
-        } else {
-
-          this.dataSource = this.input.dataSource;
-          this.displayedColumns = Object.keys(this.input.dataSource.data[0]);
-        }
-      });
+    if (this.input) {
+      this.displayedColumns = Object.keys(this.input.dataSource.data[0]);
+    } else {
+      this.tableDataSub = this.activatedRoute.data
+        .pipe(map(d => d.resolved))
+        .subscribe(tableData => {
+          if (tableData) {
+            this.input.dataSource = new MatTableDataSource(tableData);
+            this.displayedColumns = Object.keys(tableData[0]);
+          } else {
+            throw new Error('You did not pass any data to the table');
+          }
+        });
+    }
   }
 
   ngOnDestroy(): void {
-    this.tableDataSub.unsubscribe();
+    this.tableDataSub?.unsubscribe();
   }
-
 
   applyFilter(event: Event): void {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    this.input.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
+    this.input.dataSource.paginator = this.paginator;
   }
 
   sort(col: string): void {
@@ -86,7 +89,7 @@ export class AeTableComponent implements AfterViewInit, OnDestroy, OnInit {
       this.sortType = !this.sortType;
     }
     this.sortBy = col;
-    this.dataSource = new MatTableDataSource(this.dataSource.data.sort((a, b) => {
+    this.input.dataSource = new MatTableDataSource(this.input.dataSource.data.sort((a, b) => {
 
       // tslint:disable-next-line: radix
       a = parseInt(a[col]) || a[col];
@@ -98,9 +101,8 @@ export class AeTableComponent implements AfterViewInit, OnDestroy, OnInit {
     }));
   }
 
-
-  selected(row: { [key: string]: any }): void {
-    console.log(row.id);
+  clicked(row: { [key: string]: any }): void {
+    this.input.onClick(row.id);
   }
 
 }

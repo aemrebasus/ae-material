@@ -1,11 +1,11 @@
 <mat-form-field>
     <mat-label>Filter</mat-label>
-    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #filterInput>
 </mat-form-field>
 
 <div class="table-container">
 
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <table mat-table [dataSource]="input.dataSource" class="mat-elevation-z8">
 
         <!-- Position Column -->
         <ng-container *ngFor="let col of displayedColumns" [matColumnDef]="col">
@@ -16,13 +16,12 @@
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns;  sticky: true;"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selected(row)"
-            [routerLink]="['view',row.id]" routerLinkActive="router-link-active"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="clicked(row)"></tr>
 
         <!-- Row shown when there is no matching data. -->
         <tr class="mat-row" *matNoDataRow>
-            <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+            <td class="mat-cell" colspan="4">No data matching the filter "{{filterInput.value}}"</td>
         </tr>
     </table>
 </div>
-<mat-paginator [pageSizeOptions]="[5, 10]" showFirstLastButtons></mat-paginator>
+<mat-paginator [pageSizeOptions]="[5, 10, 15, 20, 25, 30,50]" showFirstLastButtons></mat-paginator>

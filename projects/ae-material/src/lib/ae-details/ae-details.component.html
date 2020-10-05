@@ -1,0 +1,27 @@
+<mat-card>
+    <mat-card-content>
+        <mat-list>
+            <mat-list-item *ngFor="let item of data">
+                <strong>{{item[0] | titlecase}}: </strong>
+                <span style="width: 20px;"></span>
+                <span>{{item[1]}}</span>
+            </mat-list-item>
+        </mat-list>
+    </mat-card-content>
+
+    <mat-card-actions style="display: flex; justify-content: flex-end;">
+
+        <button mat-mini-fab (click)="goBack()" color="primary">
+            <mat-icon> {{iconGoBack}}</mat-icon>
+        </button>
+        <span style="flex:1 1 auto"></span>
+        <button mat-mini-fab (click)="edit()" color="accent" style="margin-right: 5px;">
+            <mat-icon>{{iconEdit}}</mat-icon>
+        </button>
+        <button mat-mini-fab (click)="confirmDelete()" color="warn">
+            <mat-icon>{{iconDelete}}</mat-icon>
+        </button>
+
+    </mat-card-actions>
+
+</mat-card>

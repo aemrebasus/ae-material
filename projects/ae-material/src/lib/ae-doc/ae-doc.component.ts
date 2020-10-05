@@ -6,10 +6,6 @@ import { AeView } from '../ae-view/ae-view.component';
 import { sideNavData } from './sidenav-list';
 
 
-
-
-
-
 @Component({
   selector: 'ae-doc',
   templateUrl: './ae-doc.component.html',

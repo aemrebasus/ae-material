@@ -13,8 +13,8 @@ const routes: Routes = [
 @NgModule({
   imports: [
     GreetingModule,
+    RouterModule.forRoot(routes, { useHash: true }),
     AeDocModule,
-    RouterModule.forRoot(routes, { useHash: true })
   ],
   exports: [RouterModule]
 })

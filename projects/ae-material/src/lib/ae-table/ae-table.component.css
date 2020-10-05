@@ -1,5 +1,5 @@
 table {
-    width: 100%;
+    flex-grow: 1;
 }
 
 .mat-form-field {
@@ -12,9 +12,9 @@ table {
 }
 
 .table-container {
-    width: 100%;
-
     overflow-x: auto;
+    display: flex;
+    flex-direction: row;
 }
 
 tr:hover {
