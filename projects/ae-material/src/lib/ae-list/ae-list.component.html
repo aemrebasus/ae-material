@@ -1,0 +1,9 @@
+<mat-selection-list #shoes [multiple]="false">
+    <h1 *ngIf="input.title">{{input.title}}</h1>
+    <mat-list-option *ngFor="let item of input.list" [value]="item?.value" [routerLink]="item?.route"
+        [matTooltip]="item?.tooltip | titlecase" [matTooltipPosition]="item?.tooltipPosition || 'right'"
+        (click)="item?.action ? item.action() : ''">
+        <mat-icon mat-list-icon>{{item?.icon}}</mat-icon>
+        <div mat-line> {{item?.value | titlecase}} </div>
+    </mat-list-option>
+</mat-selection-list>

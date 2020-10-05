@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
 
 import { AeAvatarModule } from './ae-avatar/ae-avatar.module';
 import { AeCardModule } from './ae-card/ae-card.module';
@@ -21,8 +20,7 @@ import { AeToolbarModule } from './ae-toolbar/ae-toolbar.module';
     AeAvatarModule,
     AeCardModule,
     AeFormModule,
-    AeToolbarModule,
-    AeDocModule
+    AeToolbarModule
   ]
 })
 export class AeMaterialModule { }

@@ -1,0 +1,9 @@
+.mat-drawer {
+    min-width: 200px;
+    height: 100vh;
+}
+
+.mat-drawer-container {
+    width: 100vw;
+    height: 100vh;
+}

@@ -1,1 +1,5 @@
-<p>ae-avatar works!</p>
+<mat-card-header>
+    <div mat-card-avatar> <img [src]="input.src" (click)="input.action()"> </div>
+    <mat-card-title>{{input.title}}</mat-card-title>
+    <mat-card-subtitle>{{input.subTitle}}</mat-card-subtitle>
+</mat-card-header>

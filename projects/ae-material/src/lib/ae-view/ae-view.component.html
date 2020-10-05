@@ -1,0 +1,54 @@
+<mat-tab-group>
+
+  <mat-tab label="View">
+    <mat-card>
+      <mat-card-content>
+        <ng-content></ng-content>
+      </mat-card-content>
+    </mat-card>
+  </mat-tab>
+  <mat-tab label="Api">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Module </mat-card-title>
+        <mat-card-subtitle>
+          <code>
+            import  {{input?.module}}  from 'ae-material/{{input?.selector}}';
+          </code>
+        </mat-card-subtitle>
+      </mat-card-header>
+
+
+      <mat-card-header>
+        <mat-card-title>Component</mat-card-title>
+        <mat-card-subtitle>
+          <code>
+            {{input?.component}}
+          </code>
+        </mat-card-subtitle>
+      </mat-card-header>
+
+
+      <mat-card-header>
+        <mat-card-title>Selector</mat-card-title>
+        <mat-card-subtitle>
+          <code>
+            {{input?.selector}}
+          </code>
+        </mat-card-subtitle>
+      </mat-card-header>
+
+
+      <mat-card-header>
+        <mat-card-title>Interface</mat-card-title>
+        <mat-card-subtitle>
+          <code>
+            {{input?.interface}}
+          </code>
+        </mat-card-subtitle>
+      </mat-card-header>
+
+
+    </mat-card>
+  </mat-tab>
+</mat-tab-group>
