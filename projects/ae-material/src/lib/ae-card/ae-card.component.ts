@@ -8,6 +8,14 @@ export interface AeCard {
   actionLabel?: string;
 }
 
+const sampleCard: AeCard = {
+  action: () => alert('Card action'),
+  actionLabel: 'Action Label',
+  title: 'Card Title',
+  subtitle: 'Card Subtitle'
+
+};
+
 
 @Component({
   selector: 'ae-card',
@@ -15,13 +23,7 @@ export interface AeCard {
   styleUrls: ['./ae-card.component.css']
 })
 export class AeCardComponent implements OnInit {
-  @Input() input: AeCard = {
-    action: () => alert('Card action'),
-    actionLabel: 'Action Label',
-    title: 'Card Title',
-    subtitle: 'Card Subtitle'
-
-  };
+  @Input() input: AeCard = sampleCard;
   constructor() { }
 
   ngOnInit(): void {

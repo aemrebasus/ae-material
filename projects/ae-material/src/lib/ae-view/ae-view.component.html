@@ -7,6 +7,7 @@
       </mat-card-content>
     </mat-card>
   </mat-tab>
+
   <mat-tab label="Api">
     <mat-card>
       <mat-card-header>
@@ -47,8 +48,18 @@
           </code>
         </mat-card-subtitle>
       </mat-card-header>
-
-
     </mat-card>
   </mat-tab>
+
+  <mat-tab label="Notes" *ngIf="input.notes">
+    <mat-card>
+      <mat-card-content>
+        <p>
+          {{input.notes}}
+        </p>
+      </mat-card-content>
+    </mat-card>
+  </mat-tab>
+
+
 </mat-tab-group>

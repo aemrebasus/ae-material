@@ -26,8 +26,10 @@
     "@ngrx/effects": "10.0.0",
     "@ngrx/entity": "10.0.0",
     "@ngrx/store": "10.0.0",
+    "@types/validator": "^13.1.0",
     "rxjs": "6.6.0",
     "tslib": "2.0.0",
+    "validator": "^13.1.17",
     "zone.js": "0.10.2"
   },
   "devDependencies": {

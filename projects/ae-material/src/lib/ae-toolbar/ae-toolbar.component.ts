@@ -13,7 +13,8 @@ const sampleToolbar: AeToolbar = {
     { action: () => alert('Toolbar Action'), icon: 'signal_cellular_connected_no_internet_4_bar', tooltip: 'Left Tooltip', tooltipPosition: 'left' },
     { action: () => alert('Toolbar Action'), icon: 'list_alt', tooltip: 'Above Tooltip', tooltipPosition: 'above' },
   ]
-}
+};
+
 
 @Component({
   selector: 'ae-toolbar',

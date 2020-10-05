@@ -15,10 +15,11 @@ import { AeListModule } from '../ae-list/ae-list.module';
 import { AeListComponent } from '../ae-list/ae-list.component';
 import { AeSideNavModule } from '../ae-side-nav/ae-side-nav.module';
 import { AeViewModule } from '../ae-view/ae-view.module';
-import { createAction, createReducer, on, props, StoreModule } from '@ngrx/store';
-import { AeView } from '../ae-view/ae-view.component';
+import { StoreModule } from '@ngrx/store';
 import { reducer } from './actions';
 import { AeSideNavComponent } from '../ae-side-nav/ae-side-nav.component';
+import { AeTableComponent } from '../ae-table/ae-table.component';
+import { AeTableModule } from '../ae-table/ae-table.module';
 
 const routes: Routes = [
   {
@@ -31,9 +32,10 @@ const routes: Routes = [
       { path: 'form', component: AeFormComponent },
       { path: 'side-nav', component: AeSideNavComponent },
       { path: 'toolbar', component: AeToolbarComponent },
-      { path: 'list', component: AeListComponent }
+      { path: 'list', component: AeListComponent },
+      { path: 'table', component: AeTableComponent }
     ]
-  }
+  },
 ];
 
 
@@ -52,6 +54,7 @@ const routes: Routes = [
     AeListModule,
     AeSideNavModule,
     AeViewModule,
+    AeTableModule
 
   ],
   exports: [AeDocComponent]

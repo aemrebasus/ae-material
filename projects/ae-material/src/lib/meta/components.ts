@@ -1,8 +1,5 @@
 import { AeView } from '../ae-view/ae-view.component';
 
-
-
-
 /**
  * For documentation of components
  */
@@ -27,6 +24,7 @@ export const components: { [key: string]: AeView } = {
         component: 'AeFormComponent',
         selector: 'ae-form',
         interface: 'AeForm',
+        notes: 'There are some builtin inputs like firstName, lastName, password, etc. They can be access from \'ae-material/ae-form/builtin-inputs\'. Also there are builtin-validators that can be imported from \'ae-material/ae-form/builtin-validators\''
     },
     list: {
         name: 'List',
@@ -49,6 +47,14 @@ export const components: { [key: string]: AeView } = {
         selector: 'ae-toolbar',
         interface: 'AeToolbar',
     },
+
+    table: {
+        name: 'Table',
+        module: 'AeTableModule',
+        component: 'AeTableComponent',
+        selector: 'ae-table',
+        interface: 'AeTable'
+    }
 
     // TODO: Add the new components here.
 };

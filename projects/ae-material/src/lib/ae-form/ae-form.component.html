@@ -1,1 +1,180 @@
-<p>ae-form works!</p>
+<mat-card class="form-card">
+
+    <!-- Title -->
+    <mat-card-header style="display: flex; justify-content: space-between;">
+        <mat-card-title>{{input.title + ' '  + 'Form'}}</mat-card-title>
+        <button mat-icon-button (click)="goBack()">
+            <mat-icon class="fa fa-times"></mat-icon>
+        </button>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+
+    <!-- body -->
+    <mat-card-content style="margin: 5px;">
+
+        <!-- Form -->
+        <form [formGroup]="form">
+
+            <div *ngFor="let field of fields">
+                <div [ngSwitch]="field.viewType">
+
+                    <!-- Inputs that compatiple with Text input -->
+                    <div *ngSwitchCase="'text'">
+                        <mat-form-field appearance="legacy">
+                            <mat-label>
+                                <mat-icon matPrefix [class]="field.icon"></mat-icon>
+                                {{field.label}}
+                            </mat-label>
+                            <input [type]="field.type" matInput [placeholder]="field.placeholder"
+                                [formControlName]="field.controlName" [autocomplete]="field.autocomplete">
+
+                        </mat-form-field>
+
+                        <!-- Validation errors -->
+                        <mat-error *ngIf="isInvalid(field.controlName)">
+                            <li *ngFor="let err of getErrors(field.controlName)">
+                                <small>
+                                    {{err}}
+                                </small>
+                            </li>
+                        </mat-error>
+                    </div>
+
+                    <!-- Select input  -->
+                    <div *ngSwitchCase="'select'">
+                        <mat-form-field>
+                            <mat-label>{{field.label}}</mat-label>
+                            <mat-select [formControlName]="field.controlName">
+                                <mat-option [value]="option.key" *ngFor="let option of field.options">
+                                    <mat-icon matPrefix [class]="option.icon" color="primary"></mat-icon>
+                                    {{option.value}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+
+                    <!-- Select Many input  -->
+                    <div *ngSwitchCase="'select-many'">
+                        <mat-form-field>
+                            <mat-label>{{field.label}}</mat-label>
+                            <mat-select [formControlName]="field.controlName" multiple>
+                                <mat-option class="option-chip" [value]="option.key"
+                                    *ngFor="let option of field.options | async">
+                                    <mat-icon matPrefix [class]="option.icon" color="primary"></mat-icon>
+                                    {{option.value}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <!-- Select Users input -->
+                    <div *ngSwitchCase="'select-users'">
+                        <mat-form-field>
+                            <mat-label>{{field.label}}</mat-label>
+                            <mat-select [formControlName]="field.controlName" multiple>
+                                <mat-option class="option-chip" [value]="option.key"
+                                    *ngFor="let option of field.options | async">
+                                    <mat-icon matPrefix [class]="option.icon" color="primary"></mat-icon>
+                                    {{option.value}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+
+                    <!-- Text area  -->
+                    <div *ngSwitchCase="'text-area'">
+                        <mat-form-field appearance="legacy">
+                            <mat-label>
+                                <mat-icon matPrefix [class]="field.icon"></mat-icon>
+                                {{field.label}}
+                            </mat-label>
+                            <textarea matInput [placeholder]="field.placeholder"
+                                [formControlName]="field.controlName"></textarea>
+
+                        </mat-form-field>
+                    </div>
+
+
+                    <!-- Date Input -->
+                    <div *ngSwitchCase="'date'">
+                        <mat-form-field color="accent">
+                            <mat-label>{{field.label}}</mat-label>
+                            <input matInput [matDatepicker]="picker1" [formControlName]="field.controlName"
+                                contenteditable="false">
+                            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                            <mat-datepicker #picker1></mat-datepicker>
+                        </mat-form-field>
+                        <mat-error *ngIf="isInvalid(field.controlName)">
+                            <li *ngFor="let err of getErrors(field.controlName)">
+                                <small *ngIf="err"> {{err}} </small>
+                            </li>
+                        </mat-error>
+                    </div>
+
+                    <!-- Checkbox input -->
+                    <div *ngSwitchCase="'checkbox'">
+                        <mat-checkbox class="example-margin" [formControlName]="field.controlName">
+                            {{field.label}}
+                        </mat-checkbox>
+                    </div>
+
+                    <!-- Range input -->
+                    <div *ngSwitchCase="'range'">
+                        <mat-label>{{field.label}}</mat-label>
+                        <mat-slider #slider thumbLabel [min]="field.min" [max]="field.max"
+                            [formControlName]="field.controlName">
+                        </mat-slider>
+                        <span>{{slider.value}}</span>
+                    </div>
+
+                    <!-- If the input type is not compatiple, show the error message -->
+                    <div *ngSwitchDefault style="width: 100%; background-color: red; color: white; padding: 10px;">
+                        <h1>Input type is not compatible!</h1>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+
+    </mat-card-content>
+
+    <!-- Submit button and external links -->
+    <mat-card-actions>
+        <!-- Submit button -->
+        <button mat-raised-button color="primary" (click)="onSubmit()"
+            [disabled]="form.invalid">{{submitLabel}}</button>
+    </mat-card-actions>
+
+
+    <mat-divider></mat-divider>
+    <mat-card-actions>
+        <!-- External links -->
+        <button mat-raised-button [routerLink]="link.path" routerLinkActive="router-link-active"
+            *ngFor="let link of links">
+            {{link.value}}
+        </button>
+    </mat-card-actions>
+
+
+    <!-- Server response to the request -->
+    <mat-card-actions *ngIf="response">
+
+        <!-- TODO: Create an alert module that handles errors and messages like this -->
+        <p *ngIf="response.status" style="border:1px solid green; padding:5px; color:green; border-radius: 10px;">
+            <small>
+                {{response.msg}}
+            </small>
+        </p>
+
+        <p *ngIf="!response.status" style="border:1px solid red; padding:5px; color:red; border-radius: 10px;">
+            <small>
+                {{response.msg}}
+            </small>
+        </p>
+
+    </mat-card-actions>
+
+
+</mat-card>
