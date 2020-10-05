@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GreetingComponent } from './greeting.component';
-
+import { AeListModule } from 'ae-material';
 
 /**
  * This module will check user sessions and direct users to the right page.
@@ -9,10 +9,12 @@ import { GreetingComponent } from './greeting.component';
 @NgModule({
   declarations: [GreetingComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    AeListModule
   ],
   exports: [
-    GreetingComponent
-  ]
+    GreetingComponent,
+  ],
+
 })
 export class GreetingModule { }

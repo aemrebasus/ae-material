@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { AeSideNav } from '../ae-side-nav/ae-side-nav.component';
 import { AeView } from '../ae-view/ae-view.component';
-import { sideNavData } from './sidenav-list';
+import { components } from '../meta/components';
 
 
 @Component({
@@ -13,24 +13,62 @@ import { sideNavData } from './sidenav-list';
 })
 export class AeDocComponent implements OnDestroy, OnInit {
 
-  storeSubscription: Subscription;
 
-  @Input() sideNav: AeSideNav = sideNavData(this.store);
+
+  @Input() sideNav: AeSideNav = {
+    list: {
+      list: [
+        {
+          value: 'Components', icon: 'home', tooltip: 'Home',
+          action: () => { }
+        },
+        {
+          value: 'avatar', icon: 'image_search', tooltip: 'Avatar Component',
+          action: () => this.viewInput = components.avatar
+        },
+        {
+          value: 'card', icon: 'card_giftcard', tooltip: 'Card Component',
+          action: () => this.viewInput = components.card
+        },
+        {
+          value: 'form', icon: 'input', tooltip: 'Form Component',
+          action: () => this.viewInput = components.form
+        },
+        {
+          value: 'list', icon: 'list', tooltip: 'List Component',
+          action: () => this.viewInput = components.list
+        },
+        {
+          value: 'Side Nav', icon: 'navigate_next', tooltip: 'SideNav Component',
+          action: () => this.viewInput = components['side-nav']
+        },
+        {
+          value: 'Toolbar', icon: 'pan_tool', tooltip: 'Toolbar Component',
+          action: () => this.viewInput = components.toobar
+        },
+        {
+          value: 'Table', icon: 'table_view', tooltip: 'Table Component',
+          action: () => this.viewInput = components.table
+        },
+        {
+          value: 'Details', icon: 'details', tooltip: 'Details Component',
+          action: () => this.viewInput = components.details
+        }
+      ]
+    },
+    toolbar: {
+      list: []
+    }
+  };
 
   viewInput: AeView;
 
-  constructor(private store: Store<{ aeDoc: { aeView: AeView } }>) {
-
-  }
-
   ngOnInit(): void {
-    this.storeSubscription = this.store.subscribe(data => {
-      this.viewInput = data.aeDoc.aeView;
-    });
+
   }
 
   ngOnDestroy(): void {
-    this.storeSubscription.unsubscribe();
+
   }
 
 }

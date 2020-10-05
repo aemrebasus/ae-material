@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AeListComponent } from './ae-list.component';
 import { MatListModule } from '@angular/material/list';
@@ -19,6 +19,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatTooltipModule,
     MatSnackBarModule
   ],
-  exports: [AeListComponent]
+  exports: [AeListComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AeListModule { }

@@ -20,16 +20,10 @@ export class AeViewComponent implements OnInit {
 
   @Input() input: AeView;
 
-  constructor(private router: Router) { }
+  constructor() { }
 
   ngOnInit(): void {
-    const fragments = this.router.url.split('/');
-    const lastFragment = fragments[fragments.length - 1].trim();
-    this.input = components[lastFragment];
+
   }
-
-
-
-
 
 }

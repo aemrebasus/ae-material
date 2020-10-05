@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AeFormComponent } from './ae-form.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -46,6 +46,7 @@ import { RouterModule } from '@angular/router';
     MatCheckboxModule,
     MatSliderModule,
   ],
-  exports: [AeFormComponent]
+  exports: [AeFormComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AeFormModule { }

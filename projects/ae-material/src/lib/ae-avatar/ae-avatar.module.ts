@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AeAvatarComponent } from './ae-avatar.component';
 import { MatCardModule } from '@angular/material/card';
@@ -10,6 +10,7 @@ import { MatCardModule } from '@angular/material/card';
     CommonModule,
     MatCardModule,
   ],
-  exports: [AeAvatarComponent]
+  exports: [AeAvatarComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AeAvatarModule { }

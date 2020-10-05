@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AeDetailsComponent } from './ae-details.component';
 import { MatIconModule } from '@angular/material/icon';
@@ -22,6 +22,7 @@ import { MatListModule } from '@angular/material/list';
   ],
   exports: [
     AeDetailsComponent
-  ]
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AeDetailsModule { }

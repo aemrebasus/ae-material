@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AeTableComponent } from './ae-table.component';
 import { MatTableModule } from '@angular/material/table';
@@ -18,6 +18,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatInputModule,
     MatButtonModule,
   ],
-  exports: [AeTableComponent]
+  exports: [AeTableComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AeTableModule { }

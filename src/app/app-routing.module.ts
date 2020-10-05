@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AeDocModule } from 'projects/ae-material/src/lib/ae-doc/ae-doc.module';
 import { GreetingComponent } from './greeting/greeting.component';
 import { GreetingModule } from './greeting/greeting.module';
 
@@ -14,7 +13,6 @@ const routes: Routes = [
   imports: [
     GreetingModule,
     RouterModule.forRoot(routes, { useHash: true }),
-    AeDocModule,
   ],
   exports: [RouterModule]
 })

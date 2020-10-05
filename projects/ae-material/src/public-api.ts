@@ -2,4 +2,41 @@
  * Public API Surface of ae-material
  */
 
-export * from './lib/ae-material.module';
+// Modules
+export * from './lib/ae-avatar/ae-avatar.module';
+export * from './lib/ae-avatar/ae-avatar.component';
+
+export * from './lib/ae-card/ae-card.module';
+export * from './lib/ae-card/ae-card.component';
+
+export * from './lib/ae-details/ae-details.module';
+export * from './lib/ae-details/ae-details.component';
+
+export * from './lib/ae-doc/ae-doc.module';
+export * from './lib/ae-doc/ae-doc.component';
+
+export * from './lib/ae-form/ae-form.module';
+export * from './lib/ae-form/ae-form.component';
+
+export * from './lib/ae-list/ae-list.module';
+export * from './lib/ae-list/ae-list.component';
+
+export * from './lib/ae-side-nav/ae-side-nav.module';
+export * from './lib/ae-side-nav/ae-side-nav.component';
+
+export * from './lib/ae-table/ae-table.module';
+export * from './lib/ae-table/ae-table.component';
+
+export * from './lib/ae-toolbar/ae-toolbar.module';
+export * from './lib/ae-toolbar/ae-toolbar.component';
+
+export * from './lib/ae-view/ae-view.module';
+export * from './lib/ae-view/ae-view.component';
+
+
+export * from './lib/common/IconType';
+export * from './lib/common/MenuItem';
+export * from './lib/ae-form/builtin-inputs';
+export * from './lib/ae-form/builtin-validators';
+
+

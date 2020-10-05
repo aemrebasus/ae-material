@@ -1,6 +1,7 @@
 
 import { AfterViewInit, Input, Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -13,7 +14,7 @@ import { map } from 'rxjs/operators';
  */
 export interface AeTable<T = any> {
   dataSource: MatTableDataSource<T>;
-  onClick?: (id: string) => void;
+  onClick?: (id?: string) => void;
 }
 
 
@@ -26,10 +27,7 @@ const sampleData: AeTable = {
     { id: '5', firstName: '5', lastName: '5' },
     { id: '6', firstName: '6', lastName: '6' },
     { id: '7', firstName: '7', lastName: '7' },
-  ]),
-  onClick: (id) => {
-    alert(`You clicked the item with the id ${id}`);
-  }
+  ])
 };
 
 
@@ -51,10 +49,9 @@ export class AeTableComponent implements AfterViewInit, OnDestroy, OnInit {
   sortBy: string;
   sortType: boolean;
 
-  constructor(private activatedRoute: ActivatedRoute, private router: Router) { }
+  constructor(private activatedRoute: ActivatedRoute, private router: Router, private alertService: MatSnackBar) { }
 
   ngOnInit(): void {
-
     if (this.input) {
       this.displayedColumns = Object.keys(this.input.dataSource.data[0]);
     } else {
@@ -102,7 +99,11 @@ export class AeTableComponent implements AfterViewInit, OnDestroy, OnInit {
   }
 
   clicked(row: { [key: string]: any }): void {
-    this.input.onClick(row.id);
+    if (this.input.onClick) {
+      this.input.onClick(row.id);
+    } else {
+      this.alertService.open(`Clicked the item with the id ${row.id}`, '', { duration: 2000 });
+    }
   }
 
 }
