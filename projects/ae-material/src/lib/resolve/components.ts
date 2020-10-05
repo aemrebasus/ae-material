@@ -35,7 +35,7 @@ export const components: { [key: string]: AeView } = {
         selector: 'ae-list',
         interface: 'AeList',
     },
-    'side nav': {
+    'side-nav': {
         name: 'Side Nav',
         module: 'AeSideNavModule',
         component: 'AeSideNavComponent',
