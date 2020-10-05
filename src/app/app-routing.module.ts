@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AeDocComponent, AeDocModule } from 'projects/ae-material/src/public-api';
+import { AeDocComponent, AeDocModule } from 'ae-material';
 
 import { GreetingComponent } from './greeting/greeting.component';
 import { GreetingModule } from './greeting/greeting.module';
