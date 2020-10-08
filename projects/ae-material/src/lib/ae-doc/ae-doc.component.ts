@@ -2,6 +2,7 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { AeAvatarComponent } from '../ae-avatar/ae-avatar.component';
 import { AeCardComponent } from '../ae-card/ae-card.component';
 import { AeDetailsComponent } from '../ae-details/ae-details.component';
+import { AeFeatureButtonComponent } from '../ae-feature-button/ae-feature-button.component';
 import { AeFormComponent } from '../ae-form/ae-form.component';
 import { AeListComponent } from '../ae-list/ae-list.component';
 import { AeSideNav, AeSideNavComponent } from '../ae-side-nav/ae-side-nav.component';
@@ -10,6 +11,9 @@ import { AeToolbarComponent } from '../ae-toolbar/ae-toolbar.component';
 import { AeView } from '../ae-view/ae-view.component';
 import { components } from '../meta/components';
 
+export interface AeDocComponent {
+  thereIsNothingHere: string;
+}
 
 @Component({
   selector: 'ae-doc',
@@ -58,6 +62,10 @@ export class AeDocComponent {
         {
           value: 'Details', icon: 'details', tooltip: 'Details Component',
           action: () => { this.viewInput = components.details; this.component = AeDetailsComponent; }
+        },
+        {
+          value: 'Feature Button', icon: 'star_border', tooltip: 'Feature Button',
+          action: () => { this.viewInput = components.featureButton; this.component = AeFeatureButtonComponent; }
         }
       ]
     },

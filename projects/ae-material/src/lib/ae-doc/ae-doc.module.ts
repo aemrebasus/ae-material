@@ -11,7 +11,7 @@ import { AeSideNavModule } from '../ae-side-nav/ae-side-nav.module';
 import { AeViewModule } from '../ae-view/ae-view.module';
 import { AeTableModule } from '../ae-table/ae-table.module';
 import { AeDetailsModule } from '../ae-details/ae-details.module';
-
+import { AeFeatureButtonModule } from '../ae-feature-button/ae-feature-button.module';
 
 
 @NgModule({
@@ -28,6 +28,7 @@ import { AeDetailsModule } from '../ae-details/ae-details.module';
     AeViewModule,
     AeTableModule,
     AeDetailsModule,
+    AeFeatureButtonModule,
   ],
   exports: [
     AeDocComponent,

@@ -62,6 +62,14 @@ export const components: { [key: string]: AeView } = {
         component: 'AeDetailsComponent',
         selector: 'ae-details',
         interface: 'AeDetail'
+    },
+
+    featureButton: {
+        name: 'Feature Button',
+        module: 'AeFeatureButtonModule',
+        component: 'AeFeatureButtonComponent',
+        selector: 'ae-feature-button',
+        interface: 'AeFeatureButton'
     }
 
     // TODO: Add the new components here.

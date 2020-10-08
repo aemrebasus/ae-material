@@ -33,6 +33,10 @@ export * from './lib/ae-toolbar/ae-toolbar.component';
 export * from './lib/ae-view/ae-view.module';
 export * from './lib/ae-view/ae-view.component';
 
+export * from './lib/ae-feature-button/ae-feature-button.module';
+export * from './lib/ae-feature-button/ae-feature-button.component';
+
+
 
 export * from './lib/common/IconType';
 export * from './lib/common/MenuItem';
