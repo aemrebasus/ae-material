@@ -1,0 +1,4 @@
+<button mat-button [matMenuTriggerFor]="menu" (click)="input.action ? input.action():null">{{input.value}}</button>
+<mat-menu #menu="matMenu">
+    <button mat-menu-item *ngFor="let mi of input.children" (click)="mi.action? mi.action():null">{{mi.value}}</button>
+</mat-menu>

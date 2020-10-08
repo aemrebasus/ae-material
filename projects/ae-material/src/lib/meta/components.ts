@@ -70,6 +70,13 @@ export const components: { [key: string]: AeView } = {
         component: 'AeFeatureButtonComponent',
         selector: 'ae-feature-button',
         interface: 'AeFeatureButton'
+    },
+    navbarMenu: {
+        name: 'Navbar Menu',
+        module: 'AeNavbarMenuModule',
+        component: 'AeNavbarMenuComponent',
+        selector: 'ae-navbar-menu',
+        interface: 'AeNavbarMenu'
     }
 
     // TODO: Add the new components here.
