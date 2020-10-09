@@ -1,11 +1,32 @@
-# AeMaterial
+### Installation
+````
+npm install ae-material 
+or
+yarn install ae-material
+````
 
-### Example 
+### Documentation 
+
+> To access the documentation page, add the routing configuration to your application, and navigate to the route.
+
 
 ````
-const input:AeAvatar = { 
-    url:'....'
-}
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { AeDocComponent, AeDocModule } from 'ae-material';
 
-<ae-avatar [input]="input"></ae-avatar>
+const routes: Routes = [
+  { path: 'doc', component: AeDocComponent }
+];
+
+@NgModule({
+  imports: [
+    GreetingModule,
+    AeDocModule,
+    RouterModule.forRoot(routes, { useHash: true }),
+  ],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
+
 ````
