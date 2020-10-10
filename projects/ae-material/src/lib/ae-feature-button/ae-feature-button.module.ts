@@ -6,11 +6,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { AeRotateDirective } from './rotate.directive';
 
 
 
 @NgModule({
-  declarations: [AeFeatureButtonComponent],
+  declarations: [AeFeatureButtonComponent, AeRotateDirective],
   imports: [
     CommonModule,
     MatInputModule,
@@ -20,7 +21,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatTooltipModule
   ],
   exports: [
-    AeFeatureButtonComponent
+    AeFeatureButtonComponent,
+    AeRotateDirective,
   ]
 })
 export class AeFeatureButtonModule { }

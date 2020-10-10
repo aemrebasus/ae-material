@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 
 export interface AeAvatar {
@@ -10,9 +10,9 @@ export interface AeAvatar {
 
 const sampleAvatar = {
   action: () => { },
-  src: '/assets/icons/logo.png',
-  subTitle: 'Sub title',
-  title: 'Title',
+  src: 'https://lh3.googleusercontent.com/ogw/ADGmqu8DptS2o9V5e3YGX4BY3QGvkj-4C8A1ruTTd6Vw=s83-c-mo',
+  subTitle: 'Angular Developer',
+  title: 'Full Stack Developer',
 };
 
 @Component({

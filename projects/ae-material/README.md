@@ -1,8 +1,8 @@
 ### Installation
 ````
-npm install ae-material 
-or
-yarn install ae-material
+  npm install ae-material 
+  or
+  yarn install ae-material
 ````
 
 ### Documentation 

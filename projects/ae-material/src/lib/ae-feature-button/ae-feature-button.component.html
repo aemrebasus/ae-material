@@ -1,1 +1,6 @@
-<img class="img-button-1" [src]="input.imgSrc" [alt]="input.tooltip">
+<div class="feature-button">
+    <img [aeRotate]="input.rotate" class="img-button-1" [src]="input.imgSrc" [alt]="input.tooltip">
+    <div>
+        <button mat-raised-button color="accent">{{input.value}}</button>
+    </div>
+</div>
