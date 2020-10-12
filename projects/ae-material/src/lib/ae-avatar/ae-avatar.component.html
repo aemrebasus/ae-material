@@ -1,5 +1,5 @@
-<div class="avatar-container d-inline-flex align-items-center justify-content-start w-100" (click)="input.action()"
-    style="cursor: pointer;">
+<div class="avatar-container d-inline-flex align-items-center justify-content-start w-100"
+    (click)="input.action? input.action() : null" style="cursor: pointer;">
     <div>
         <img [src]="input.src" class="rounded-circle" style="max-height: 50px; box-shadow: 0px 0px 3px black;">
     </div>

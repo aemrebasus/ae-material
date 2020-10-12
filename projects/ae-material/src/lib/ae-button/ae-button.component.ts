@@ -2,8 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { IconType } from '../common/IconType';
 
 interface IconButton {
-  icon: IconType;
-  action: () => void;
+  icon?: IconType;
+  action?: (id?: string) => void;
 }
 
 export interface AeButton {

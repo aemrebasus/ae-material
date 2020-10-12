@@ -21,3 +21,11 @@
     padding-left: 3px;
     padding-right: 3px;
 }
+
+button:focus,
+button:active,
+input:focus,
+input:active {
+    border: none;
+    outline: none;
+}

@@ -1,31 +1,22 @@
-<div class="container">
+<div class="position-fixed fixed-bottom w-100 d-flex justify-content-end align-items-end ">
 
-
-    <div class="inbox-container">
-        <div mat-button class="msg-box inbox">
-            <span>Main Inbox</span>
-            <mat-icon>menu</mat-icon>
-        </div>
-        <div class="inbox-content" *ngIf="false">
-            Content
-        </div>
-    </div>
-    <div class="inbox-container">
-        <div mat-button class="msg-box inbox">
-            <span>Main Inbox</span>
-            <mat-icon>menu</mat-icon>
-        </div>
-        <div class="inbox-content" *ngIf="true">
+    <div class="inbox-container" *ngFor="let box of inboxs">
+        <ae-button [input]="box"></ae-button>
+        <div class=" inbox-content" *ngIf="box.id == currentInbox" [@inOutAnimation]>
             Content
         </div>
     </div>
 
     <div class="inbox-container">
-
         <ae-button [input]="inboxButton"></ae-button>
-
         <div [class.inbox-content]="isInboxOpen" *ngIf="isInboxOpen" [@inOutAnimation]>
-            <ae-avatar *ngFor="let user of input.users" [input]="user"></ae-avatar>
+            <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>Search for message</mat-label>
+                <input matInput placeholder="Type message" autocomplete="none" name="none" #searchInput
+                    (input)="findMessage(searchInput.value)">
+                <mat-icon matSuffix>search</mat-icon>
+            </mat-form-field>
+            <ae-avatar *ngFor="let user of filteredUsers" [input]="user" (click)="selectUser(user.id)"></ae-avatar>
         </div>
     </div>
 
