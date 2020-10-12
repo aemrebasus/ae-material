@@ -13,6 +13,7 @@ import { AeTableModule } from '../ae-table/ae-table.module';
 import { AeDetailsModule } from '../ae-details/ae-details.module';
 import { AeFeatureButtonModule } from '../ae-feature-button/ae-feature-button.module';
 import { AeNavbarMenuModule } from '../ae-navbar-menu/ae-navbar-menu.module';
+import { AeMessageModule } from '../ae-message/ae-message.module';
 
 
 @NgModule({
@@ -31,9 +32,22 @@ import { AeNavbarMenuModule } from '../ae-navbar-menu/ae-navbar-menu.module';
     AeDetailsModule,
     AeFeatureButtonModule,
     AeNavbarMenuModule,
+    AeMessageModule,
   ],
   exports: [
     AeDocComponent,
+    AeAvatarModule,
+    AeCardModule,
+    AeFormModule,
+    AeToolbarModule,
+    AeListModule,
+    AeSideNavModule,
+    AeViewModule,
+    AeTableModule,
+    AeDetailsModule,
+    AeFeatureButtonModule,
+    AeNavbarMenuModule,
+    AeMessageModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
 })

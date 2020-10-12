@@ -5,6 +5,7 @@ import { AeDetailsComponent } from '../ae-details/ae-details.component';
 import { AeFeatureButtonComponent } from '../ae-feature-button/ae-feature-button.component';
 import { AeFormComponent } from '../ae-form/ae-form.component';
 import { AeListComponent } from '../ae-list/ae-list.component';
+import { AeMessageComponent } from '../ae-message/ae-message.component';
 import { AeNavbarMenuComponent } from '../ae-navbar-menu/ae-navbar-menu.component';
 import { AeSideNav, AeSideNavComponent } from '../ae-side-nav/ae-side-nav.component';
 import { AeTableComponent } from '../ae-table/ae-table.component';
@@ -71,6 +72,9 @@ export class AeDocComponent {
         {
           value: 'Navbar Menu', icon: 'menu', tooltip: 'Navbar Menu',
           action: () => { this.viewInput = components.navbarMenu, this.component = AeNavbarMenuComponent; }
+        }, {
+          value: 'Message', icon: 'message', tooltip: 'Message',
+          action: () => { this.viewInput = components.message, this.component = AeMessageComponent; }
         }
       ]
     },

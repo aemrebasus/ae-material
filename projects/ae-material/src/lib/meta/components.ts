@@ -77,6 +77,13 @@ export const components: { [key: string]: AeView } = {
         component: 'AeNavbarMenuComponent',
         selector: 'ae-navbar-menu',
         interface: 'AeNavbarMenu'
+    },
+    message: {
+        name: 'Message',
+        module: 'AeMessageModule',
+        component: 'AeMessageComponent',
+        selector: 'ae-message',
+        interface: 'AeMessage'
     }
 
     // TODO: Add the new components here.

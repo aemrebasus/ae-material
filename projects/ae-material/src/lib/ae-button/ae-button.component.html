@@ -1,0 +1,8 @@
+<div class="msg-box inbox">
+    <span>{{input.value}}</span>
+    <div class="buttons">
+        <button mat-icon-button *ngFor="let btn of input.buttons" (click)="btn.action()">
+            <mat-icon>{{btn.icon}}</mat-icon>
+        </button>
+    </div>
+</div>

@@ -1,5 +1,11 @@
-<mat-card-header>
-    <div mat-card-avatar> <img [src]="input.src" (click)="input.action()"> </div>
-    <mat-card-title>{{input.title}}</mat-card-title>
-    <mat-card-subtitle>{{input.subTitle}}</mat-card-subtitle>
-</mat-card-header>
+<div class="avatar-container d-inline-flex align-items-center justify-content-start w-100" (click)="input.action()"
+    style="cursor: pointer;">
+    <div>
+        <img [src]="input.src" class="rounded-circle" style="max-height: 50px; box-shadow: 0px 0px 3px black;">
+    </div>
+    <span class="m-1"></span>
+    <div class="pr-2">
+        <div>{{input.title}}</div>
+        <div>{{input.subTitle}}</div>
+    </div>
+</div>

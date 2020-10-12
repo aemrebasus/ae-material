@@ -39,6 +39,9 @@ export * from './lib/ae-feature-button/ae-feature-button.component';
 export * from './lib/ae-navbar-menu/ae-navbar-menu.module';
 export * from './lib/ae-navbar-menu/ae-navbar-menu.component';
 
+export * from './lib/ae-message/ae-message.module';
+export * from './lib/ae-message/ae-message.component';
+
 
 export * from './lib/common/IconType';
 export * from './lib/common/MenuItem';

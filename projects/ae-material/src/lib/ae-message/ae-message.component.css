@@ -1,0 +1,37 @@
+* {
+    box-sizing: border-box;
+}
+
+.inbox-content {
+    padding: 2px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.inbox-container {
+    border: 2px solid orangered;
+    margin-left: 5px;
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    clear: both;
+}
+
+.container {
+    width: 100%;
+
+    position: fixed;
+    bottom: 0px;
+    right: 0px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.space {
+    width: 50px;
+}

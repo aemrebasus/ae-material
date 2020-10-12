@@ -1,0 +1,33 @@
+<div class="container">
+
+
+    <div class="inbox-container">
+        <div mat-button class="msg-box inbox">
+            <span>Main Inbox</span>
+            <mat-icon>menu</mat-icon>
+        </div>
+        <div class="inbox-content" *ngIf="false">
+            Content
+        </div>
+    </div>
+    <div class="inbox-container">
+        <div mat-button class="msg-box inbox">
+            <span>Main Inbox</span>
+            <mat-icon>menu</mat-icon>
+        </div>
+        <div class="inbox-content" *ngIf="true">
+            Content
+        </div>
+    </div>
+
+    <div class="inbox-container">
+
+        <ae-button [input]="inboxButton"></ae-button>
+
+        <div [class.inbox-content]="isInboxOpen" *ngIf="isInboxOpen" [@inOutAnimation]>
+            <ae-avatar *ngFor="let user of input.users" [input]="user"></ae-avatar>
+        </div>
+    </div>
+
+
+</div>
