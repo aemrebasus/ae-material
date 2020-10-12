@@ -4,8 +4,28 @@
     box-shadow: 0px 0px 3px black;
 }
 
+button:active,
+button:focus {
+    border: none;
+    outline: none;
+}
+.mat-form-field {
+    margin: 0px;
+    padding: 0px;
+}
 .inbox-content {
     padding: 2px;
     height: 400px;
-    overflow-y: auto;
+    overflow-y: hidden;
+}
+
+ae-avatar {
+    margin-top: 10px;
+}
+
+textarea {
+    max-height: 100px;
+    min-height: 50px;
+    min-width: 100%;
+    border-top: thin solid gray;
 }

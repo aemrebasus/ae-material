@@ -1,7 +1,8 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AeAvatar } from '../ae-avatar/ae-avatar.component';
 import { AeButton } from '../ae-button/ae-button.component';
+import { AeToolbar } from '../ae-toolbar/ae-toolbar.component';
 
 
 export interface AeSingleMessage {
@@ -23,25 +24,33 @@ export interface AeSingleUser {
 export interface AeMessage {
   users: AeSingleUser[];
   messages: AeSingleMessage[];
-  currentUser: string;
+  currentUserId: string;
+
+  sendMessage: (msg: string) => void;
 }
 
 
-
+export type SendMessageFunction = (from: string, to: string, msg: string) => void;
 
 
 const sampleMessages: AeMessage = {
-  currentUser: '1',
+  currentUserId: '1',
+  sendMessage: (msg: string) => console.log(msg),
   users: [
+
+    { title: 'Ahmet Emrebas', id: '1', src: 'https://lh3.googleusercontent.com/ogw/ADGmqu8DptS2o9V5e3YGX4BY3QGvkj-4C8A1ruTTd6Vw=s83-c-mo' },
     { title: 'Ali Emre', id: '2', src: 'https://lh3.googleusercontent.com/ogw/ADGmqu8DptS2o9V5e3YGX4BY3QGvkj-4C8A1ruTTd6Vw=s83-c-mo' },
     { title: 'Veli Bas', id: '3', src: 'https://lh3.googleusercontent.com/ogw/ADGmqu8DptS2o9V5e3YGX4BY3QGvkj-4C8A1ruTTd6Vw=s83-c-mo' },
     { title: 'Mark Basemre', id: '4', src: 'https://lh3.googleusercontent.com/ogw/ADGmqu8DptS2o9V5e3YGX4BY3QGvkj-4C8A1ruTTd6Vw=s83-c-mo' },
 
   ],
   messages: [
-    { id: '1', message: 'I am Ahmet. How are you Ali', createdAt: Date.now() + 100, from: '1', to: '2', read: true },
-    { id: '2', message: 'Nope, I do not remember Ahmet.', createdAt: Date.now() + 200, from: '2', to: '1', read: false },
-    { id: '3', message: 'I met you at the gas station.', createdAt: Date.now() + 300, from: '1', to: '2', read: false },
+    { id: '2', message: 'Nope, I do not remember Ahmet.', createdAt: Date.now() + 100000, from: '2', to: '1', read: false },
+    {
+      id: '3', message: 'I met you at the gas station. OOO man. I am so sory. I could no tremember you at first. ',
+      createdAt: Date.now() + 600000, from: '1', to: '2', read: false
+    },
+    { id: '4', message: 'I am Ahmet. How are you Ali', createdAt: Date.now() + 50000, from: '1', to: '2', read: true },
   ]
 };
 
@@ -89,6 +98,23 @@ export class AeMessageComponent implements OnInit {
     ]
   }[] = [];
 
+  public toolbar: AeToolbar = {
+    list: [
+      {
+        icon: 'send',
+        tooltip: 'Send message',
+        action: () => {
+          if (this.newMessage !== '') {
+            this.input.sendMessage(this.newMessage);
+          }
+          this.newMessage = '';
+        }
+      }
+    ]
+  };
+
+
+  public newMessage = '';
 
   public filteredUsers: AeSingleUser[] = [];
 
@@ -105,7 +131,7 @@ export class AeMessageComponent implements OnInit {
   public currentInbox: string = null;
 
 
-  public messages: { from?: string, to?: string }[] = [];
+  public messages: AeAvatar[] = [];
 
 
   public getButtonForUser(id: string): AeButton {
@@ -120,7 +146,7 @@ export class AeMessageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.filteredUsers = this.input.users;
+    this.filteredUsers = this.input.users.filter(user => this.input.currentUserId !== user.id);
   }
 
   selectUser(id: string): void {
@@ -154,7 +180,7 @@ export class AeMessageComponent implements OnInit {
 
   findMessage(msg: string): void {
     if (msg === '') {
-      this.filteredUsers = this.input.users;
+      this.filteredUsers = this.input.users.filter(user => this.input.currentUserId !== user.id);
       return;
     }
 
@@ -187,12 +213,14 @@ export class AeMessageComponent implements OnInit {
     this.messages = this.input.messages
       .filter(msg => msg.from === this.currentInbox || msg.to === this.currentInbox)
       .map(msg => {
-        if (msg.from === this.currentInbox) {
-          return { from: msg.message };
-        } else {
-          return { to: msg.message };
-        }
-      });
+        return {
+          src: this.input.users.find(user => user.id === msg.from).src,
+          title: this.input.users.find(user => user.id === msg.from).title,
+          subTitle: msg.message,
+          date: new Date(msg.createdAt).toLocaleTimeString()
+        } as AeAvatar;
+
+      }).sort((a, b) => a.date > b.date ? 1 : a.date < b.date ? -1 : 0);
   }
 
 }

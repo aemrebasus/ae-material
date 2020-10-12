@@ -9,6 +9,7 @@ import { AeButtonModule } from '../ae-button/ae-button.module';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AeToolbarModule } from '../ae-toolbar/ae-toolbar.module';
 
 
 
@@ -24,7 +25,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatButtonModule,
     MatIconModule,
     AeButtonModule,
-    AeAvatarModule
+    AeAvatarModule,
+    AeToolbarModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
 })

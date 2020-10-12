@@ -1,13 +1,16 @@
 <div class="position-fixed fixed-bottom w-100 d-flex justify-content-end align-items-end ">
 
-    <div class="inbox-container" *ngFor="let box of inboxs">
+    <div class="inbox-container" *ngFor="let box of inboxs" style="position:relative">
         <ae-button [input]="box"></ae-button>
-        <div class="d-flex flex-column inbox-content" *ngIf="box.id == currentInbox" [@inOutAnimation]>
-            <div class="card w-75 m-1" [class.align-self-start]="msg.from" [class.align-self-end]="msg.to"
-                *ngFor="let msg of messages">
-                <div class="card-body">
-                    {{msg.from  || msg.to}}
-                </div>
+        <div class="d-flex flex-column justify-content-between inbox-content" *ngIf="box.id == currentInbox"
+            [@inOutAnimation]>
+            <div class="d-flex flex-column" style="overflow-y: auto;">
+                <ae-avatar *ngFor="let msg of messages" [input]="msg" style="margin-top: 10px;"></ae-avatar>
+            </div>
+
+            <div>
+                <textarea matInput placeholder="Type message" [(ngModel)]="newMessage"></textarea>
+                <ae-toolbar [input]="toolbar"></ae-toolbar>
             </div>
 
         </div>
