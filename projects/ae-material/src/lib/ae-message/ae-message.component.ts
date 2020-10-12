@@ -7,7 +7,7 @@ import { AeButton } from '../ae-button/ae-button.component';
 export interface AeSingleMessage {
   id: string;
   message: string;
-  createdAt: string;
+  createdAt: number;
   read: boolean;
   from: string;
   to: string;
@@ -39,12 +39,9 @@ const sampleMessages: AeMessage = {
 
   ],
   messages: [
-    { id: '1', message: 'I am Ahmet. How are you Ali', createdAt: 'date...', from: '1', to: '2', read: true },
-    { id: '2', message: 'Ahmet Ahmet, do not you remember me, Ali!', createdAt: 'date...', from: '1', to: '2', read: false },
-    { id: '3', message: 'From Ahmet to Veli', createdAt: 'date...', from: '1', to: '3', read: true },
-    { id: '4', message: 'Veli, this is Ahmet', createdAt: 'date...', from: '1', to: '3', read: false },
-    { id: '5', message: 'Ahmet? WHich Ahmet? I am not Veli. I am his wife', createdAt: 'date...', from: '3', to: '1', read: false },
-    { id: '6', message: 'OOO, I remembered, Ahmet. I will tell Veli.', createdAt: 'date...', from: '3', to: '1', read: true },
+    { id: '1', message: 'I am Ahmet. How are you Ali', createdAt: Date.now() + 100, from: '1', to: '2', read: true },
+    { id: '2', message: 'Nope, I do not remember Ahmet.', createdAt: Date.now() + 200, from: '2', to: '1', read: false },
+    { id: '3', message: 'I met you at the gas station.', createdAt: Date.now() + 300, from: '1', to: '2', read: false },
   ]
 };
 
@@ -79,7 +76,7 @@ export class AeMessageComponent implements OnInit {
 
   @Input()
   public input: AeMessage = sampleMessages;
-  
+
   public searchText = '';
   public isInboxOpen = false;
   public inboxs: {
@@ -105,7 +102,11 @@ export class AeMessageComponent implements OnInit {
     ]
   };
 
-  currentInbox: string;
+  public currentInbox: string = null;
+
+
+  public messages: { from?: string, to?: string }[] = [];
+
 
   public getButtonForUser(id: string): AeButton {
     const userName = this.input.users.find(u => u.id === id).title;
@@ -169,6 +170,7 @@ export class AeMessageComponent implements OnInit {
 
   closeInbox(id: string): void {
     this.inboxs = this.inboxs.filter(inb => inb.id !== id);
+    this.currentInbox = null;
   }
 
   openCurrentInbox(id: string): void {
@@ -177,6 +179,20 @@ export class AeMessageComponent implements OnInit {
       return;
     }
     this.currentInbox = id;
+    this.setMessagesForCurrentUser();
+  }
+
+
+  setMessagesForCurrentUser(): void {
+    this.messages = this.input.messages
+      .filter(msg => msg.from === this.currentInbox || msg.to === this.currentInbox)
+      .map(msg => {
+        if (msg.from === this.currentInbox) {
+          return { from: msg.message };
+        } else {
+          return { to: msg.message };
+        }
+      });
   }
 
 }

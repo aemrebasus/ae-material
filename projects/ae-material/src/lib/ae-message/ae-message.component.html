@@ -2,8 +2,14 @@
 
     <div class="inbox-container" *ngFor="let box of inboxs">
         <ae-button [input]="box"></ae-button>
-        <div class=" inbox-content" *ngIf="box.id == currentInbox" [@inOutAnimation]>
-            Content
+        <div class="d-flex flex-column inbox-content" *ngIf="box.id == currentInbox" [@inOutAnimation]>
+            <div class="card w-75 m-1" [class.align-self-start]="msg.from" [class.align-self-end]="msg.to"
+                *ngFor="let msg of messages">
+                <div class="card-body">
+                    {{msg.from  || msg.to}}
+                </div>
+            </div>
+
         </div>
     </div>
 
