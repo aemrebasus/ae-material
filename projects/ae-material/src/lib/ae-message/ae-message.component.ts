@@ -25,9 +25,9 @@ export interface AeMessage {
   users: AeSingleUser[];
   messages: AeSingleMessage[];
   currentUserId: string;
-  onUserInboxOpen?: (input: AeSingleMessage[], userId: string) => AeSingleMessage[];
+  onUserInboxOpen?: (msgs: AeSingleMessage[], userId: string) => AeSingleMessage[];
   onMainInboxOpen?: () => void;
-  sendMessage?: (msg: string) => void;
+  sendMessage?: (msgs: AeSingleMessage[], msg: string, from: string, to: string) => AeSingleMessage[];
 }
 
 
@@ -47,7 +47,19 @@ type InboxButtonType = {
 const sampleMessages: AeMessage = {
 
   currentUserId: '1',
-  sendMessage: (msg: string) => console.log(msg),
+  sendMessage: (msgs: AeSingleMessage[], message: string, from: string, to: string) => {
+    return [
+      ...msgs,
+      {
+        id: Math.floor((Math.random() * 1000000000)) + '',
+        message,
+        from,
+        to,
+        read: false,
+        createdAt: Date.now(),
+      }
+    ];
+  },
   onUserInboxOpen: (msgs: AeSingleMessage[], userId: string) => {
     return msgs.map(msg => {
       if (msg.from === userId || msg.to === userId) {
@@ -143,7 +155,7 @@ export class AeMessageComponent implements OnInit, AfterViewInit, OnDestroy {
         tooltip: 'Send message',
         action: () => {
           if (this.newMessage !== '') {
-            this.input.sendMessage(this.newMessage);
+            this.sendMessage('inner');
           }
           this.newMessage = '';
         }
@@ -372,6 +384,26 @@ export class AeMessageComponent implements OnInit, AfterViewInit, OnDestroy {
     this.setMessagesForCurrentUser();
   }
 
+  public sendMessage(event): void {
+
+    const opt = () => {
+      this.input.messages = this.input.sendMessage(this.input.messages, this.newMessage, this.input.currentUserId, this.currentInbox);
+      this.setMessagesForCurrentUser();
+      this.newMessage = '';
+    };
+
+    if (event.key === 'Enter' || event === 'inner') {
+      event.preventDefault();
+      opt();
+      return;
+    }
+
+  }
+
+  trackMessage(index: number, msg: AeAvatar): string {
+    return msg.id;
+  }
+
   /**
    * @description get the messages of the selected users and store them in the messages property. Also sort the message by date.
    */
@@ -392,6 +424,7 @@ export class AeMessageComponent implements OnInit, AfterViewInit, OnDestroy {
 
   convertAeSingleMessageToAeAvatarData(msg: AeSingleMessage): AeAvatar {
     return {
+      id: msg.id,
       src: this.userSrc(msg.from),
       title: this.userTitle(msg.from),
       subTitle: msg.message,

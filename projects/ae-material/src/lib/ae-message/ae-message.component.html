@@ -4,13 +4,15 @@
         <ae-button [input]="box"></ae-button>
         <div class="d-flex flex-column justify-content-between inbox-content" *ngIf="box.id == currentInbox"
             [@inOutAnimation]>
-            <div [scrollTo]="500" class="d-flex flex-column" style="overflow-y: auto; ">
-                <ae-avatar class="avatar-margin" *ngFor="let msg of messages" [input]="msg" style="margin-top: 10px;">
+            <div [scrollTo]="20000" class="d-flex flex-column" style="overflow-y: auto; padding-bottom: 20px; ">
+                <ae-avatar class="avatar-margin" *ngFor="let msg of messages; trackBy:trackMessage" [input]="msg"
+                    style="margin-top: 10px;">
                 </ae-avatar>
             </div>
 
             <div>
-                <textarea matInput placeholder="Type message" [(ngModel)]="newMessage"></textarea>
+                <textarea matInput placeholder="Type message" [(ngModel)]="newMessage"
+                    (keypress)="sendMessage($event)"></textarea>
                 <ae-toolbar [input]="toolbar"></ae-toolbar>
             </div>
 
