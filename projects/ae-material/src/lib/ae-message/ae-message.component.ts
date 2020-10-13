@@ -1,6 +1,5 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, QueryList, ViewChild, ViewRef } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { AeAvatar } from '../ae-avatar/ae-avatar.component';
 import { AeButton } from '../ae-button/ae-button.component';
 import { AeToolbar } from '../ae-toolbar/ae-toolbar.component';
@@ -26,8 +25,9 @@ export interface AeMessage {
   users: AeSingleUser[];
   messages: AeSingleMessage[];
   currentUserId: string;
-
-  sendMessage: (msg: string) => void;
+  onUserInboxOpen?: (input: AeSingleMessage[], userId: string) => AeSingleMessage[];
+  onMainInboxOpen?: () => void;
+  sendMessage?: (msg: string) => void;
 }
 
 
@@ -42,21 +42,31 @@ type InboxButtonType = {
   src?: string,
 };
 
-type SendMessageFunction = (from: string, to: string, msg: string) => void;
 
 
 const sampleMessages: AeMessage = {
+
   currentUserId: '1',
   sendMessage: (msg: string) => console.log(msg),
+  onUserInboxOpen: (msgs: AeSingleMessage[], userId: string) => {
+    return msgs.map(msg => {
+      if (msg.from === userId || msg.to === userId) {
+        return {
+          ...msg,
+          read: true
+        };
+      } else {
+        return msg;
+      }
+    });
+  },
   users: [
-
     { title: 'Ahmet Emrebas', id: '1', src: 'https://lh3.googleusercontent.com/ogw/ADGmqu8DptS2o9V5e3YGX4BY3QGvkj-4C8A1ruTTd6Vw=s83-c-mo' },
     { title: 'Ali Emre', id: '2', src: 'https://lh3.googleusercontent.com/ogw/ADGmqu8DptS2o9V5e3YGX4BY3QGvkj-4C8A1ruTTd6Vw=s83-c-mo' },
     { title: 'Veli Bas', id: '3', src: 'https://lh3.googleusercontent.com/ogw/ADGmqu8DptS2o9V5e3YGX4BY3QGvkj-4C8A1ruTTd6Vw=s83-c-mo' },
     { title: 'Mark Basemre', id: '4', src: 'https://lh3.googleusercontent.com/ogw/ADGmqu8DptS2o9V5e3YGX4BY3QGvkj-4C8A1ruTTd6Vw=s83-c-mo' },
     { title: 'Derda Bl', id: '5', src: 'https://lh3.googleusercontent.com/ogw/ADGmqu8DptS2o9V5e3YGX4BY3QGvkj-4C8A1ruTTd6Vw=s83-c-mo' },
     { title: 'Jan Dabian', id: '6', src: 'https://lh3.googleusercontent.com/ogw/ADGmqu8DptS2o9V5e3YGX4BY3QGvkj-4C8A1ruTTd6Vw=s83-c-mo' },
-
   ],
   messages: [
     { id: '2', message: 'Nope, I do not remember Ahmet.', createdAt: Date.now() + 100000, from: '2', to: '1', read: false },
@@ -188,6 +198,13 @@ export class AeMessageComponent implements OnInit, AfterViewInit, OnDestroy {
     // Unsubscribe all
   }
 
+  private initFilteredUsers(): void {
+    this.filteredUsers = this.input.users.filter(user => this.input.currentUserId !== user.id)
+      .map(user => ({ ...user, badge: this.unreadMessageCount(user.id) }));
+  }
+
+
+
   /**
    * @param id user id
    * returns the number of unread messages.
@@ -200,10 +217,48 @@ export class AeMessageComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
 
+  private setMessagesReadByUserId(userId: string): void {
 
-  private initFilteredUsers(): void {
-    this.filteredUsers = this.input.users.filter(user => this.input.currentUserId !== user.id)
-      .map(user => ({ ...user, badge: this.unreadMessageCount(user.id) }));
+    this.input.messages = this.input.messages.map(msg => {
+      if (msg.from === userId || msg.to === userId) {
+
+        return {
+          ...msg,
+          read: true,
+        };
+      }
+      return msg;
+    });
+
+    // Updating the current view as well. Setting the count 0 so the badge will disappear.
+    this.inboxes = this.inboxes.map(inb => {
+      if (inb.id === userId) {
+        return {
+          ...inb,
+          count: 0
+        };
+      }
+      return inb;
+    });
+
+
+    this.input.users = this.input.users.map(user => {
+      if (user.id === userId) {
+        return {
+          ...user,
+          count: 0
+        };
+      }
+      return user;
+    });
+
+
+    this.initFilteredUsers();
+
+
+
+    // User defined function!
+    this.input.onUserInboxOpen(this.input.messages, userId);
   }
 
   /**
@@ -211,22 +266,24 @@ export class AeMessageComponent implements OnInit, AfterViewInit, OnDestroy {
    * to the inboxes list that the user inbox appear to left of the main inbox
    * @param id user id
    */
-  public openUserInboxById(id: string): void {
+  public openUserInboxById(userId: string): void {
 
     // if the inbox for the user is present but closed, then open the inbox and return.
-    if (this.isUserInboxPresent(id)) {
-      this.openCurrentInbox(id);
+    if (this.isUserInboxPresent(userId)) {
+      this.openUserInbox(userId);
       return;
     }
 
     // else add the new user inbox and open it.
-    this.addNewUserToPresentInboxes(this.createInboxButton(id));
-    this.openCurrentInbox(id);
-
+    this.addNewUserToPresentInboxes(this.createInboxButton(userId));
+    this.openUserInbox(userId);
+    this.setMessagesReadByUserId(userId);
     // if there are more than 4 inboxes are visible, then remove the first inbox from the list.
     if (this.isNumberOfVisibleInboxGreaterThan(4)) {
       this.removeTheFirstInboxFromPresentInboxes();
     }
+
+
   }
 
 
@@ -242,7 +299,7 @@ export class AeMessageComponent implements OnInit, AfterViewInit, OnDestroy {
         {
           icon: 'keyboard_arrow_down',
           action: () => {
-            this.openCurrentInbox(id);
+            this.openUserInbox(id);
           }
         },
         {
@@ -306,7 +363,7 @@ export class AeMessageComponent implements OnInit, AfterViewInit, OnDestroy {
    * @param id user id
    * @description open the inbox of the selected user from the main user list.
    */
-  openCurrentInbox(id: string): void {
+  private openUserInbox(id: string): void {
     if (this.currentInbox === id) {
       this.currentInbox = null;
       return;
@@ -318,7 +375,7 @@ export class AeMessageComponent implements OnInit, AfterViewInit, OnDestroy {
   /**
    * @description get the messages of the selected users and store them in the messages property. Also sort the message by date.
    */
-  setMessagesForCurrentUser(): void {
+  private setMessagesForCurrentUser(): void {
     const msgs = this.filterMessagesByUserId(this.currentInbox)
       .map(msg => this.convertAeSingleMessageToAeAvatarData(msg))
       .sort(sortByDateProperty);
@@ -375,7 +432,7 @@ function sortByProperty(property: string): any {
 /**
  * @description date comparison function for sort function
  */
-function sortByDateProperty(a: any, b: any): any {
+function sortByDateProperty(): any {
   return sortByProperty('date');
 }
 
