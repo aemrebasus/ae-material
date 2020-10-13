@@ -9,6 +9,7 @@ export interface AeAvatar {
   title?: string;
   subTitle?: string;
   date?: string;
+  badge?: string | number;
   action?: () => void;
 }
 
@@ -17,7 +18,8 @@ const sampleAvatar: AeAvatar = {
   src: 'https://lh3.googleusercontent.com/ogw/ADGmqu8DptS2o9V5e3YGX4BY3QGvkj-4C8A1ruTTd6Vw=s83-c-mo',
   title: 'Full Stack Developer',
   subTitle: 'Angular Developer Angular DeveloperAngular DeveloperAngular DeveloperAngular DeveloperAngular DeveloperAngular DeveloperAngular Developer',
-  date: '10 - 10 - 2020'
+  date: '10 - 10 - 2020',
+  badge: '100',
 };
 
 @Component({

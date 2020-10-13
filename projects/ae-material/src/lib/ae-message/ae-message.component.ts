@@ -1,5 +1,6 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, QueryList, ViewChild, ViewRef } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { AeAvatar } from '../ae-avatar/ae-avatar.component';
 import { AeButton } from '../ae-button/ae-button.component';
 import { AeToolbar } from '../ae-toolbar/ae-toolbar.component';
@@ -30,7 +31,17 @@ export interface AeMessage {
 }
 
 
-export type SendMessageFunction = (from: string, to: string, msg: string) => void;
+type InboxButtonType = {
+  id: string,
+  value: string;
+  buttons: [
+    { icon: 'keyboard_arrow_down', action: () => void },
+    { icon: 'close', action: () => void }
+  ],
+  count: number
+};
+
+type SendMessageFunction = (from: string, to: string, msg: string) => void;
 
 
 const sampleMessages: AeMessage = {
@@ -46,6 +57,9 @@ const sampleMessages: AeMessage = {
   ],
   messages: [
     { id: '2', message: 'Nope, I do not remember Ahmet.', createdAt: Date.now() + 100000, from: '2', to: '1', read: false },
+    { id: '5', message: 'Nope, I do not remember Ahmet.', createdAt: Date.now() + 100000, from: '2', to: '1', read: false },
+    { id: '6', message: 'Nope, I do not remember Ahmet.', createdAt: Date.now() + 100000, from: '2', to: '1', read: false },
+    { id: '7', message: 'Nope, I do not remember Ahmet.', createdAt: Date.now() + 100000, from: '2', to: '1', read: false },
     {
       id: '3', message: 'I met you at the gas station. OOO man. I am so sory. I could no tremember you at first. ',
       createdAt: Date.now() + 600000, from: '1', to: '2', read: false
@@ -53,6 +67,7 @@ const sampleMessages: AeMessage = {
     { id: '4', message: 'I am Ahmet. How are you Ali', createdAt: Date.now() + 50000, from: '1', to: '2', read: true },
   ]
 };
+
 
 @Component({
   selector: 'ae-message',
@@ -80,24 +95,34 @@ const sampleMessages: AeMessage = {
     )
   ]
 })
-export class AeMessageComponent implements OnInit {
+export class AeMessageComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
+
+  /**
+   * @description Input of the component
+   */
   @Input()
   public input: AeMessage = sampleMessages;
 
+  /**
+   * @description If users' messages contains the searchText then show only those users.
+   */
   public searchText = '';
-  public isInboxOpen = false;
-  public inboxs: {
-    id: string,
-    open: boolean;
-    value: string;
-    buttons: [
-      { icon: 'keyboard_arrow_down', action: () => void },
-      { icon: 'close', action: () => void }
-    ]
-  }[] = [];
 
+  /**
+   * @description Toogle the inbox/user list
+   */
+  public isInboxOpen = false;
+
+  /**
+   * @description Meta data of the buttons of message box
+   */
+  public inboxes: InboxButtonType[] = [];
+
+  /**
+   * @description meta data of the message toolbar like send message.
+   */
   public toolbar: AeToolbar = {
     list: [
       {
@@ -113,72 +138,138 @@ export class AeMessageComponent implements OnInit {
     ]
   };
 
-
+  /**
+   * @description stores the new message
+   */
   public newMessage = '';
 
+  /**
+   * @description the users list that filtered by the searchText
+   */
   public filteredUsers: AeSingleUser[] = [];
 
+  /**
+   * @description the main inbox botton that toogle the user list
+   */
   public inboxButton: AeButton = {
-    value: 'Inbox',
+    value: this.userTitle(this.input.currentUserId),
     buttons: [
       {
         icon: 'keyboard_arrow_down',
         action: () => this.openInbox()
       }
-    ]
+    ],
+    count: this.unreadMessageCount(this.input.currentUserId)
   };
 
+
+  /**
+   * @description The id of user whose inbox is open
+   */
   public currentInbox: string = null;
 
-
+  /**
+   * @description  Messages of the users whose id is the currentInbox value (currentInbox stores the currently selected user's id)
+   */
   public messages: AeAvatar[] = [];
 
-
-  public getButtonForUser(id: string): AeButton {
-    const userName = this.input.users.find(u => u.id === id).title;
-    return {
-      value: userName,
-      buttons: [
-        { icon: 'keyboard_arrow_down', action: () => console.log('Open inbox') },
-        { icon: 'close', action: () => alert('Hello there') }
-      ]
-    };
+  ngAfterViewInit(): void {
+    // NOTHING HERE?
   }
 
   ngOnInit(): void {
-    this.filteredUsers = this.input.users.filter(user => this.input.currentUserId !== user.id);
+    this.initFilteredUsers();
   }
 
-  selectUser(id: string): void {
+  ngOnDestroy(): void {
+    // Unsubscribe all
+  }
+
+  /**
+   * @param id user id
+   * returns the number of unread messages.
+   */
+  public unreadMessageCount(id?: string): number {
+    if (id) {
+      return this.input.messages.filter(msg => msg.from === id && !msg.read).length;
+    }
+    return this.input.messages.filter(msg => !msg.read).length;
+  }
 
 
-    if (this.inboxs.find(e => e.id === id)) {
+
+  private initFilteredUsers(): void {
+    this.filteredUsers = this.input.users.filter(user => this.input.currentUserId !== user.id)
+      .map(user => ({ ...user, badge: this.unreadMessageCount(user.id) }));
+  }
+
+  /**
+   * @description when a user is selected from the list, then add the user
+   * to the inboxes list that the user inbox appear to left of the main inbox
+   * @param id user id
+   */
+  public openUserInboxById(id: string): void {
+
+    if (this.isUserInboxPresent(id)) {
+      this.openCurrentInbox(id);
       return;
     }
 
-    if (this.inboxs.length > 4) {
-      this.inboxs.shift();
+    if (this.isNumberOfPresentInboxGreaterThan(4)) {
+      this.removeTheFirstInboxFromPresentInboxes();
     }
 
+    this.addNewUserToPresentInboxes(this.createInboxButton(id));
+    this.openCurrentInbox(id);
 
-    const userName = this.input.users.find(user => user.id === id).title;
-
-
-    this.inboxs = [
-      {
-        id,
-        open: false,
-        value: userName,
-        buttons: [
-          { icon: 'keyboard_arrow_down', action: () => this.openCurrentInbox(id) },
-          { icon: 'close', action: () => this.closeInbox(id) }
-        ]
-      },
-      ...this.inboxs,
-    ];
   }
 
-  findMessage(msg: string): void {
+
+
+  /**
+   * @description helper method to create an inbox button ( the header appearing at the top of inbox elements)
+   */
+  private createInboxButton(id): InboxButtonType {
+    return {
+      id,
+      value: this.userTitle(id),
+      buttons: [
+        {
+          icon: 'keyboard_arrow_down',
+          action: () => {
+            this.openCurrentInbox(id);
+          }
+        },
+        {
+          icon: 'close',
+          action: () => this.closeInbox(id)
+        }
+      ],
+      count: this.unreadMessageCount(id)
+    };
+  }
+
+  private addNewUserToPresentInboxes(newbox: InboxButtonType): void {
+    this.inboxes = [newbox, ...this.inboxes];
+  }
+
+  private isUserInboxPresent(id: string): boolean {
+    return !!this.inboxes.find(e => e.id === id);
+  }
+
+  private isNumberOfPresentInboxGreaterThan(count: number): boolean {
+    return this.inboxes.length > count;
+  }
+
+  private removeTheFirstInboxFromPresentInboxes(): void {
+    this.inboxes.shift();
+  }
+
+  /**
+   * @param msg message
+   * @description filter users by message. set the filteredUsers to the users who has a message that contains the msg value.
+   */
+  filterUsersByMessage(msg: string): void {
     if (msg === '') {
       this.filteredUsers = this.input.users.filter(user => this.input.currentUserId !== user.id);
       return;
@@ -190,15 +281,25 @@ export class AeMessageComponent implements OnInit {
     });
   }
 
+  /**
+   * @description toogle the main inbox. show the users that sent or received a message(s).
+   */
   openInbox(): void {
     this.isInboxOpen = !this.isInboxOpen;
   }
 
+  /**
+   * @description toogle the inboxes when the user clicks on the close button.
+   */
   closeInbox(id: string): void {
-    this.inboxs = this.inboxs.filter(inb => inb.id !== id);
+    this.inboxes = this.inboxes.filter(inb => inb.id !== id);
     this.currentInbox = null;
   }
 
+  /**
+   * @param id user id
+   * @description open the inbox of the selected user from the main user list.
+   */
   openCurrentInbox(id: string): void {
     if (this.currentInbox === id) {
       this.currentInbox = null;
@@ -208,19 +309,67 @@ export class AeMessageComponent implements OnInit {
     this.setMessagesForCurrentUser();
   }
 
-
+  /**
+   * @description get the messages of the selected users and store them in the messages property. Also sort the message by date.
+   */
   setMessagesForCurrentUser(): void {
-    this.messages = this.input.messages
-      .filter(msg => msg.from === this.currentInbox || msg.to === this.currentInbox)
-      .map(msg => {
-        return {
-          src: this.input.users.find(user => user.id === msg.from).src,
-          title: this.input.users.find(user => user.id === msg.from).title,
-          subTitle: msg.message,
-          date: new Date(msg.createdAt).toLocaleTimeString()
-        } as AeAvatar;
-
-      }).sort((a, b) => a.date > b.date ? 1 : a.date < b.date ? -1 : 0);
+    const msgs = this.filterMessagesByUserId(this.currentInbox)
+      .map(msg => this.convertAeSingleMessageToAeAvatarData(msg))
+      .sort(sortByDateProperty);
+    this.setMessages(msgs);
   }
 
+  public setMessages(msgs: AeAvatar[]): void {
+    this.messages = msgs;
+  }
+
+  filterMessagesByUserId(id: string): AeSingleMessage[] {
+    return this.input.messages.filter(msg => msg.from === id || msg.to === id);
+  }
+
+  convertAeSingleMessageToAeAvatarData(msg: AeSingleMessage): AeAvatar {
+    return {
+      src: this.userSrc(msg.from),
+      title: this.userTitle(msg.from),
+      subTitle: msg.message,
+      date: this.toLocalStringDate(msg.createdAt)
+    };
+  }
+
+  getUserPropertyById(propertyKey: string, id: string): any {
+    return this.input.users.find(user => user.id === id)[propertyKey];
+  }
+
+  userSrc(id: string): string {
+    return this.getUserPropertyById('src', id);
+  }
+
+  userTitle(id: string): string {
+    return this.getUserPropertyById('title', id);
+  }
+
+  toLocalStringDate(dateNumber: number): string {
+    return new Date(dateNumber).toLocaleTimeString();
+  }
+
+  sortAvatarsByDate(msg: AeAvatar[]): AeAvatar[] {
+    return msg.sort((a, b) => a.date > b.date ? 1 : a.date < b.date ? -1 : 0);
+  }
+
+
 }
+
+/**
+ * @description comparison function for sort function
+ */
+function sortByProperty(property: string): any {
+  return (a, b) => a[property] > b[property] ? 1 : a[property] < b[property] ? -1 : 0;
+}
+
+/**
+ * @description date comparison function for sort function
+ */
+function sortByDateProperty(a: any, b: any): any {
+  return sortByProperty('date');
+}
+

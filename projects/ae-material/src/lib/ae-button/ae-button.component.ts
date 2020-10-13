@@ -9,6 +9,7 @@ interface IconButton {
 export interface AeButton {
   value: string;
   buttons: IconButton[];
+  count?: number;
 }
 
 const sampleButton: AeButton = {
@@ -16,7 +17,8 @@ const sampleButton: AeButton = {
   buttons: [
     { icon: 'arrow_downward', action: () => alert('Arrow downward') },
     { icon: 'arrow_downward', action: () => alert('Arrow downward') },
-  ]
+  ],
+  count: 40,
 };
 
 @Component({

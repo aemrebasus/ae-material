@@ -10,13 +10,17 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AeToolbarModule } from '../ae-toolbar/ae-toolbar.module';
+import { MatBadgeModule } from '@angular/material/badge';
+import { BrowserModule } from '@angular/platform-browser';
+import { ScrollToDirective } from './scroll-end.directive';
 
 
 
 @NgModule({
-  declarations: [AeMessageComponent],
+  declarations: [AeMessageComponent, ScrollToDirective],
   imports: [
     CommonModule,
+    BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
@@ -24,9 +28,13 @@ import { AeToolbarModule } from '../ae-toolbar/ae-toolbar.module';
     MatFormFieldModule,
     MatButtonModule,
     MatIconModule,
+    MatBadgeModule,
     AeButtonModule,
     AeAvatarModule,
     AeToolbarModule
+  ],
+  exports: [
+    AeMessageComponent, ScrollToDirective
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
 })

@@ -14,7 +14,6 @@ button:focus {
     padding: 0px;
 }
 .inbox-content {
-    padding: 2px;
     height: 400px;
     overflow-y: hidden;
 }
@@ -32,4 +31,9 @@ textarea {
     min-height: 50px;
     min-width: 100%;
     border-top: thin solid gray;
+}
+
+.avatar-margin {
+    margin: 3px;
+    margin-left: 15px;
 }

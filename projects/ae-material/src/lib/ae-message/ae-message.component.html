@@ -1,11 +1,12 @@
 <div class="position-fixed fixed-bottom w-100 d-flex justify-content-end align-items-end ">
 
-    <div class="inbox-container" *ngFor="let box of inboxs" style="position:relative">
+    <div class="inbox-container" *ngFor="let box of inboxes" style="position:relative">
         <ae-button [input]="box"></ae-button>
         <div class="d-flex flex-column justify-content-between inbox-content" *ngIf="box.id == currentInbox"
             [@inOutAnimation]>
-            <div class="d-flex flex-column" style="overflow-y: auto;">
-                <ae-avatar *ngFor="let msg of messages" [input]="msg" style="margin-top: 10px;"></ae-avatar>
+            <div [scrollTo]="500" class="d-flex flex-column" style="overflow-y: auto; ">
+                <ae-avatar class="avatar-margin" *ngFor="let msg of messages" [input]="msg" style="margin-top: 10px;">
+                </ae-avatar>
             </div>
 
             <div>
@@ -19,15 +20,16 @@
     <div class="inbox-container">
         <ae-button [input]="inboxButton"></ae-button>
         <div [class.inbox-content]="isInboxOpen" *ngIf="isInboxOpen" [@inOutAnimation]>
+
             <mat-form-field appearance="legacy" style="width: 100%;">
                 <mat-label>Search for message</mat-label>
                 <input matInput placeholder="Type message" autocomplete="none" name="none" #searchInput
-                    (input)="findMessage(searchInput.value)">
+                    (input)="filterUsersByMessage(searchInput.value)">
                 <mat-icon matSuffix>search</mat-icon>
             </mat-form-field>
 
-            <div class="ae-avatar" *ngFor="let user of filteredUsers">
-                <ae-avatar [input]="user" (click)="selectUser(user.id)"></ae-avatar>
+            <div class="ae-avatar avatar-margin" *ngFor="let user of filteredUsers">
+                <ae-avatar [input]="user" (click)="openUserInboxById(user.id)"></ae-avatar>
             </div>
         </div>
     </div>
