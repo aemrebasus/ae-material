@@ -1,11 +1,11 @@
 <div class="position-fixed fixed-bottom w-100 d-flex justify-content-end align-items-end ">
 
-    <div class="inbox-container" *ngFor="let box of inboxes" style="position:relative">
+    <div class="inbox-container" *ngFor="let box of inboxes; trackBy:trackAvatar;" style="position:relative">
         <ae-button [input]="box"></ae-button>
         <div class="d-flex flex-column justify-content-between inbox-content" *ngIf="box.id == currentInbox"
             [@inOutAnimation]>
             <div [scrollTo]="20000" class="d-flex flex-column" style="overflow-y: auto; padding-bottom: 20px; ">
-                <ae-avatar class="avatar-margin" *ngFor="let msg of messages; trackBy:trackMessage" [input]="msg"
+                <ae-avatar class="avatar-margin" *ngFor="let msg of messages; trackBy:trackAvatar" [input]="msg"
                     style="margin-top: 10px;">
                 </ae-avatar>
             </div>
@@ -29,7 +29,7 @@
                 <mat-icon matSuffix>search</mat-icon>
             </mat-form-field>
 
-            <div class="ae-avatar avatar-margin" *ngFor="let user of filteredUsers">
+            <div class="ae-avatar avatar-margin" *ngFor="let user of filteredUsers; trackBy:trackAvatar">
                 <ae-avatar [input]="user" (click)="openUserInboxById(user.id)"></ae-avatar>
             </div>
         </div>

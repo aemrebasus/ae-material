@@ -184,7 +184,7 @@ export class AeMessageComponent implements OnInit, AfterViewInit, OnDestroy {
         action: () => this.openInbox()
       }
     ],
-    count: this.unreadMessageCount(this.input.currentUserId)
+    src: this.userSrc(this.input.currentUserId)
   };
 
 
@@ -400,8 +400,8 @@ export class AeMessageComponent implements OnInit, AfterViewInit, OnDestroy {
 
   }
 
-  trackMessage(index: number, msg: AeAvatar): string {
-    return msg.id;
+  trackAvatar(index: number, avt: AeAvatar): string {
+    return avt.id;
   }
 
   /**
