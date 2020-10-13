@@ -1,7 +1,7 @@
 <div class="msg-box inbox">
     <div class="d-flex  align-items-center align-content-center">
         <div class="d-flex align-items-center">
-            <mat-icon [matBadge]="input.count" matBadgeColor="accent">person</mat-icon>
+            <mat-icon [matBadge]="input.count || null" matBadgeColor="accent">person</mat-icon>
         </div>
         <div class="ml-5">{{input.value}}</div>
     </div>
