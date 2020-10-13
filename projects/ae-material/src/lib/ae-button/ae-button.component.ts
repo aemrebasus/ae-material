@@ -10,6 +10,7 @@ export interface AeButton {
   value: string;
   buttons: IconButton[];
   count?: number;
+  src?: string;
 }
 
 const sampleButton: AeButton = {
