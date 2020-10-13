@@ -1,11 +1,12 @@
 <div class="msg-box inbox">
     <div class="d-flex  align-items-center align-content-center">
         <div class="d-flex align-items-center">
-            <img *ngIf="input.src" [src]="input.src" class="rounded-circle"
-                style="max-height: 50px; box-shadow: 0px 0px 3px black;">
+            <div *ngIf="input.src" [matBadge]="input.count || null" matBadgeColor="accent" matBadgePosition="before">
+                <img [src]="input.src" class="rounded-circle" style="max-height: 30px; box-shadow: 0px 0px 3px black;">
+            </div>
             <mat-icon *ngIf="!input.src" [matBadge]="input.count || null" matBadgeColor="accent">person</mat-icon>
         </div>
-        <div class="ml-5">{{input.value}}</div>
+        <div class="ml-2">{{input.value.substr(0,10) + '...'}}</div>
     </div>
     <div class="buttons">
         <button mat-icon-button *ngFor="let btn of input.buttons" (click)="btn.action()">

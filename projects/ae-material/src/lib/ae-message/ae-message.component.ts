@@ -32,13 +32,14 @@ export interface AeMessage {
 
 
 type InboxButtonType = {
-  id: string,
-  value: string;
-  buttons: [
+  id?: string,
+  value?: string;
+  buttons?: [
     { icon: 'keyboard_arrow_down', action: () => void },
     { icon: 'close', action: () => void }
   ],
-  count: number
+  count?: number,
+  src?: string,
 };
 
 type SendMessageFunction = (from: string, to: string, msg: string) => void;
@@ -249,7 +250,8 @@ export class AeMessageComponent implements OnInit, AfterViewInit, OnDestroy {
           action: () => this.closeInbox(id)
         }
       ],
-      count: this.unreadMessageCount(id)
+      count: this.unreadMessageCount(id),
+      src: this.userSrc(id)
     };
   }
 
