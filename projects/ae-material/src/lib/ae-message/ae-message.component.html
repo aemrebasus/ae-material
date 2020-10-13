@@ -25,7 +25,10 @@
                     (input)="findMessage(searchInput.value)">
                 <mat-icon matSuffix>search</mat-icon>
             </mat-form-field>
-            <ae-avatar *ngFor="let user of filteredUsers" [input]="user" (click)="selectUser(user.id)"></ae-avatar>
+
+            <div class="ae-avatar" *ngFor="let user of filteredUsers">
+                <ae-avatar [input]="user" (click)="selectUser(user.id)"></ae-avatar>
+            </div>
         </div>
     </div>
 

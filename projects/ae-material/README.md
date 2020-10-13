@@ -1,9 +1,10 @@
-### Installation
-````
-  npm install ae-material 
-  or
-  yarn install ae-material
-````
+
+#### Peer Dependencies 
+1. @angular/material 
+2. Bootstrap 4 + 
+3. validator
+
+
 
 ### Documentation 
 
