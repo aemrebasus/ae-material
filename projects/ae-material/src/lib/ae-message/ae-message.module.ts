@@ -12,7 +12,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AeToolbarModule } from '../ae-toolbar/ae-toolbar.module';
 import { MatBadgeModule } from '@angular/material/badge';
 import { BrowserModule } from '@angular/platform-browser';
-import { ScrollToDirective } from './scroll-end.directive';
+import { ScrollToDirective } from './scroll-to.directive';
 
 
 

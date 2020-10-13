@@ -22,7 +22,6 @@
         <div [class.inbox-content]="isInboxOpen" *ngIf="isInboxOpen" [@inOutAnimation]>
 
             <mat-form-field appearance="legacy" style="width: 100%;">
-                <mat-label>Search for message</mat-label>
                 <input matInput placeholder="Type message" autocomplete="none" name="none" #searchInput
                     (input)="filterUsersByMessage(searchInput.value)">
                 <mat-icon matSuffix>search</mat-icon>

@@ -13,6 +13,5 @@ export class ScrollToDirective implements AfterViewChecked {
             top: this.scrollTo
         });
     }
-
 }
 

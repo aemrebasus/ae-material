@@ -53,6 +53,8 @@ const sampleMessages: AeMessage = {
     { title: 'Ali Emre', id: '2', src: 'https://lh3.googleusercontent.com/ogw/ADGmqu8DptS2o9V5e3YGX4BY3QGvkj-4C8A1ruTTd6Vw=s83-c-mo' },
     { title: 'Veli Bas', id: '3', src: 'https://lh3.googleusercontent.com/ogw/ADGmqu8DptS2o9V5e3YGX4BY3QGvkj-4C8A1ruTTd6Vw=s83-c-mo' },
     { title: 'Mark Basemre', id: '4', src: 'https://lh3.googleusercontent.com/ogw/ADGmqu8DptS2o9V5e3YGX4BY3QGvkj-4C8A1ruTTd6Vw=s83-c-mo' },
+    { title: 'Derda Bl', id: '5', src: 'https://lh3.googleusercontent.com/ogw/ADGmqu8DptS2o9V5e3YGX4BY3QGvkj-4C8A1ruTTd6Vw=s83-c-mo' },
+    { title: 'Jan Dabian', id: '6', src: 'https://lh3.googleusercontent.com/ogw/ADGmqu8DptS2o9V5e3YGX4BY3QGvkj-4C8A1ruTTd6Vw=s83-c-mo' },
 
   ],
   messages: [
@@ -210,18 +212,20 @@ export class AeMessageComponent implements OnInit, AfterViewInit, OnDestroy {
    */
   public openUserInboxById(id: string): void {
 
+    // if the inbox for the user is present but closed, then open the inbox and return.
     if (this.isUserInboxPresent(id)) {
       this.openCurrentInbox(id);
       return;
     }
 
-    if (this.isNumberOfPresentInboxGreaterThan(4)) {
-      this.removeTheFirstInboxFromPresentInboxes();
-    }
-
+    // else add the new user inbox and open it.
     this.addNewUserToPresentInboxes(this.createInboxButton(id));
     this.openCurrentInbox(id);
 
+    // if there are more than 4 inboxes are visible, then remove the first inbox from the list.
+    if (this.isNumberOfVisibleInboxGreaterThan(4)) {
+      this.removeTheFirstInboxFromPresentInboxes();
+    }
   }
 
 
@@ -257,12 +261,12 @@ export class AeMessageComponent implements OnInit, AfterViewInit, OnDestroy {
     return !!this.inboxes.find(e => e.id === id);
   }
 
-  private isNumberOfPresentInboxGreaterThan(count: number): boolean {
+  private isNumberOfVisibleInboxGreaterThan(count: number): boolean {
     return this.inboxes.length > count;
   }
 
   private removeTheFirstInboxFromPresentInboxes(): void {
-    this.inboxes.shift();
+    this.inboxes.pop();
   }
 
   /**
