@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule,NO_ERRORS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AeToolbarComponent } from './ae-toolbar.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -16,6 +16,6 @@ import { MatButtonModule } from '@angular/material/button';
     MatIconModule,
   ],
   exports: [AeToolbarComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
 })
 export class AeToolbarModule { }

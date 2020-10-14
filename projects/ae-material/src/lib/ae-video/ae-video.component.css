@@ -11,13 +11,18 @@ video {
     width: 100%;
 }
 
+.hidden:hover {
+    visibility: visible;
+}
+
 .hidden {
     visibility: hidden;
 }
 .volume {
     position: absolute;
     background-color: white;
-
+    padding-top: 20px;
+    padding-bottom: 20px;
     margin: 10px;
     z-index: 1000;
     top: 0px;
@@ -38,4 +43,23 @@ video {
 
 .fullscreen-controls:hover {
     opacity: 1;
+}
+
+.progress {
+    position: relative;
+    cursor: pointer;
+}
+
+.progress-bar {
+    /* position: absolute; */
+    width: 100%;
+}
+
+.progress-mask {
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    border: 1px solid red;
+    top: -15px;
+    z-index: 1000;
 }

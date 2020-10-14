@@ -10,10 +10,9 @@ export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private documentElement = document.documentElement;
   public isFullScreen = false;
-  public progressBarValue = 0;
+  public progressBarValue = 50;
   public volumeValue = 40;
   public isVolumeHidden = true;
-
 
   @ViewChild('videoElement') videoElement: ElementRef<HTMLVideoElement>;
 
@@ -113,6 +112,18 @@ export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private updateVolumeValueFromVideoVolume(): void {
     this.volumeValue = this.videoElement.nativeElement.volume * 100;
+  }
+
+  private getVideoDuration(): number {
+    return this.videoElement.nativeElement.duration;
+  }
+
+  private calculateTheCurrentTimeOfVideo(): number {
+    return (this.progressBarValue / 1000) * this.getVideoDuration();
+  }
+
+  public updateProgressBarValue(): void {
+    this.videoElement.nativeElement.currentTime = this.calculateTheCurrentTimeOfVideo();
   }
 
 

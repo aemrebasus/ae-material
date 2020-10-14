@@ -1,14 +1,25 @@
 <div #videoContainer class="video-container">
 
     <div class="volume" [class.hidden]="isVolumeHidden">
-        <mat-slider min="0" max="100" step="10" vertical="true" [(ngModel)]="volumeValue"
-            (change)="updateVolumeValue()"></mat-slider>
+        <mat-slider min="0" max="100" vertical="true" [(ngModel)]="volumeValue" (change)="updateVolumeValue()">
+        </mat-slider>
     </div>
     <video #videoElement [class.fullscreen-video]="isFullScreen">
         <source src=" /assets/videos/hayta-pahali.mp4" type="video/mp4" />
     </video>
-    <mat-progress-bar mode="determinate" [value]="progressBarValue" (click)="goToTime($event)" style="height: 20px;">
-    </mat-progress-bar>
+
+    <div class="progress rounded-0">
+        <div class="progress-bar bg-primary " role="progressbar" [style.width]="progressBarValue | percent"
+            aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+
+        <div class="progress-mask">
+            <mat-slider min="0" max="100" [(ngModel)]="progressBarValue" (change)="updateProgressBarValue()"
+                style="width:100%; margin:0px; padding:0px; ">
+            </mat-slider>
+        </div>
+
+
+    </div>
     <div class="controls" [class.fullscreen-controls]="isFullScreen">
         <ae-toolbar [input]="controls"></ae-toolbar>
     </div>
