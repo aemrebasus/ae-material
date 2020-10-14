@@ -1,1 +1,41 @@
+.video-container {
+    position: relative;
+    width: 50%;
+}
 
+video {
+    width: 100%;
+}
+
+.controls {
+    width: 100%;
+}
+
+.hidden {
+    visibility: hidden;
+}
+.volume {
+    position: absolute;
+    background-color: white;
+
+    margin: 10px;
+    z-index: 1000;
+    top: 0px;
+}
+
+.fullscreen-video {
+    position: absolute;
+    width: 100vw;
+}
+
+.fullscreen-controls {
+    position: fixed;
+    bottom: 0px;
+    z-index: 1000;
+    opacity: 0;
+    transition: all ease-in-out 400ms;
+}
+
+.fullscreen-controls:hover {
+    opacity: 1;
+}

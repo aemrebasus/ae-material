@@ -1,10 +1,15 @@
-<p>Hello there. !</p>
+<div #videoContainer class="video-container">
 
-<div style="width: 600px; padding: 0px;">
-    <video width="600">
-        <source src="/assets/videos/hayta-pahali.mp4" type="video/mp4" />
+    <div class="volume" [class.hidden]="isVolumeHidden">
+        <mat-slider min="0" max="100" step="10" vertical="true" [(ngModel)]="volumeValue"
+            (change)="updateVolumeValue()"></mat-slider>
+    </div>
+    <video #videoElement [class.fullscreen-video]="isFullScreen">
+        <source src=" /assets/videos/hayta-pahali.mp4" type="video/mp4" />
     </video>
-    <div class="controls">
+    <mat-progress-bar mode="determinate" [value]="progressBarValue" (click)="goToTime($event)" style="height: 20px;">
+    </mat-progress-bar>
+    <div class="controls" [class.fullscreen-controls]="isFullScreen">
         <ae-toolbar [input]="controls"></ae-toolbar>
     </div>
 </div>
