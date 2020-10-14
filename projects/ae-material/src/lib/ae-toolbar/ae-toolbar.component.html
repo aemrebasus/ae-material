@@ -1,8 +1,27 @@
 <mat-toolbar>
     <ng-content></ng-content>
-    <button *ngFor="let item of input.list" type="button" mat-icon-button (click)="item.action()" [routerLink]="item.route">
-        <mat-icon color="primary" matBadge="12" matBadgePosition="above after" matBadgeColor="accent">
-            {{item.icon}}
-        </mat-icon>
-    </button>
+    <div class="w-100 d-flex justify-content-between">
+
+        <div class="d-flex justify-content-start">
+            <div *ngFor="let item of input.list">
+                <button type="button" mat-icon-button (click)="item.action()" [routerLink]="item.route"
+                    *ngIf="item.location ==='left' || !item.location">
+                    <mat-icon color="primary" matBadge="12" matBadgePosition="above after" matBadgeColor="accent">
+                        {{item.icon}}
+                    </mat-icon>
+                </button>
+            </div>
+        </div>
+        <div class="d-flex justify-content-end">
+            <div *ngFor="let item of input.list">
+                <button type="button" mat-icon-button (click)="item.action()" [routerLink]="item.route"
+                    *ngIf="item.location ==='right'">
+                    <mat-icon color="primary" matBadge="12" matBadgePosition="above after" matBadgeColor="accent">
+                        {{item.icon}}
+                    </mat-icon>
+                </button>
+            </div>
+        </div>
+
+    </div>
 </mat-toolbar>

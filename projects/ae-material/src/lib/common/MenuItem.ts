@@ -9,5 +9,6 @@ export class MenuItem {
     tooltip?: string;
     action?: () => void;
     tooltipPosition?: TooltipPosition;
+    location?: 'left' | 'right' | 'top' | 'bottom';
 }
 
