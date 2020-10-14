@@ -4,4 +4,19 @@ input {
     word-wrap: normal;
 }
 
+.main-container {
+    width: 100%;
+    overflow: hidden;
+}
 
+button {
+    width: 8%;
+    height: auto;
+}
+.mat-toolbar {
+    width: 100%;
+    
+}
+.tool-container {
+    width: fit-content;
+}
