@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { GreetingComponent } from './greeting/greeting.component';
 import { GreetingModule } from './greeting/greeting.module';
 
 /**
  * Library
  */
-import { AeAvatarComponent, AeDocComponent, AeDocModule, AeMessageComponent } from 'projects/ae-material/src/public-api';
+import { AeDocComponent, AeDocModule } from 'projects/ae-material/src/public-api';
 import { AeVideoComponent } from 'projects/ae-material/src/lib/ae-video/ae-video.component';
 
 const routes: Routes = [
