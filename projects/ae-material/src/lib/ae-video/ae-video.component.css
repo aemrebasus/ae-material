@@ -1,13 +1,17 @@
 .video-container {
     position: relative;
+    justify-content: flex-start;
+    align-items: flex-start;
     width: 50%;
 }
 
 video {
     width: 100%;
+    display: block;
 }
 
 .controls {
+    position: relative;
     width: 100%;
 }
 
@@ -45,14 +49,28 @@ video {
     opacity: 1;
 }
 
+.ae-toolbar {
+    position: absolute;
+    width: 100%;
+    padding-top: 10px;
+    top: 0px;
+}
 .progress {
     position: relative;
     cursor: pointer;
+    height: 10px;
+    z-index: 700;
+    transition: height ease-in-out 200ms;
 }
 
 .progress-bar {
+    height: 100%;
     /* position: absolute; */
     width: 100%;
+}
+
+.progress:hover {
+    height: 20px;
 }
 
 .progress-mask {

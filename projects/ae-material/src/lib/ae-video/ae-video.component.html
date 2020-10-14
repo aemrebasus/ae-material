@@ -10,7 +10,7 @@
 
     <div class="controls" [class.fullscreen-controls]="isFullScreen">
         <div class="progress rounded-0">
-            <div class="progress-bar bg-primary " role="progressbar" [style.width]="progressBarValue | toPercent"
+            <div class="progress-bar bg-danger " role="progressbar" [style.width]="progressBarValue | toPercent"
                 aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
 
             <div class="progress-mask">
@@ -19,6 +19,6 @@
                 </mat-slider>
             </div>
         </div>
-        <ae-toolbar [input]="controls"></ae-toolbar>
+        <ae-toolbar class="ae-toolbar" [input]="controls"></ae-toolbar>
     </div>
 </div>
