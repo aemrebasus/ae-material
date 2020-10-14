@@ -25,4 +25,8 @@ export class AeToolbarComponent {
 
   @Input() input: AeToolbar = sampleToolbar;
 
+
+  activate(id: string): void {
+    this.input.list.find(e => e.id === id).active = true;
+  }
 }

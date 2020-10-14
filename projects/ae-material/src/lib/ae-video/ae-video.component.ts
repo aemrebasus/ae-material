@@ -1,5 +1,62 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AeList } from '../ae-list/ae-list.component';
 import { AeToolbar } from '../ae-toolbar/ae-toolbar.component';
+
+
+export interface AeVideoBookmark {
+  title: string;
+  note: string;
+  time: number;
+}
+
+export interface AeSingleVideo {
+
+  id: number | string;
+  name: string;
+  src: string;
+  thumbnail?: string;
+  currentTime?: number;
+  bookmarks?: AeVideoBookmark[];
+
+}
+
+
+export interface AeVideo {
+  videos: AeSingleVideo[];
+}
+
+const sampleVideoInput: AeVideo = {
+
+  videos: [
+    {
+      id: '1',
+      name: 'Video 1 ',
+      src: '/assets/videos/hayta-pahali.mp4',
+      currentTime: 10,
+      bookmarks: [
+        {
+          title: 'bookmark 1',
+          note: 'Bookmark1 note',
+          time: 5,
+        }
+      ]
+    },
+    {
+      id: '2',
+      name: 'Video 2',
+      currentTime: 30,
+      src: '/assets/videos/hayta-pahali.mp4',
+      bookmarks: [
+        {
+          title: 'bookmark 1 foro video 2',
+          note: 'Bookmark note',
+          time: 20,
+        }
+      ]
+    }
+  ]
+};
+
 
 @Component({
   selector: 'ae-video',
@@ -15,28 +72,48 @@ export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
   public isVolumeHidden = true;
   public isPlaying = false;
 
+  public isVideoListOpen = false;
+  public currentVideo: AeSingleVideo = null;
+
+
   @ViewChild('videoElement') videoElement: ElementRef<HTMLVideoElement>;
+  @ViewChild('videoSource') videoSource: ElementRef<HTMLSourceElement>;
+
+  @Input() input: AeVideo = sampleVideoInput;
+
+  videoList: AeList = {
+    list: []
+  };
+
 
   /**
    * @description player controller
    */
   public controls: AeToolbar = {
     list: [
-      { action: () => this.play(), icon: 'play_arrow', location: 'left' },
-      { action: () => this.stop(), icon: 'stop', location: 'left' },
-      // { action: () => this.pause(), icon: 'pause', location: 'left' },
-      // { action: () => this.previous(), icon: 'skip_previous', location: 'left' },
-      // { action: () => this.next(), icon: 'skip_next', location: 'left' },
-      // { action: () => this.mute(), icon: 'volume_mute', location: 'left' },
-      // { action: () => this.volumeDown(), icon: 'volume_down', location: 'left' },
+      { action: () => this.play(), icon: 'play_arrow', toogle: 'pause', location: 'left' },
+      { action: () => this.stop(), icon: 'stop', location: 'left', color: 'warn' },
+      { action: () => this.pause(), icon: 'pause', location: 'left' },
+      { action: () => this.previous(), icon: 'skip_previous', location: 'left' },
+      { action: () => this.next(), icon: 'skip_next', location: 'left' },
+      { action: () => this.mute(), icon: 'volume_mute', location: 'left' },
+      { action: () => this.volumeDown(), icon: 'volume_down', location: 'left' },
       { action: () => this.volumeUp(), icon: 'volume_up', location: 'left' },
-      { action: () => this.bookmark(), icon: 'bookmark', location: 'right' },
-      { action: () => this.closeFullScreen(), icon: 'fullscreen_exit', location: 'right' },
-      { action: () => this.fullScreen(), icon: 'fullscreen', location: 'right' },
+      { action: () => this.bookmark(), icon: 'bookmark', location: 'right', color: 'accent' },
+      { action: () => this.closeFullScreen(), icon: 'fullscreen_exit', location: 'right', color: 'accent' },
+      { action: () => this.fullScreen(), icon: 'fullscreen', location: 'right', color: 'accent' },
+      { action: () => this.toogleVideoList(), icon: 'list', location: 'right', color: 'accent' },
     ]
   };
 
   constructor() { }
+  ngOnDestroy(): void {
+    // Nothing YET
+  }
+
+  ngOnInit(): void {
+    this.initVideoList();
+  }
 
   ngAfterViewInit(): void {
     this.setupFullScreenConfiguration();
@@ -55,6 +132,27 @@ export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
 
   }
 
+  private setVideoSrc(src: string): void {
+    this.videoSource.nativeElement.src = src;
+  }
+
+  private initVideoList(): void {
+    this.input.videos.forEach(video => {
+      this.videoList.list.push({
+        icon: 'featured_video',
+        value: video.name,
+        action: () => {
+          this.currentVideo = video;
+          this.setVideoSrc(video.src);
+          this.load();
+          this.play();
+        }
+      });
+    });
+
+    // Set the initial video;
+  }
+
   private initVideoValues(): void {
     this.videoElement.nativeElement.volume = this.volumeValue / 100;
     this.setCurrentTime(0);
@@ -71,9 +169,8 @@ export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
   private addEventListenerForVideoPlayer(type: keyof HTMLMediaElementEventMap, callback: (event) => void): void {
     this.videoElement.nativeElement.addEventListener(type, callback);
   }
-  public scrollFunction(): void {
 
-  }
+
   private initVidePlayerListeners(): void {
 
     this.addEventListenerForVideoPlayer('wheel', (event: WheelEvent) => {
@@ -104,14 +201,9 @@ export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
     this.addEventListenerForVideoPlayer('timeupdate', () => this.updateProgressBarValueFromVideoProgress());
   }
 
-  ngOnDestroy(): void {
-    // Nothing YET
+  public load(): void {
+    this.videoElement.nativeElement.load();
   }
-
-  ngOnInit(): void {
-    // Nothing YET
-  }
-
 
   public play(): void {
     this.videoElement.nativeElement.play();
@@ -209,16 +301,22 @@ export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
     console.log('bookmarking');
   }
 
+  public toogleVideoList(): void {
+    this.isVideoListOpen = !this.isVideoListOpen;
+  }
+
   private fullScreen(): void {
     if (this.documentElement.requestFullscreen) {
       this.documentElement.requestFullscreen();
     }
+    this.isFullScreen = true;
   }
 
   private closeFullScreen(): void {
     if (document.exitFullscreen) {
       document.exitFullscreen();
     }
+    this.isFullScreen = false;
   }
 
 

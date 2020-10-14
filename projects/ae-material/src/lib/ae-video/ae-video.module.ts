@@ -8,6 +8,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AeToolbarModule } from '../ae-toolbar/ae-toolbar.module';
 import { ToPercentPipe } from './to-percent.pipe';
+import { AeListModule } from '../ae-list/ae-list.module';
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import { ToPercentPipe } from './to-percent.pipe';
   imports: [
     CommonModule,
     AeToolbarModule,
+    AeListModule,
     FormsModule,
     ReactiveFormsModule,
     MatSliderModule,

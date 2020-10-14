@@ -1,8 +1,12 @@
-.video-container {
+.main-container {
     position: relative;
     justify-content: flex-start;
     align-items: flex-start;
-    width: 50%;
+    width: 100%;
+}
+
+.video-container {
+    position: relative;
 }
 
 video {
@@ -38,8 +42,9 @@ video {
 }
 
 .fullscreen-controls {
-    position: fixed;
     bottom: 0px;
+    width: 100%;
+
     z-index: 1000;
     opacity: 0;
     transition: all ease-in-out 400ms;
@@ -80,4 +85,31 @@ video {
     border: 1px solid red;
     top: -15px;
     z-index: 1000;
+}
+
+.video-list {
+    position: absolute;
+
+    right: 0px;
+    top: 0px;
+    height: 100%;
+    z-index: 1000;
+    background-color: white;
+    width: 0px;
+    overflow: hidden;
+    transition: width ease-in-out 400ms;
+}
+
+.video-background {
+    background: url("https://i.pinimg.com/originals/7f/3e/18/7f3e186790208b63dadda09d6b91d334.jpg");
+    background-position-y: center;
+    background-size: cover;
+}
+
+.video-list:hover {
+    width: 200px;
+}
+
+.video-list-open {
+    width: 200px;
 }

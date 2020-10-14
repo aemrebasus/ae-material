@@ -24,3 +24,7 @@ button {
 button:hover {
     background-color: rgba(42, 37, 37, 0.993);
 }
+
+.active {
+    background-color: rgba(42, 37, 37, 0.993);
+}

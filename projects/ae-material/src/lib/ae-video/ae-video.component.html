@@ -1,12 +1,18 @@
-<div #videoContainer class="video-container">
+<div #videoContainer class="main-container">
 
     <div class="volume" [class.hidden]="isVolumeHidden">
         <mat-slider min="0" max="100" vertical="true" [(ngModel)]="volumeValue" (change)="updateVolumeValue()">
         </mat-slider>
     </div>
-    <video #videoElement [class.fullscreen-video]="isFullScreen">
-        <source src=" /assets/videos/hayta-pahali.mp4" type="video/mp4" />
-    </video>
+
+    <div class="video-container">
+        <div class="video-list" [class.video-list-open]="isVideoListOpen">
+            <ae-list [input]="videoList"></ae-list>
+        </div>
+        <video #videoElement [class.video-background]="!currentVideo" [class.fullscreen-video]="isFullScreen">
+            <source #videoSource [src]="currentVideo ? currentVideo.src: ''" type="video/mp4" />
+        </video>
+    </div>
 
     <div class="controls" [class.fullscreen-controls]="isFullScreen">
         <div class="progress rounded-0">

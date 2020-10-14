@@ -4,8 +4,9 @@
 
         <div class="tool-container d-flex justify-content-start">
             <div *ngFor="let item of input.list">
-                <button type="button" mat-icon-button (click)="item.action()" [routerLink]="item.route"
-                    *ngIf="item.location ==='left' || !item.location">
+                <button type="button" mat-icon-button (click)="item.action(); activate(item.id)"
+                    [routerLink]="item.route" *ngIf="item.location ==='left' || !item.location"
+                    [class.active]="item.active">
                     <mat-icon color="primary" [matBadge]="item.badge" matBadgePosition="above after"
                         matBadgeColor="accent" [color]="item.color || 'primary'">
                         {{item.icon}}
@@ -16,8 +17,8 @@
 
         <div class="tool-container d-flex justify-content-end">
             <div *ngFor="let item of input.list">
-                <button type="button" mat-icon-button (click)="item.action()" [routerLink]="item.route"
-                    *ngIf="item.location ==='right'">
+                <button type="button" mat-icon-button (click)="item.action(); ; activate(item.id)"
+                    [routerLink]="item.route" *ngIf="item.location ==='right'" [class.active]="item.active">
                     <mat-icon color="primary" [matBadge]="item.badge" matBadgePosition="above after"
                         matBadgeColor="accent" [color]="item.color || 'primary'">
                         {{item.icon}}
