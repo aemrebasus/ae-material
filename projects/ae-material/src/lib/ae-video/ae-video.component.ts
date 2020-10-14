@@ -62,8 +62,26 @@ export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
   private addEventListenerForVideoPlayer(type: keyof HTMLMediaElementEventMap, callback: (event) => void): void {
     this.videoElement.nativeElement.addEventListener(type, callback);
   }
+  public scrollFunction(): void {
 
+  }
   private initVidePlayerListeners(): void {
+
+    this.addEventListenerForVideoPlayer('wheel', (event: WheelEvent) => {
+      const up = event.deltaY > 0 ? true : false;
+      const ctrl = event.ctrlKey;
+      const alt = event.altKey;
+      const shift = event.shiftKey;
+
+      if (up) {
+        if (ctrl) {
+
+        }
+
+      }
+
+    });
+
     this.addEventListenerForVideoPlayer('click', () => {
       if (this.isPlaying) {
         this.pause();
@@ -74,6 +92,7 @@ export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
     this.addEventListenerForVideoPlayer('play', () => this.isPlaying = true);
     this.addEventListenerForVideoPlayer('pause', () => this.isPlaying = false);
     this.addEventListenerForVideoPlayer('pause', () => this.isPlaying = false);
+    this.addEventListenerForVideoPlayer('timeupdate', () => this.updateProgressBarValueFromVideoProgress());
   }
 
   ngOnDestroy(): void {
@@ -103,6 +122,14 @@ export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
 
   public next(): void {
     console.log('Next video');
+  }
+
+  public rewind(): void {
+
+  }
+
+  public foward(): void {
+
   }
 
   public volumeUp(): void {
@@ -135,6 +162,16 @@ export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
     this.videoElement.nativeElement.volume = this.volumeValue / 100;
   }
 
+  private updateProgressBarValueFromVideoProgress(): void {
+    this.progressBarValue = (this.getCurrentTime() / this.getVideoDuration()) * 100;
+  }
+  private setCurrentTime(time: number): void {
+    this.videoElement.nativeElement.currentTime = time;
+  }
+  private getCurrentTime(): number {
+    return this.videoElement.nativeElement.currentTime;
+  }
+
   private updateVolumeValueFromVideoVolume(): void {
     this.volumeValue = this.videoElement.nativeElement.volume * 100;
   }
@@ -144,7 +181,7 @@ export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private calculateTheCurrentTimeOfVideo(): number {
-    return (this.progressBarValue / 1000) * this.getVideoDuration();
+    return (this.progressBarValue / 100) * this.getVideoDuration();
   }
 
   public updateProgressBarValue(): void {
@@ -175,9 +212,6 @@ export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  public setCurrentTime(time: number): void {
-    this.videoElement.nativeElement.currentTime = time;
-  }
 
   public goToTime(event): void {
     this.progressBarValue = 100;
