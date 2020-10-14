@@ -10,5 +10,7 @@ export class MenuItem {
     action?: () => void;
     tooltipPosition?: TooltipPosition;
     location?: 'left' | 'right' | 'top' | 'bottom';
+    badge?: string;
+    color?: 'accent' | 'primary' | 'warn';
 }
 

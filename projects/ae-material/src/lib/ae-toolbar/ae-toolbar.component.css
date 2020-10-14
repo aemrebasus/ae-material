@@ -3,20 +3,24 @@
 input {
     word-wrap: normal;
 }
-
 .main-container {
     width: 100%;
+    position: absolute;
+    left: 0px;
     overflow: hidden;
 }
 
 button {
-    width: 8%;
-    height: auto;
+    transform: scale(0.8);
+    border: 2px solid gray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* margin-left: 5px; */
+    background-color: white;
+    transition: all ease-in-out 400ms;
 }
-.mat-toolbar {
-    width: 100%;
-    
-}
-.tool-container {
-    width: fit-content;
+
+button:hover {
+    background-color: rgba(42, 37, 37, 0.993);
 }

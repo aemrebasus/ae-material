@@ -1,4 +1,4 @@
-<mat-toolbar style="width: 100%; ">
+<mat-toolbar class="mat-toolbar">
     <ng-content></ng-content>
     <div class="main-container w-100 d-flex justify-content-between ">
 
@@ -6,22 +6,24 @@
             <div *ngFor="let item of input.list">
                 <button type="button" mat-icon-button (click)="item.action()" [routerLink]="item.route"
                     *ngIf="item.location ==='left' || !item.location">
-                    <mat-icon color="primary" matBadge="12" matBadgePosition="above after" matBadgeColor="accent">
-                        {{item.icon}}
-                    </mat-icon>
-                </button>
-            </div>
-        </div>
-        <div class="tool-container d-flex justify-content-end">
-            <div *ngFor="let item of input.list">
-                <button type="button" mat-icon-button (click)="item.action()" [routerLink]="item.route"
-                    *ngIf="item.location ==='right'">
-                    <mat-icon color="primary" matBadge="12" matBadgePosition="above after" matBadgeColor="accent">
+                    <mat-icon color="primary" [matBadge]="item.badge" matBadgePosition="above after"
+                        matBadgeColor="accent" [color]="item.color || 'primary'">
                         {{item.icon}}
                     </mat-icon>
                 </button>
             </div>
         </div>
 
+        <div class="tool-container d-flex justify-content-end">
+            <div *ngFor="let item of input.list">
+                <button type="button" mat-icon-button (click)="item.action()" [routerLink]="item.route"
+                    *ngIf="item.location ==='right'">
+                    <mat-icon color="primary" [matBadge]="item.badge" matBadgePosition="above after"
+                        matBadgeColor="accent" [color]="item.color || 'primary'">
+                        {{item.icon}}
+                    </mat-icon>
+                </button>
+            </div>
+        </div>
     </div>
 </mat-toolbar>
