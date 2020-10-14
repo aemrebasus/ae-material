@@ -10,6 +10,7 @@ import { AeNavbarMenuComponent } from '../ae-navbar-menu/ae-navbar-menu.componen
 import { AeSideNav, AeSideNavComponent } from '../ae-side-nav/ae-side-nav.component';
 import { AeTableComponent } from '../ae-table/ae-table.component';
 import { AeToolbarComponent } from '../ae-toolbar/ae-toolbar.component';
+import { AeVideoComponent } from '../ae-video/ae-video.component';
 import { AeView } from '../ae-view/ae-view.component';
 import { components } from '../meta/components';
 
@@ -75,6 +76,10 @@ export class AeDocComponent {
         }, {
           value: 'Message', icon: 'message', tooltip: 'Message',
           action: () => { this.viewInput = components.message, this.component = AeMessageComponent; }
+        },
+        {
+          value: 'Video', icon: 'videocam', tooltip: 'Video',
+          action: () => { this.viewInput = components.video, this.component = AeVideoComponent; }
         }
       ]
     },

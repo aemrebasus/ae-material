@@ -14,6 +14,8 @@ import { AeDetailsModule } from '../ae-details/ae-details.module';
 import { AeFeatureButtonModule } from '../ae-feature-button/ae-feature-button.module';
 import { AeNavbarMenuModule } from '../ae-navbar-menu/ae-navbar-menu.module';
 import { AeMessageModule } from '../ae-message/ae-message.module';
+import { AeVideoComponent } from '../ae-video/ae-video.component';
+import { AeVideoModule } from '../ae-video/ae-video.module';
 
 
 @NgModule({
@@ -33,6 +35,7 @@ import { AeMessageModule } from '../ae-message/ae-message.module';
     AeFeatureButtonModule,
     AeNavbarMenuModule,
     AeMessageModule,
+    AeVideoModule,
   ],
   exports: [
     AeDocComponent,
@@ -48,6 +51,7 @@ import { AeMessageModule } from '../ae-message/ae-message.module';
     AeFeatureButtonModule,
     AeNavbarMenuModule,
     AeMessageModule,
+    AeVideoComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
 })

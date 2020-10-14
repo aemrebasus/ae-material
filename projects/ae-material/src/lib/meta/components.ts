@@ -84,6 +84,13 @@ export const components: { [key: string]: AeView } = {
         component: 'AeMessageComponent',
         selector: 'ae-message',
         interface: 'AeMessage'
+    },
+    video: {
+        name: 'Video',
+        module: 'AeVideoModule',
+        component: 'AeVideoComponent',
+        selector: 'ae-video',
+        interface: 'AeVideo'
     }
 
     // TODO: Add the new components here.
