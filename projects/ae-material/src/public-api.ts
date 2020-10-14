@@ -43,6 +43,10 @@ export * from './lib/ae-message/ae-message.module';
 export * from './lib/ae-message/ae-message.component';
 
 
+export * from './lib/ae-video/ae-video.module';
+export * from './lib/ae-video/ae-video.component';
+
+
 export * from './lib/common/IconType';
 export * from './lib/common/MenuItem';
 export * from './lib/ae-form/builtin-inputs';
