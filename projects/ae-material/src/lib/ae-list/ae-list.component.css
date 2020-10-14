@@ -1,3 +1,6 @@
+@import '../common/common.scss';
+
 .mat-selection-list {
+
     user-select: none;
 }

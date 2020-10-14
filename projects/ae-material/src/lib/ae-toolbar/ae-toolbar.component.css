@@ -1,9 +1,5 @@
-button:active,
-button:focus {
-    border: none;
-    outline: none;
-}
+@import "../common/common.scss";
 
 input {
-    word-wrap:normal;
+    word-wrap: normal;
 }

@@ -1,3 +1,4 @@
+@import '../common/common.scss';
 .form-card {
     width: 300px;
     margin: auto;

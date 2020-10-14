@@ -1,6 +1,5 @@
-* {
-    box-sizing: border-box;
-}
+@import '../common/common.scss';
+
 img {
     background-color: transparent;
     width: 100%;
