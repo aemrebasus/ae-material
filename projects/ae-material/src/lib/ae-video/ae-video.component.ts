@@ -10,8 +10,8 @@ export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private documentElement = document.documentElement;
   public isFullScreen = false;
-  public progressBarValue = 50;
-  public volumeValue = 40;
+  public progressBarValue = 0;
+  public volumeValue = 100;
   public isVolumeHidden = true;
   public isPlaying = false;
 
@@ -40,7 +40,7 @@ export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     this.setupFullScreenConfiguration();
-    this.initVideoVolume();
+    this.initVideoValues();
     this.initVidePlayerListeners();
   }
 
@@ -55,8 +55,17 @@ export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
 
   }
 
-  private initVideoVolume(): void {
+  private initVideoValues(): void {
     this.videoElement.nativeElement.volume = this.volumeValue / 100;
+    this.setCurrentTime(0);
+  }
+
+  private setVolume(volume: number): void {
+    if (volume < 0) { volume = 0; }
+    if (volume > 100) { volume = 100; }
+
+    this.volumeValue = volume;
+    this.updateVolumeValue();
   }
 
   private addEventListenerForVideoPlayer(type: keyof HTMLMediaElementEventMap, callback: (event) => void): void {
@@ -137,7 +146,7 @@ export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.videoElement.nativeElement.volume <= 0.90) {
       this.videoElement.nativeElement.volume += 0.10;
     }
-    this.updateVolumeValueFromVideoVolume();
+    this.updateVolumeSliderValue();
   }
 
   public volumeDown(): void {
@@ -146,7 +155,7 @@ export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.videoElement.nativeElement.volume >= 0.10) {
       this.videoElement.nativeElement.volume -= 0.10;
     }
-    this.updateVolumeValueFromVideoVolume();
+    this.updateVolumeSliderValue();
   }
 
   private showTheVolumeElement(): void {
@@ -172,7 +181,7 @@ export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
     return this.videoElement.nativeElement.currentTime;
   }
 
-  private updateVolumeValueFromVideoVolume(): void {
+  private updateVolumeSliderValue(): void {
     this.volumeValue = this.videoElement.nativeElement.volume * 100;
   }
 
@@ -192,7 +201,7 @@ export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
   public mute(): void {
     this.showTheVolumeElement();
     this.videoElement.nativeElement.volume = 0;
-    this.updateVolumeValueFromVideoVolume();
+    this.updateVolumeSliderValue();
   }
 
 
