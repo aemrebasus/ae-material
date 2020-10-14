@@ -13,6 +13,7 @@ export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
   public progressBarValue = 50;
   public volumeValue = 40;
   public isVolumeHidden = true;
+  public isPlaying = false;
 
   @ViewChild('videoElement') videoElement: ElementRef<HTMLVideoElement>;
 
@@ -38,6 +39,12 @@ export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor() { }
 
   ngAfterViewInit(): void {
+    this.setupFullScreenConfiguration();
+    this.initVideoVolume();
+    this.initVidePlayerListeners();
+  }
+
+  private setupFullScreenConfiguration(): void {
     document.addEventListener('fullscreenchange', (event) => {
       if (document.fullscreenElement) {
         this.isFullScreen = true;
@@ -46,17 +53,35 @@ export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     });
 
+  }
 
+  private initVideoVolume(): void {
     this.videoElement.nativeElement.volume = this.volumeValue / 100;
+  }
 
+  private addEventListenerForVideoPlayer(type: keyof HTMLMediaElementEventMap, callback: (event) => void): void {
+    this.videoElement.nativeElement.addEventListener(type, callback);
+  }
+
+  private initVidePlayerListeners(): void {
+    this.addEventListenerForVideoPlayer('click', () => {
+      if (this.isPlaying) {
+        this.pause();
+      } else {
+        this.play();
+      }
+    });
+    this.addEventListenerForVideoPlayer('play', () => this.isPlaying = true);
+    this.addEventListenerForVideoPlayer('pause', () => this.isPlaying = false);
+    this.addEventListenerForVideoPlayer('pause', () => this.isPlaying = false);
   }
 
   ngOnDestroy(): void {
-
+    // Nothing YET
   }
 
   ngOnInit(): void {
-
+    // Nothing YET
   }
 
 
