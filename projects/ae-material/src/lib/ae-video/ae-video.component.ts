@@ -312,6 +312,7 @@ export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
 
   public toogleVideoList(): void {
     this.isVideoListOpen = !this.isVideoListOpen;
+    this.closeFullScreen();
   }
 
   private fullScreen(): void {

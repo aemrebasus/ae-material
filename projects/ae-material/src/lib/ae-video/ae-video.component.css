@@ -60,6 +60,7 @@ video {
     padding-top: 10px;
     top: 0px;
 }
+
 .progress {
     position: relative;
     cursor: pointer;
@@ -89,7 +90,6 @@ video {
 
 .video-list {
     position: absolute;
-
     right: 0px;
     top: 0px;
     height: 100%;
@@ -112,4 +112,6 @@ video {
 
 .video-list-open {
     width: 200px;
+    position: absolute;
+    z-index: 5000;
 }
