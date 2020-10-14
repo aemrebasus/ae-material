@@ -101,9 +101,9 @@ video {
 }
 
 .video-background {
-    background: url("https://i.pinimg.com/originals/7f/3e/18/7f3e186790208b63dadda09d6b91d334.jpg");
-    background-position-y: center;
-    background-size: cover;
+    background: url("https://media3.giphy.com/media/p4NLw3I4U0idi/giphy.gif");
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
 .video-list:hover {

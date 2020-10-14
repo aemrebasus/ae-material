@@ -9,8 +9,9 @@
         <div class="video-list" [class.video-list-open]="isVideoListOpen">
             <ae-list [input]="videoList"></ae-list>
         </div>
-        <video #videoElement [class.video-background]="!currentVideo" [class.fullscreen-video]="isFullScreen">
-            <source #videoSource [src]="currentVideo ? currentVideo.src: ''" type="video/mp4" />
+        <video #videoElement [class.video-background]="!selectedVideoFromTheList"
+            [class.fullscreen-video]="isFullScreen">
+            <source #videoSource [src]="selectedVideoFromTheList ? selectedVideoFromTheList.src: ''" type="video/mp4" />
         </video>
     </div>
 

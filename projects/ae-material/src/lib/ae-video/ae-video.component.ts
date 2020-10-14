@@ -10,23 +10,19 @@ export interface AeVideoBookmark {
 }
 
 export interface AeSingleVideo {
-
   id: number | string;
   name: string;
   src: string;
   thumbnail?: string;
   currentTime?: number;
   bookmarks?: AeVideoBookmark[];
-
 }
-
 
 export interface AeVideo {
   videos: AeSingleVideo[];
 }
 
 const sampleVideoInput: AeVideo = {
-
   videos: [
     {
       id: '1',
@@ -73,7 +69,7 @@ export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
   public isPlaying = false;
 
   public isVideoListOpen = false;
-  public currentVideo: AeSingleVideo = null;
+  public selectedVideoFromTheList: AeSingleVideo = null;
 
 
   @ViewChild('videoElement') videoElement: ElementRef<HTMLVideoElement>;
@@ -91,18 +87,18 @@ export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
    */
   public controls: AeToolbar = {
     list: [
-      { action: () => this.play(), icon: 'play_arrow', toogle: 'pause', location: 'left' },
-      { action: () => this.stop(), icon: 'stop', location: 'left', color: 'warn' },
-      { action: () => this.pause(), icon: 'pause', location: 'left' },
-      { action: () => this.previous(), icon: 'skip_previous', location: 'left' },
-      { action: () => this.next(), icon: 'skip_next', location: 'left' },
-      { action: () => this.mute(), icon: 'volume_mute', location: 'left' },
-      { action: () => this.volumeDown(), icon: 'volume_down', location: 'left' },
-      { action: () => this.volumeUp(), icon: 'volume_up', location: 'left' },
-      { action: () => this.bookmark(), icon: 'bookmark', location: 'right', color: 'accent' },
-      { action: () => this.closeFullScreen(), icon: 'fullscreen_exit', location: 'right', color: 'accent' },
-      { action: () => this.fullScreen(), icon: 'fullscreen', location: 'right', color: 'accent' },
-      { action: () => this.toogleVideoList(), icon: 'list', location: 'right', color: 'accent' },
+      { id: '1', action: () => this.play(), icon: 'play_arrow', toogle: 'pause', location: 'left' },
+      { id: '2', action: () => this.stop(), icon: 'stop', location: 'left', color: 'warn' },
+      { id: '3', action: () => this.pause(), icon: 'pause', location: 'left' },
+      { id: '4', action: () => this.previous(), icon: 'skip_previous', location: 'left' },
+      { id: '5', action: () => this.next(), icon: 'skip_next', location: 'left' },
+      { id: '6', action: () => this.mute(), icon: 'volume_mute', location: 'left' },
+      { id: '7', action: () => this.volumeDown(), icon: 'volume_down', location: 'left' },
+      { id: '8', action: () => this.volumeUp(), icon: 'volume_up', location: 'left' },
+      { id: '9', action: () => this.bookmark(), icon: 'bookmark', location: 'right', color: 'accent' },
+      { id: '10', action: () => this.closeFullScreen(), icon: 'fullscreen_exit', location: 'right', color: 'accent' },
+      { id: '11', action: () => this.fullScreen(), icon: 'fullscreen', location: 'right', color: 'accent' },
+      { id: '12', action: () => this.toogleVideoList(), icon: 'list', location: 'right', color: 'accent' },
     ]
   };
 
@@ -142,10 +138,11 @@ export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
         icon: 'featured_video',
         value: video.name,
         action: () => {
-          this.currentVideo = video;
+          this.selectedVideoFromTheList = video;
           this.setVideoSrc(video.src);
           this.load();
           this.play();
+          this.hideVideoList();
         }
       });
     });
@@ -178,7 +175,7 @@ export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
       const ctrl = event.ctrlKey;
       const alt = event.altKey;
       const shift = event.shiftKey;
-
+      // TODO: When scroll up and down
       if (up) {
         if (ctrl) {
 
@@ -196,8 +193,11 @@ export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     });
     this.addEventListenerForVideoPlayer('play', () => this.isPlaying = true);
-    this.addEventListenerForVideoPlayer('pause', () => this.isPlaying = false);
-    this.addEventListenerForVideoPlayer('pause', () => this.isPlaying = false);
+    this.addEventListenerForVideoPlayer('pause', () => {
+      if (!!this.selectedVideoFromTheList) {
+        this.isPlaying = false;
+      }
+    });
     this.addEventListenerForVideoPlayer('timeupdate', () => this.updateProgressBarValueFromVideoProgress());
   }
 
@@ -208,6 +208,15 @@ export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
   public play(): void {
     this.videoElement.nativeElement.play();
   }
+
+  public hideVideoList(): void {
+    this.isVideoListOpen = false;
+  }
+
+  public showVideoList(): void {
+    this.isVideoListOpen = true;
+  }
+
   public stop(): void {
     this.pause();
     this.setCurrentTime(0);

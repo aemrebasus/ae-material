@@ -26,7 +26,19 @@ export class AeToolbarComponent {
   @Input() input: AeToolbar = sampleToolbar;
 
 
-  activate(id: string): void {
-    this.input.list.find(e => e.id === id).active = true;
+  public activate(id: string): void {
+    console.log('Activating item ');
+    this.input.list = this.input.list.map(e => {
+      if (e.id === id) {
+        return {
+          ...e,
+          active: true
+        };
+      }
+      return {
+        ...e,
+        active: false
+      };
+    });
   }
 }
