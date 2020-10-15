@@ -88,16 +88,29 @@ video {
     z-index: 1000;
 }
 
-.video-list {
+.element-list {
     position: absolute;
     right: 0px;
     top: 0px;
     height: 100%;
     z-index: 1000;
-    background-color: white;
+    background-color: rgb(212, 246, 255);
+    box-shadow: 0px 0px 3px black;
     width: 0px;
     overflow: hidden;
     transition: width ease-in-out 400ms;
+}
+
+.bookmark-list {
+    @extend .element-list;
+    left: 0px;
+    top: 0px;
+}
+
+.video-list {
+    @extend .element-list;
+    right: 0px;
+    top: 0px;
 }
 
 .video-background {
@@ -106,12 +119,9 @@ video {
     background-repeat: no-repeat;
 }
 
-.video-list:hover {
+.video-list:hover,
+.bookmark-list:hover,
+.video-list-open,
+.bookmark-list-open {
     width: 200px;
-}
-
-.video-list-open {
-    width: 200px;
-    position: absolute;
-    z-index: 5000;
 }

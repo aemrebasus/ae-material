@@ -13,6 +13,11 @@
         <div class="video-list" [class.video-list-open]="isVideoListOpen">
             <ae-list [input]="videoList"></ae-list>
         </div>
+
+        <div class="bookmark-list" [class.bookmark-list-open]="isBookmarkListOpen">
+            <ae-list [input]="bookmarkList"></ae-list>
+        </div>
+
     </div>
 
     <div class="controls" [class.fullscreen-controls]="isFullScreen">

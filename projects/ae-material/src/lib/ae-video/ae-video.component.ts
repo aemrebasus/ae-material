@@ -32,7 +32,7 @@ const sampleVideoInput: AeVideo = {
       bookmarks: [
         {
           title: 'bookmark 1',
-          note: 'Bookmark1 note',
+          note: 'Bookmark1 note. This is a long note. Let\'s see how it looks',
           time: 5,
         }
       ]
@@ -57,7 +57,7 @@ const sampleVideoInput: AeVideo = {
 @Component({
   selector: 'ae-video',
   templateUrl: './ae-video.component.html',
-  styleUrls: ['./ae-video.component.css']
+  styleUrls: ['./ae-video.component.scss']
 })
 export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
 
@@ -69,6 +69,7 @@ export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
   public isPlaying = false;
 
   public isVideoListOpen = false;
+  public isBookmarkListOpen = false;
   public selectedVideoFromTheList: AeSingleVideo = null;
 
 
@@ -77,9 +78,9 @@ export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @Input() input: AeVideo = sampleVideoInput;
 
-  videoList: AeList = {
-    list: []
-  };
+
+  public videoList: AeList = { list: [] };
+  public bookmarkList: AeList = { list: [] };
 
 
   /**
@@ -95,7 +96,7 @@ export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
       { id: '6', action: () => this.mute(), icon: 'volume_mute', location: 'left' },
       { id: '7', action: () => this.volumeDown(), icon: 'volume_down', location: 'left' },
       { id: '8', action: () => this.volumeUp(), icon: 'volume_up', location: 'left' },
-      { id: '9', action: () => this.bookmark(), icon: 'bookmark', location: 'right', color: 'accent' },
+      { id: '9', action: () => this.toogleBookmarkList(), icon: 'bookmark', location: 'right', color: 'accent' },
       { id: '10', action: () => this.closeFullScreen(), icon: 'fullscreen_exit', location: 'right', color: 'accent' },
       { id: '11', action: () => this.fullScreen(), icon: 'fullscreen', location: 'right', color: 'accent' },
       { id: '12', action: () => this.toogleVideoList(), icon: 'list', location: 'right', color: 'accent' },
@@ -132,6 +133,16 @@ export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
     this.videoSource.nativeElement.src = src;
   }
 
+  private initBookmarkList(): void {
+    this.selectedVideoFromTheList.bookmarks.forEach(b => {
+      this.bookmarkList.list.push({
+        action: () => this.setCurrentTime(b.time),
+        icon: 'bookmark',
+        value: b.note,
+      });
+    });
+  }
+
   private initVideoList(): void {
     this.input.videos.forEach(video => {
       this.videoList.list.push({
@@ -143,6 +154,7 @@ export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
           this.load();
           this.play();
           this.hideVideoList();
+          this.initBookmarkList();
         }
       });
     });
@@ -215,6 +227,14 @@ export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
 
   public showVideoList(): void {
     this.isVideoListOpen = true;
+  }
+
+  public hideBookmarkList(): void {
+    this.isBookmarkListOpen = false;
+  }
+
+  public showBookmarkList(): void {
+    this.isBookmarkListOpen = true;
   }
 
   public stop(): void {
@@ -306,13 +326,15 @@ export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
 
-  public bookmark(): void {
-    console.log('bookmarking');
-  }
-
   public toogleVideoList(): void {
     this.isVideoListOpen = !this.isVideoListOpen;
     setTimeout(() => this.isVideoListOpen = false, 4000);
+    this.closeFullScreen();
+  }
+
+  public toogleBookmarkList(): void {
+    this.isBookmarkListOpen = !this.isBookmarkListOpen;
+    setTimeout(() => this.isBookmarkListOpen = false, 4000);
     this.closeFullScreen();
   }
 
@@ -329,12 +351,6 @@ export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     this.isFullScreen = false;
   }
-
-
-  public goToTime(event): void {
-    this.progressBarValue = 100;
-  }
-
 
 
 }
