@@ -213,7 +213,7 @@ export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
 
     });
 
-    // When the video screen is clicked. 
+    // When the video screen is clicked.
     this.addEventListenerForVideoPlayer('click', () => {
       if (this.isPlaying) {
         this.pause();
@@ -272,7 +272,7 @@ export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
     throw new Error('Not implemented');
   }
 
-  // Lists 
+  // Lists
 
   public hideVideoList(): void {
     this.isVideoListOpen = false;
