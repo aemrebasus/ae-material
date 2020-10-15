@@ -1,6 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { AeAvatarComponent } from '../ae-avatar/ae-avatar.component';
+import { Component, Input } from '@angular/core';
 import { MenuItem } from '../common/MenuItem';
 
 export interface AeList {

@@ -31,10 +31,20 @@ const sampleVideoInput: AeVideo = {
       currentTime: 10,
       bookmarks: [
         {
-          title: 'bookmark 1',
+          title: 'book 1',
           note: 'Bookmark1 note. This is a long note. Let\'s see how it looks',
           time: 5,
-        }
+        },
+        {
+          title: 'boo 2',
+          note: 'Book note. This is a long note. Let\'s see how it looks',
+          time: 15,
+        },
+        {
+          title: 'bookmark 3',
+          note: 'Bookmark1 note. This is a long note. Let\'s see how it looks',
+          time: 20,
+        },
       ]
     },
     {
@@ -44,7 +54,7 @@ const sampleVideoInput: AeVideo = {
       src: '/assets/videos/hayta-pahali.mp4',
       bookmarks: [
         {
-          title: 'bookmark 1 foro video 2',
+          title: 'bookmark 30 foro video 2',
           note: 'Bookmark note',
           time: 20,
         }
@@ -80,8 +90,12 @@ export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() input: AeVideo = sampleVideoInput;
 
 
-  public videoList: AeList;
-  public bookmarkList: AeList;
+  public videoList: AeList = {
+    list: []
+  };
+  public bookmarkList: AeList = {
+    list: []
+  };
 
 
   // Video Player controllers like play, pause, stop, fullscreen etc.
@@ -114,7 +128,6 @@ export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     this.setupFullScreenConfiguration();
-    this.initVideoValues();
     this.initVidePlayerListeners();
   }
 
@@ -141,11 +154,10 @@ export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
       list: []
     };
     this.selectedVideoFromTheList.bookmarks.forEach(b => {
-
       this.bookmarkList.list.push({
         action: () => this.setCurrentTime(b.time),
         icon: 'bookmark',
-        value: b.note,
+        value: b.title
       });
     });
   }
@@ -164,6 +176,7 @@ export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
         action: () => {
           this.selectedVideoFromTheList = video;
           this.load();
+          this.setCurrentTime(video.currentTime);
           this.play();
           this.hideVideoList();
           this.initBookmarkList();
@@ -173,24 +186,16 @@ export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
 
   }
 
-  private initVideoValues(): void {
-    this.videoElement.nativeElement.volume = this.volumeValue / 100;
-    this.setCurrentTime(0);
-  }
-
-  private setVolume(volume: number): void {
-    if (volume < 0) { volume = 0; }
-    if (volume > 100) { volume = 100; }
-
-    this.volumeValue = volume;
-    this.updateVolumeValue();
-  }
-
+  /**
+   * @description helper method for adding event lister for video element.
+   */
   private addEventListenerForVideoPlayer(type: keyof HTMLMediaElementEventMap, callback: (event) => void): void {
     this.videoElement.nativeElement.addEventListener(type, callback);
   }
 
-
+  /**
+   * @description initialize all the listeners for video player events.
+   */
   private initVidePlayerListeners(): void {
 
     this.addEventListenerForVideoPlayer('wheel', (event: WheelEvent) => {
@@ -208,6 +213,7 @@ export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
 
     });
 
+    // When the video screen is clicked. 
     this.addEventListenerForVideoPlayer('click', () => {
       if (this.isPlaying) {
         this.pause();
@@ -215,22 +221,58 @@ export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
         this.play();
       }
     });
+
+    // When play button is clicked
     this.addEventListenerForVideoPlayer('play', () => this.isPlaying = true);
+    // When pause button is clicked
     this.addEventListenerForVideoPlayer('pause', () => {
       if (!!this.selectedVideoFromTheList) {
         this.isPlaying = false;
       }
     });
+    // When video is playing and time is changing.
     this.addEventListenerForVideoPlayer('timeupdate', () => this.updateProgressBarValueFromVideoProgress());
   }
 
+  /**
+   * @description After setting the src attribute of the video, we must load the video element before playing.
+   */
   public load(): void {
     this.videoElement.nativeElement.load();
   }
 
+  // Major controls
+
   public play(): void {
     this.videoElement.nativeElement.play();
   }
+
+  public stop(): void {
+    this.pause();
+    this.setCurrentTime(0);
+  }
+
+  public pause(): void {
+    this.videoElement.nativeElement.pause();
+  }
+
+  public previous(): void {
+    throw new Error('Not implemented!');
+  }
+
+  public next(): void {
+    throw new Error('Not implemented');
+  }
+
+  public rewind(): void {
+    throw new Error('Not Implemented');
+  }
+
+  public foward(): void {
+    throw new Error('Not implemented');
+  }
+
+  // Lists 
 
   public hideVideoList(): void {
     this.isVideoListOpen = false;
@@ -248,95 +290,6 @@ export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
     this.isBookmarkListOpen = true;
   }
 
-  public stop(): void {
-    this.pause();
-    this.setCurrentTime(0);
-  }
-
-  public pause(): void {
-    this.videoElement.nativeElement.pause();
-  }
-
-  public previous(): void {
-    console.log('Previous video!');
-  }
-
-  public next(): void {
-    console.log('Next video');
-  }
-
-  public rewind(): void {
-
-  }
-
-  public foward(): void {
-
-  }
-
-  public volumeUp(): void {
-    this.showTheVolumeElement();
-    if (this.videoElement.nativeElement.volume <= 0.90) {
-      this.videoElement.nativeElement.volume += 0.10;
-    }
-    this.updateVolumeSliderValue();
-  }
-
-  public volumeDown(): void {
-    this.showTheVolumeElement();
-
-    if (this.videoElement.nativeElement.volume >= 0.10) {
-      this.videoElement.nativeElement.volume -= 0.10;
-    }
-    this.updateVolumeSliderValue();
-  }
-
-  private showTheVolumeElement(): void {
-    if (this.isVolumeHidden) {
-      this.isVolumeHidden = false;
-      setTimeout(() => {
-        this.isVolumeHidden = true;
-      }, 3000);
-    }
-  }
-
-  public updateVolumeValue(): void {
-    this.videoElement.nativeElement.volume = this.volumeValue / 100;
-  }
-
-  private updateProgressBarValueFromVideoProgress(): void {
-    this.progressBarValue = (this.getCurrentTime() / this.getVideoDuration()) * 100;
-  }
-  private setCurrentTime(time: number): void {
-    this.videoElement.nativeElement.currentTime = time;
-  }
-  private getCurrentTime(): number {
-    return this.videoElement.nativeElement.currentTime;
-  }
-
-  private updateVolumeSliderValue(): void {
-    this.volumeValue = this.videoElement.nativeElement.volume * 100;
-  }
-
-  private getVideoDuration(): number {
-    return this.videoElement.nativeElement.duration;
-  }
-
-  private calculateTheCurrentTimeOfVideo(): number {
-    return (this.progressBarValue / 100) * this.getVideoDuration();
-  }
-
-  public updateProgressBarValue(): void {
-    this.videoElement.nativeElement.currentTime = this.calculateTheCurrentTimeOfVideo();
-  }
-
-
-  public mute(): void {
-    this.showTheVolumeElement();
-    this.videoElement.nativeElement.volume = 0;
-    this.updateVolumeSliderValue();
-  }
-
-
   public toogleVideoList(): void {
     this.isVideoListOpen = !this.isVideoListOpen;
     setTimeout(() => this.isVideoListOpen = false, 4000);
@@ -349,19 +302,94 @@ export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
     this.closeFullScreen();
   }
 
+  // Volume
+
+  public volumeUp(): void {
+    this.showTheVolumeSlider();
+    if (this.videoElement.nativeElement.volume <= 0.90) {
+      this.videoElement.nativeElement.volume += 0.10;
+    }
+    this.updateVolumeSliderValue();
+  }
+
+  public volumeDown(): void {
+    this.showTheVolumeSlider();
+
+    if (this.videoElement.nativeElement.volume >= 0.10) {
+      this.videoElement.nativeElement.volume -= 0.10;
+    }
+    this.updateVolumeSliderValue();
+  }
+
+  public mute(): void {
+    this.showTheVolumeSlider();
+    this.videoElement.nativeElement.volume = 0;
+    this.updateVolumeSliderValue();
+  }
+
+  private showTheVolumeSlider(): void {
+    if (this.isVolumeHidden) {
+      this.isVolumeHidden = false;
+      setTimeout(() => {
+        this.isVolumeHidden = true;
+      }, 3000);
+    }
+  }
+
+  public updateVolumeValue(): void {
+    this.videoElement.nativeElement.volume = this.volumeValue / 100;
+  }
+  private updateVolumeSliderValue(): void {
+    this.volumeValue = this.videoElement.nativeElement.volume * 100;
+  }
+
+
+  private updateProgressBarValueFromVideoProgress(): void {
+    this.progressBarValue = (this.getCurrentTime() / this.getVideoDuration()) * 100;
+  }
+  public updateProgressBarValue(): void {
+    this.videoElement.nativeElement.currentTime = this.calculateTheCurrentTimeOfVideo();
+  }
+
+
+  // Current Time
+
+  private setCurrentTime(time: number): void {
+    this.videoElement.nativeElement.currentTime = time;
+  }
+
+  private getCurrentTime(): number {
+    return this.videoElement.nativeElement.currentTime;
+  }
+
+  private getVideoDuration(): number {
+    return this.videoElement.nativeElement.duration;
+  }
+
+  private calculateTheCurrentTimeOfVideo(): number {
+    return (this.progressBarValue / 100) * this.getVideoDuration();
+  }
+
+
+
+  // FullScreen
+
   private fullScreen(): void {
-    if (this.documentElement.requestFullscreen) {
-      this.documentElement.requestFullscreen();
+    if (!this.isFullScreen) {
+      if (this.documentElement.requestFullscreen) {
+        this.documentElement.requestFullscreen();
+      }
     }
     this.isFullScreen = true;
   }
 
   private closeFullScreen(): void {
-    if (document.exitFullscreen) {
-      document.exitFullscreen();
+    if (this.isFullScreen) {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      }
     }
     this.isFullScreen = false;
   }
-
 
 }
