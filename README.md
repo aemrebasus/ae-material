@@ -1,9 +1,25 @@
 
-#### Peer Dependencies 
+### Peer Dependencies 
 1. @angular/material 
 2. Bootstrap 4 + 
 3. validator
 
+````
+npm install @angular/material 
+npm install validator
+npm install bootstrap
+
+````
+
+### Installation 
+
+````
+npm install ae-material
+````
+or 
+````
+yarn install ae-material
+````
 
 ### Documentation 
 
