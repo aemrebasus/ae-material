@@ -61,6 +61,7 @@ const sampleVideoInput: AeVideo = {
 })
 export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
 
+
   private documentElement = document.documentElement;
   public isFullScreen = false;
   public progressBarValue = 0;
@@ -79,13 +80,11 @@ export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() input: AeVideo = sampleVideoInput;
 
 
-  public videoList: AeList = { list: [] };
-  public bookmarkList: AeList = { list: [] };
+  public videoList: AeList;
+  public bookmarkList: AeList;
 
 
-  /**
-   * @description player controller
-   */
+  // Video Player controllers like play, pause, stop, fullscreen etc.
   public controls: AeToolbar = {
     list: [
       { id: '1', action: () => this.play(), icon: 'play_arrow', toogle: 'pause', location: 'left' },
@@ -104,8 +103,9 @@ export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
   };
 
   constructor() { }
+
   ngOnDestroy(): void {
-    // Nothing YET
+    // TODO: Nothing to do.
   }
 
   ngOnInit(): void {
@@ -118,6 +118,9 @@ export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
     this.initVidePlayerListeners();
   }
 
+  /**
+   * @description Add listener for fullscreenchange event to know wherher the screen is full.
+   */
   private setupFullScreenConfiguration(): void {
     document.addEventListener('fullscreenchange', (event) => {
       if (document.fullscreenElement) {
@@ -129,12 +132,16 @@ export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
 
   }
 
-  private setVideoSrc(src: string): void {
-    this.videoSource.nativeElement.src = src;
-  }
-
+  /**
+   * @description get the bookmark value of the currently selected video and store it
+   * to the bookmarkList variable.
+   */
   private initBookmarkList(): void {
+    this.bookmarkList = {
+      list: []
+    };
     this.selectedVideoFromTheList.bookmarks.forEach(b => {
+
       this.bookmarkList.list.push({
         action: () => this.setCurrentTime(b.time),
         icon: 'bookmark',
@@ -143,14 +150,19 @@ export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
+  /**
+   * @description get the video items from input and store them to the videoList element.
+   */
   private initVideoList(): void {
+    this.videoList = {
+      list: []
+    };
     this.input.videos.forEach(video => {
       this.videoList.list.push({
         icon: 'featured_video',
         value: video.name,
         action: () => {
           this.selectedVideoFromTheList = video;
-          this.setVideoSrc(video.src);
           this.load();
           this.play();
           this.hideVideoList();
@@ -159,7 +171,6 @@ export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
       });
     });
 
-    // Set the initial video;
   }
 
   private initVideoValues(): void {
