@@ -91,6 +91,13 @@ export const components: { [key: string]: AeView } = {
         component: 'AeVideoComponent',
         selector: 'ae-video',
         interface: 'AeVideo'
+    },
+    slider: {
+        name: 'Slider',
+        module: 'AeSliderModule',
+        component: 'AeSliderComponent',
+        selector: 'ae-slider',
+        interface: 'AeSlider',
     }
 
     // TODO: Add the new components here.

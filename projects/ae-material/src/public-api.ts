@@ -46,6 +46,13 @@ export * from './lib/ae-message/ae-message.component';
 export * from './lib/ae-video/ae-video.module';
 export * from './lib/ae-video/ae-video.component';
 
+export * from './lib/ae-layout/ae-layout.module';
+export * from './lib/ae-layout/ae-layout.component';
+
+
+export * from './lib/ae-slider/ae-slider.module';
+export * from './lib/ae-slider/ae-slider.component';
+
 
 export * from './lib/common/IconType';
 export * from './lib/common/MenuItem';

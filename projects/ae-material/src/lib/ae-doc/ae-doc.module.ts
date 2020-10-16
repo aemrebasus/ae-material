@@ -16,6 +16,7 @@ import { AeNavbarMenuModule } from '../ae-navbar-menu/ae-navbar-menu.module';
 import { AeMessageModule } from '../ae-message/ae-message.module';
 import { AeVideoComponent } from '../ae-video/ae-video.component';
 import { AeVideoModule } from '../ae-video/ae-video.module';
+import { AeLayoutModule } from '../ae-layout/ae-layout.module';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { AeVideoModule } from '../ae-video/ae-video.module';
     AeNavbarMenuModule,
     AeMessageModule,
     AeVideoModule,
+    AeLayoutModule,
   ],
   exports: [
     AeDocComponent,
@@ -51,7 +53,8 @@ import { AeVideoModule } from '../ae-video/ae-video.module';
     AeFeatureButtonModule,
     AeNavbarMenuModule,
     AeMessageModule,
-    AeVideoComponent
+    AeVideoComponent,
+    AeLayoutModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
 })

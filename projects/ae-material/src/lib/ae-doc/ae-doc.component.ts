@@ -8,6 +8,7 @@ import { AeListComponent } from '../ae-list/ae-list.component';
 import { AeMessageComponent } from '../ae-message/ae-message.component';
 import { AeNavbarMenuComponent } from '../ae-navbar-menu/ae-navbar-menu.component';
 import { AeSideNav, AeSideNavComponent } from '../ae-side-nav/ae-side-nav.component';
+import { AeSliderComponent } from '../ae-slider/ae-slider.component';
 import { AeTableComponent } from '../ae-table/ae-table.component';
 import { AeToolbarComponent } from '../ae-toolbar/ae-toolbar.component';
 import { AeVideoComponent } from '../ae-video/ae-video.component';
@@ -25,15 +26,14 @@ export interface AeDocComponent {
 })
 export class AeDocComponent {
 
-  component: any;
+
+  public component: any = AeAvatarComponent;
+  public viewInput: AeView = components.avatar;
 
   @Input() sideNav: AeSideNav = {
     list: {
       list: [
-        {
-          value: 'Components', icon: 'home', tooltip: 'Home',
-          action: () => { }
-        },
+
         {
           value: 'avatar', icon: 'image_search', tooltip: 'Avatar Component',
           action: () => { this.viewInput = components.avatar; this.component = AeAvatarComponent; }
@@ -80,6 +80,10 @@ export class AeDocComponent {
         {
           value: 'Video', icon: 'videocam', tooltip: 'Video',
           action: () => { this.viewInput = components.video, this.component = AeVideoComponent; }
+        },
+        {
+          value: 'Slider', icon: 'slideshow', tooltip: 'Slider',
+          action: () => { this.viewInput = components.slider, this.component = AeSliderComponent; }
         }
       ]
     },
@@ -88,7 +92,7 @@ export class AeDocComponent {
     }
   };
 
-  viewInput: AeView;
+
 
 
 }
