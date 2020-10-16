@@ -1,4 +1,4 @@
-@import '../common/common.scss';
+@import "../common/common.scss";
 
 code {
     color: rgb(209, 60, 85);
@@ -6,4 +6,9 @@ code {
 .mat-card {
     border: 2px solid rgb(209, 197, 199);
     padding: 20px;
+}
+.container {
+    margin: 20px;
+
+    height: 500px;
 }

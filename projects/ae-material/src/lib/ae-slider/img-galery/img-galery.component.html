@@ -1,16 +1,11 @@
-<div>
-
-    <div class="item-buttons">
-
-        <button class="img-button" backgroundImg="https://www.marketingtutor.net/wp-content/uploads/2018/06/what-is-a-product.jpg">Img 1</button>
-
-
+<div class="container">
+    <div class="item-buttons d-flex justify-content-around">
+        <button *ngFor="let item of input.images" mat-button class="img-button" [backgroundImg]="item.src"
+            (mouseenter)="setCurrentImg(item.src)">&nbsp;</button>
     </div>
 
     <div class="img-scene">
-        <img src="https://hbr.org/resources/images/article_assets/2019/11/Nov19_14_sb10067951dd-001.jpg">
-        <img src="https://hbr.org/resources/images/article_assets/2020/04/Apr20_07_1162572100.jpg">
-        <img src="https://www.marketingtutor.net/wp-content/uploads/2018/06/what-is-a-product.jpg">
+        <img #imgElement [src]="currentImg" [style.opacity]='imageOpacity'>
     </div>
 
 

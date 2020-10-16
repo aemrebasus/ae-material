@@ -28,3 +28,10 @@ button:hover {
 .active {
     background-color: rgba(42, 37, 37, 0.993);
 }
+
+
+
+.mat-toolbar{ 
+    margin-left: 0px;
+    
+}
