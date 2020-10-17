@@ -167,7 +167,7 @@ export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
     };
     this.selectedVideoFromTheList.bookmarks.forEach(b => {
       this.bookmarkList.list.push({
-        action: () => this.setCurrentTime(b.time),
+        action: () => { this.setCurrentTime(b.time), this.play(); },
         icon: 'bookmark',
         value: b.title
       });
@@ -410,6 +410,10 @@ export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
     const time = this.getCurrentTime();
     const title = prompt('Bookmeark title');
     const note = prompt('Note');
+
+    if (title === '') {
+      return;
+    }
     const newBookmark: AeVideoBookmark = { time, title, note };
 
     this.selectedVideoFromTheList.bookmarks.push({ ...newBookmark });
