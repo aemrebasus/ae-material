@@ -1,11 +1,11 @@
-@import '../common/common.scss';
+@import "../common/common.scss";
 
 .inbox-container {
     margin-left: 5px;
     width: 250px;
     box-shadow: 0px 0px 3px black;
+    background-color: whitesmoke;
 }
-
 
 .mat-form-field {
     margin: 0px;
