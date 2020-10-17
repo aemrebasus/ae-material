@@ -41,6 +41,10 @@ export class AeSideNavComponent implements AfterViewInit {
     this.input.toolbar.list.unshift({
       id: 1000001, action: () => this.toogleDrawer(), icon: 'menu', tooltip: 'Open Menu'
     });
+
+    this.input.list.list.unshift({
+      id: 123123, action: () => this.toogleDrawer(), icon: 'close', tooltip: 'Close Menu',
+    });
   }
 
 

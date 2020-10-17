@@ -1,6 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { components } from '../meta/components';
 
 export interface AeView {
   name: string;

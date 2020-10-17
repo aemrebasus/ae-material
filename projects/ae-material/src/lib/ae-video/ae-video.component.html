@@ -1,4 +1,4 @@
-<div #videoContainer class="main-container">
+<div #videoContainer class="main-container"  [class.full-screen-container]="isFullScreen">
 
     <div class="volume" [class.hidden]="isVolumeHidden">
         <mat-slider min="0" max="100" vertical="true" [(ngModel)]="volumeValue" (change)="updateVolumeValue()">

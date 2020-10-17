@@ -35,19 +35,23 @@ video {
     z-index: 1000;
     top: 0px;
 }
-
-.fullscreen-video {
-    position: absolute;
-    width: 100vw;
-    z-index: 1000;
+.full-screen-container {
+    position: fixed;
     left: 0px;
     top: 0px;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9981972391872;
 }
 
 .fullscreen-controls {
+    position: fixed;
+    top: 0px;
+    left: 0px;
     width: 100%;
-    z-index: 1000;
+    z-index: 1005;
     opacity: 0;
+    z-index: 12124124;
     transition: all ease-in-out 400ms;
 }
 
@@ -115,7 +119,7 @@ video {
 }
 
 .video-background {
-    background: url("https://media3.giphy.com/media/p4NLw3I4U0idi/giphy.gif");
+    background: url("https://media3.giphy.com/media/p4NLw3I4U0idi/giphy.gif"), white;
     background-size: contain;
     background-repeat: no-repeat;
 }

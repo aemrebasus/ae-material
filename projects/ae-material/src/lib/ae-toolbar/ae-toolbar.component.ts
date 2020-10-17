@@ -9,8 +9,14 @@ export interface AeToolbar {
 const sampleToolbar: AeToolbar = {
   list: [
     { id: '1', action: () => alert('Toolbar action'), icon: 'first_page', tooltip: 'Below Tooltip', tooltipPosition: 'below' },
-    { id: '2', action: () => alert('Toolbar Action'), icon: 'signal_cellular_connected_no_internet_4_bar', tooltip: 'Right Tooltip', tooltipPosition: 'right' },
-    { id: '3', action: () => alert('Toolbar Action'), icon: 'signal_cellular_connected_no_internet_4_bar', tooltip: 'Left Tooltip', tooltipPosition: 'left' },
+    {
+      id: '2', action: () => alert('Toolbar Action'), icon: 'signal_cellular_connected_no_internet_4_bar',
+      tooltip: 'Right Tooltip', tooltipPosition: 'right'
+    },
+    {
+      id: '3', action: () => alert('Toolbar Action'), icon: 'signal_cellular_connected_no_internet_4_bar',
+      tooltip: 'Left Tooltip', tooltipPosition: 'left'
+    },
     { id: '4', action: () => alert('Toolbar Action'), icon: 'list_alt', tooltip: 'Above Tooltip', tooltipPosition: 'above' },
   ]
 };
