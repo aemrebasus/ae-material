@@ -167,7 +167,7 @@ export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
     };
     this.selectedVideoFromTheList.bookmarks.forEach(b => {
       this.bookmarkList.list.push({
-        action: () => { this.setCurrentTime(b.time), this.play(); },
+        action: () => { this.setCurrentTime(b.time), this.play(); this.isBookmarkListOpen = false; },
         icon: 'bookmark',
         value: b.title
       });

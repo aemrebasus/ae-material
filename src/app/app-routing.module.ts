@@ -9,7 +9,7 @@ import { AeDocComponent, AeDocModule, AeLayoutComponent, AeSliderComponent, AeTo
 
 
 const routes: Routes = [
-  { path: '', component: AeToolbarComponent, },
+  { path: '', component: AeDocComponent, },
   { path: 'doc', component: AeDocComponent },
   { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
   { path: 'client', loadChildren: () => import('./client/client.module').then(m => m.ClientModule) },
