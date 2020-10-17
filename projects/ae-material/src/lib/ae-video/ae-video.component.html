@@ -1,4 +1,4 @@
-<div #videoContainer class="main-container"  [class.full-screen-container]="isFullScreen">
+<div #videoContainer class="main-container" [class.full-screen-container]="isFullScreen">
 
     <div class="volume" [class.hidden]="isVolumeHidden">
         <mat-slider min="0" max="100" vertical="true" [(ngModel)]="volumeValue" (change)="updateVolumeValue()">
@@ -17,7 +17,6 @@
         <div class="bookmark-list" [class.bookmark-list-open]="isBookmarkListOpen">
             <ae-list [input]="bookmarkList"></ae-list>
         </div>
-
     </div>
 
     <div class="controls" [class.fullscreen-controls]="isFullScreen">

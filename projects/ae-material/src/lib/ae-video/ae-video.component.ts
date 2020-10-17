@@ -83,6 +83,7 @@ export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
   public isBookmarkListOpen = false;
   public selectedVideoFromTheList: AeSingleVideo = null;
 
+  public newBookmark = '';
 
   @ViewChild('videoElement') videoElement: ElementRef<HTMLVideoElement>;
   @ViewChild('videoSource') videoSource: ElementRef<HTMLSourceElement>;
@@ -151,7 +152,20 @@ export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
    */
   private initBookmarkList(): void {
     this.bookmarkList = {
-      list: []
+      list: [
+        {
+          id: -100,
+          action: () => {
+            const time = this.getCurrentTime();
+            const title = prompt('Bookmeark title');
+            const note = prompt('Note');
+            this.selectedVideoFromTheList.bookmarks.push({ time, title, note });
+            this.initBookmarkList();
+          },
+          icon: 'add',
+          color: 'accent'
+        }
+      ]
     };
     this.selectedVideoFromTheList.bookmarks.forEach(b => {
       this.bookmarkList.list.push({
@@ -390,6 +404,12 @@ export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     }
     this.isFullScreen = false;
+  }
+
+  // BOOKMARK
+
+  public addBookmark(mark: string): void {
+    console.log(mark);
   }
 
 }
