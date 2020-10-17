@@ -1,4 +1,5 @@
-import { AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { parse } from 'path';
 import { AeList } from '../ae-list/ae-list.component';
 import { AeToolbar } from '../ae-toolbar/ae-toolbar.component';
 
@@ -90,6 +91,7 @@ export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @Input() input: AeVideo = sampleVideoInput;
 
+  @Output() addedBookmark = new EventEmitter<{ bookmark: AeVideoBookmark, videoId: string | number }>();
 
   public videoList: AeList = {
     list: []
@@ -156,11 +158,7 @@ export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
         {
           id: -100,
           action: () => {
-            const time = this.getCurrentTime();
-            const title = prompt('Bookmeark title');
-            const note = prompt('Note');
-            this.selectedVideoFromTheList.bookmarks.push({ time, title, note });
-            this.initBookmarkList();
+            this.addBookmark();
           },
           icon: 'add',
           color: 'accent'
@@ -408,8 +406,16 @@ export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
 
   // BOOKMARK
 
-  public addBookmark(mark: string): void {
-    console.log(mark);
+  public addBookmark(): void {
+    const time = this.getCurrentTime();
+    const title = prompt('Bookmeark title');
+    const note = prompt('Note');
+    const newBookmark: AeVideoBookmark = { time, title, note };
+
+    this.selectedVideoFromTheList.bookmarks.push({ ...newBookmark });
+    this.initBookmarkList();
+    this.addedBookmark.emit({ bookmark: { ...newBookmark }, videoId: this.selectedVideoFromTheList.id });
+
   }
 
 }
