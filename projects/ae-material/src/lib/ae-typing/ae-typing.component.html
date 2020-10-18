@@ -1,0 +1,21 @@
+<h1>Typing Practice</h1>
+<hr>
+
+<div class="content">
+    <div style="margin-bottom:10px"> <button mat-raised-button>{{currentTime}}</button> </div>
+    <div *ngIf="result" style="margin-bottom: 10px;">
+        <div>
+            <button mat-raised-button>You typed <strong> {{result.correct}} correct words </strong> and <strong>
+                    {{result.wrong}} wrong words </strong>. Your
+                typing speed is <strong>
+                    {{result.speed}} </strong>
+                .</button> </div>
+    </div>
+    <span class="letter" [class.correct]="letter.correct" [class.wrong]="letter.wrong"
+        *ngFor="let letter of letters">{{letter.value}}</span>
+
+    <div class="d-flex justify-content-end">
+        <button class="ml-2" mat-raised-button color="accent" (click)="start()">{{startLabel}}</button>
+        <button class="ml-2" mat-raised-button color="accent" (click)="restart()">Restart</button>
+    </div>
+</div>

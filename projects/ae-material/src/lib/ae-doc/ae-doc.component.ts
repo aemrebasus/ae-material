@@ -11,6 +11,7 @@ import { AeSideNav, AeSideNavComponent } from '../ae-side-nav/ae-side-nav.compon
 import { AeSliderComponent } from '../ae-slider/ae-slider.component';
 import { AeTableComponent } from '../ae-table/ae-table.component';
 import { AeToolbarComponent } from '../ae-toolbar/ae-toolbar.component';
+import { AeTypingComponent } from '../ae-typing/ae-typing.component';
 import { AeVideoComponent } from '../ae-video/ae-video.component';
 import { AeView } from '../ae-view/ae-view.component';
 import { components } from '../meta/components';
@@ -72,18 +73,22 @@ export class AeDocComponent {
         },
         {
           value: 'Navbar Menu', icon: 'menu', tooltip: 'Navbar Menu',
-          action: () => { this.viewInput = components.navbarMenu, this.component = AeNavbarMenuComponent; }
+          action: () => { this.viewInput = components.navbarMenu; this.component = AeNavbarMenuComponent; }
         }, {
           value: 'Message', icon: 'message', tooltip: 'Message',
-          action: () => { this.viewInput = components.message, this.component = AeMessageComponent; }
+          action: () => { this.viewInput = components.message; this.component = AeMessageComponent; }
         },
         {
           value: 'Video', icon: 'videocam', tooltip: 'Video',
-          action: () => { this.viewInput = components.video, this.component = AeVideoComponent; }
+          action: () => { this.viewInput = components.video; this.component = AeVideoComponent; }
         },
         {
           value: 'Slider', icon: 'slideshow', tooltip: 'Slider',
-          action: () => { this.viewInput = components.slider, this.component = AeSliderComponent; }
+          action: () => { this.viewInput = components.slider; this.component = AeSliderComponent; }
+        }, {
+          value: 'Typing', icon: 'keyboard', tooltip: 'Typing',
+          action: () => { this.viewInput = components.typing; this.component = AeTypingComponent; }
+
         }
       ]
     },

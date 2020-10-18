@@ -18,6 +18,7 @@ import { AeVideoComponent } from '../ae-video/ae-video.component';
 import { AeVideoModule } from '../ae-video/ae-video.module';
 import { AeLayoutModule } from '../ae-layout/ae-layout.module';
 import { AeSliderModule } from '../ae-slider/ae-slider.module';
+import { AeTypingModule } from '../ae-typing/ae-typing.module';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { AeSliderModule } from '../ae-slider/ae-slider.module';
     AeMessageModule,
     AeVideoModule,
     AeLayoutModule,
-    AeSliderModule
+    AeSliderModule,
+    AeTypingModule
   ],
   exports: [
     AeDocComponent,
@@ -58,6 +60,7 @@ import { AeSliderModule } from '../ae-slider/ae-slider.module';
     AeVideoComponent,
     AeLayoutModule,
     AeSliderModule,
+    AeTypingModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
 })

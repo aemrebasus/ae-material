@@ -98,6 +98,13 @@ export const components: { [key: string]: AeView } = {
         component: 'AeSliderComponent',
         selector: 'ae-slider',
         interface: 'AeSlider',
+    },
+    typing: {
+        name: 'Typing',
+        module: 'AeTypingModule',
+        component: 'AeTypingComponent',
+        selector: 'ae-typing',
+        interface: 'string'
     }
 
     // TODO: Add the new components here.
