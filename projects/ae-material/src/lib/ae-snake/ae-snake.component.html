@@ -1,0 +1,20 @@
+<div class="game-pad">
+
+    <div class="controls" [hidden]="started">
+        <h1> Snake </h1>
+        <div class="mt-1">
+            <button style="width: 100px;" mat-raised-button color="accent" (click)="start()" [disabled]="started"> Start
+            </button>
+        </div>
+
+    </div>
+
+    <canvas #canvas [width]="boardWidth" [height]="boardHeight"> </canvas>
+
+    <div>
+        <button style="width: 100px;" mat-raised-button color="accent" (click)="stop(); start()" [disabled]="!started">
+            Restart
+        </button>
+    </div>
+
+</div>

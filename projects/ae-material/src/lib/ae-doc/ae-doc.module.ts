@@ -19,6 +19,7 @@ import { AeVideoModule } from '../ae-video/ae-video.module';
 import { AeLayoutModule } from '../ae-layout/ae-layout.module';
 import { AeSliderModule } from '../ae-slider/ae-slider.module';
 import { AeTypingModule } from '../ae-typing/ae-typing.module';
+import { AeSnakeModule } from '../ae-snake/ae-snake.module';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { AeTypingModule } from '../ae-typing/ae-typing.module';
     AeVideoModule,
     AeLayoutModule,
     AeSliderModule,
-    AeTypingModule
+    AeTypingModule,
+    AeSnakeModule
   ],
   exports: [
     AeDocComponent,
@@ -61,6 +63,7 @@ import { AeTypingModule } from '../ae-typing/ae-typing.module';
     AeLayoutModule,
     AeSliderModule,
     AeTypingModule,
+    AeSnakeModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
 })

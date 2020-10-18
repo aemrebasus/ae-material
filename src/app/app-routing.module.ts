@@ -5,13 +5,14 @@ import { GreetingModule } from './greeting/greeting.module';
 /**
  * Library
  */
-import { AeDocComponent, AeDocModule, AeLayoutComponent, AeSliderComponent, AeToolbarComponent } from 'projects/ae-material/src/public-api';
+import { AeDocComponent, AeDocModule, AeLayoutComponent, AeSliderComponent, AeSnakeComponent, AeToolbarComponent } from 'projects/ae-material/src/public-api';
 import { AeTypingComponent } from 'projects/ae-material/src/lib/ae-typing/ae-typing.component';
 
 
 const routes: Routes = [
   { path: '', component: AeDocComponent, },
   { path: 'typing', component: AeTypingComponent },
+  { path: 'snake', component: AeSnakeComponent },
   { path: 'doc', component: AeDocComponent },
   { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
   { path: 'client', loadChildren: () => import('./client/client.module').then(m => m.ClientModule) },
