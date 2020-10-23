@@ -9,7 +9,6 @@ import { AeMessageComponent } from '../ae-message/ae-message.component';
 import { AeNavbarMenuComponent } from '../ae-navbar-menu/ae-navbar-menu.component';
 import { AeSideNav, AeSideNavComponent } from '../ae-side-nav/ae-side-nav.component';
 import { AeSliderComponent } from '../ae-slider/ae-slider.component';
-import { AeSnakeComponent } from '../ae-snake/ae-snake.component';
 import { AeTableComponent } from '../ae-table/ae-table.component';
 import { AeToolbarComponent } from '../ae-toolbar/ae-toolbar.component';
 import { AeTypingComponent } from '../ae-typing/ae-typing.component';
@@ -91,10 +90,6 @@ export class AeDocComponent {
           value: 'Typing', icon: 'keyboard', tooltip: 'Typing',
           action: () => { this.viewInput = components.typing; this.component = AeTypingComponent; }
 
-        },
-        {
-          value: 'Snake', icon: 'gamepad', tooltip: 'Snake',
-          action: () => { this.viewInput = components.snake; this.component = AeSnakeComponent; }
         }
       ]
     },

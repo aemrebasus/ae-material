@@ -105,13 +105,6 @@ export const components: { [key: string]: AeView } = {
         component: 'AeTypingComponent',
         selector: 'ae-typing',
         interface: 'string'
-    },
-    snake: {
-        name: 'Snake',
-        module: 'AeSnakeModule',
-        component: 'AeSnakeComponent',
-        selector: 'ae-snake',
-        interface: 'none'
     }
 
     // TODO: Add the new components here.
