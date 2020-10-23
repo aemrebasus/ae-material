@@ -6,10 +6,12 @@
     </div>
 
     <div class="video-container">
+
         <video #videoElement [class.video-background]="!selectedVideoFromTheList"
             [class.fullscreen-video]="isFullScreen">
             <source #videoSource [src]="selectedVideoFromTheList ? selectedVideoFromTheList.src: ''" type="video/mp4" />
         </video>
+
         <div class="video-list" [class.video-list-open]="isVideoListOpen">
             <ae-list [input]="videoList"></ae-list>
         </div>
@@ -17,6 +19,7 @@
         <div class="bookmark-list" [class.bookmark-list-open]="isBookmarkListOpen">
             <ae-list [input]="bookmarkList"></ae-list>
         </div>
+
     </div>
 
     <div class="controls" [class.fullscreen-controls]="isFullScreen">

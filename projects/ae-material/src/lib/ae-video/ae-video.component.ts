@@ -413,11 +413,14 @@ export class AeVideoComponent implements OnInit, AfterViewInit, OnDestroy {
     if (title === '') {
       return;
     }
+
     const newBookmark: AeVideoBookmark = { time, title, note };
 
-    this.selectedVideoFromTheList.bookmarks.push({ ...newBookmark });
-    this.initBookmarkList();
-    this.addedBookmark.emit({ bookmark: { ...newBookmark }, videoId: this.selectedVideoFromTheList.id });
+    if (!(title !== '' && note !== '')) {
+      this.selectedVideoFromTheList.bookmarks.push({ ...newBookmark });
+      this.initBookmarkList();
+      this.addedBookmark.emit({ bookmark: { ...newBookmark }, videoId: this.selectedVideoFromTheList.id });
+    }
 
   }
 

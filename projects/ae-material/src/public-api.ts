@@ -57,9 +57,6 @@ export * from './lib/ae-slider/ae-slider.component';
 export * from './lib/ae-typing/ae-typing.module';
 export * from './lib/ae-typing/ae-typing.component';
 
-export * from './lib/ae-snake/ae-snake.module';
-export * from './lib/ae-snake/ae-snake.component';
-
 export * from './lib/common/IconType';
 export * from './lib/common/MenuItem';
 export * from './lib/ae-form/builtin-inputs';
