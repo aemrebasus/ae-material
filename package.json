@@ -1,7 +1,7 @@
 {
   "name": "ae-material-site",
-  "version": "1.6.0",
-  "homepage": "",
+  "version": "1.6.1",
+  "homepage": "https://aemrebasus.github.io/ae-material",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

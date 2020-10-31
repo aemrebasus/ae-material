@@ -3,9 +3,9 @@
   "version": "1.6.0",
   "repository": {
     "type": "npm",
-    "url": "https://github.com/aemrebasus/ae-material/tree/master/projects/ae-material"
+    "url": "https://github.com/aemrebasus/ae-material"
   },
-  "homepage": "",
+  "homepage": "https://aemrebasus.github.io/ae-material",
   "peerDependencies": {
     "@angular/common": "^10.1.3",
     "@angular/core": "^10.1.3",
