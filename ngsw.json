@@ -1,0 +1,140 @@
+{
+  "configVersion": 1,
+  "timestamp": 1604127015241,
+  "index": "./ae-material-site/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "./ae-material-site/favicon.ico",
+        "./ae-material-site/index.html",
+        "./ae-material-site/main.0ad79d38c5699c6830b9.js",
+        "./ae-material-site/manifest.webmanifest",
+        "./ae-material-site/polyfills.b5c4e956902aef71002b.js",
+        "./ae-material-site/runtime.acf0dec4155e77772545.js",
+        "./ae-material-site/styles.e5eea08a87d246da73e7.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "./ae-material-site/assets/icons/icon-128x128.png",
+        "./ae-material-site/assets/icons/icon-144x144.png",
+        "./ae-material-site/assets/icons/icon-152x152.png",
+        "./ae-material-site/assets/icons/icon-192x192.png",
+        "./ae-material-site/assets/icons/icon-384x384.png",
+        "./ae-material-site/assets/icons/icon-512x512.png",
+        "./ae-material-site/assets/icons/icon-72x72.png",
+        "./ae-material-site/assets/icons/icon-96x96.png",
+        "./ae-material-site/assets/icons/logo.png",
+        "./ae-material-site/assets/img/about/1.jpg",
+        "./ae-material-site/assets/img/about/2.jpg",
+        "./ae-material-site/assets/img/about/3.jpg",
+        "./ae-material-site/assets/img/about/4.jpg",
+        "./ae-material-site/assets/img/close-icon.svg",
+        "./ae-material-site/assets/img/favicon.ico",
+        "./ae-material-site/assets/img/header-bg.jpg",
+        "./ae-material-site/assets/img/logos/creative-market.jpg",
+        "./ae-material-site/assets/img/logos/designmodo.jpg",
+        "./ae-material-site/assets/img/logos/envato.jpg",
+        "./ae-material-site/assets/img/logos/themeforest.jpg",
+        "./ae-material-site/assets/img/map-image.png",
+        "./ae-material-site/assets/img/navbar-logo.svg",
+        "./ae-material-site/assets/img/portfolio/01-full.jpg",
+        "./ae-material-site/assets/img/portfolio/01-thumbnail.jpg",
+        "./ae-material-site/assets/img/portfolio/02-full.jpg",
+        "./ae-material-site/assets/img/portfolio/02-thumbnail.jpg",
+        "./ae-material-site/assets/img/portfolio/03-full.jpg",
+        "./ae-material-site/assets/img/portfolio/03-thumbnail.jpg",
+        "./ae-material-site/assets/img/portfolio/04-full.jpg",
+        "./ae-material-site/assets/img/portfolio/04-thumbnail.jpg",
+        "./ae-material-site/assets/img/portfolio/05-full.jpg",
+        "./ae-material-site/assets/img/portfolio/05-thumbnail.jpg",
+        "./ae-material-site/assets/img/portfolio/06-full.jpg",
+        "./ae-material-site/assets/img/portfolio/06-thumbnail.jpg",
+        "./ae-material-site/assets/img/team/1.jpg",
+        "./ae-material-site/assets/img/team/2.jpg",
+        "./ae-material-site/assets/img/team/3.jpg",
+        "./ae-material-site/assets/videos/hayta-pahali.mp4"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "./ae-material-site/assets/icons/icon-128x128.png": "dae3b6ed49bdaf4327b92531d4b5b4a5d30c7532",
+    "./ae-material-site/assets/icons/icon-144x144.png": "b0bd89982e08f9bd2b642928f5391915b74799a7",
+    "./ae-material-site/assets/icons/icon-152x152.png": "7479a9477815dfd9668d60f8b3b2fba709b91310",
+    "./ae-material-site/assets/icons/icon-192x192.png": "06ed1d1aae038bafc8548118630fd73321c67d10",
+    "./ae-material-site/assets/icons/icon-384x384.png": "329749cd6393768d3131ed6304c136b1ca05f2fd",
+    "./ae-material-site/assets/icons/icon-512x512.png": "d3df989f9d2e74b9c1ffe19d27e84591255904ff",
+    "./ae-material-site/assets/icons/icon-72x72.png": "c457e56089a36952cd67156f9996bc4ce54a5ed9",
+    "./ae-material-site/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
+    "./ae-material-site/assets/icons/logo.png": "40236678c128b0528a3e0ac169f369ec651385f6",
+    "./ae-material-site/assets/img/about/1.jpg": "e7bb54b033b40e313a642650c5066216c08c62b2",
+    "./ae-material-site/assets/img/about/2.jpg": "fd994613711ac2a5488c18b87864092fa171ffb9",
+    "./ae-material-site/assets/img/about/3.jpg": "2532a0c5ea4f2dab7f18d52d97c2f6db5cb65e4e",
+    "./ae-material-site/assets/img/about/4.jpg": "a52dace1cbf15fd471cabe60fa16f6f9f9898cad",
+    "./ae-material-site/assets/img/close-icon.svg": "e54e73161c615fcd9fcedfa300db59591d1b239f",
+    "./ae-material-site/assets/img/favicon.ico": "122f443e27953c1fda437a6a0db20a990ee543d4",
+    "./ae-material-site/assets/img/header-bg.jpg": "ae033b5ab5f69177cf28f87a3edbedb49490276f",
+    "./ae-material-site/assets/img/logos/creative-market.jpg": "1856902df3ae293c4deaab0ed02c1d5e1765d50b",
+    "./ae-material-site/assets/img/logos/designmodo.jpg": "4801596ecc316fd10d37f72296a83eb49bbf9c4b",
+    "./ae-material-site/assets/img/logos/envato.jpg": "0eb68b965a702719235ddfbb68c24ca5238f9ebb",
+    "./ae-material-site/assets/img/logos/themeforest.jpg": "31d06bc81ca245ac946f94a2a761ac416233ef29",
+    "./ae-material-site/assets/img/map-image.png": "14192e7ab5b5395ac5ba0857b91aef8754ee70fb",
+    "./ae-material-site/assets/img/navbar-logo.svg": "e581f89f3c5cd9ef18f07d3b226b2572435f4208",
+    "./ae-material-site/assets/img/portfolio/01-full.jpg": "24ef7b065077c81fd3829f945b429c1158247557",
+    "./ae-material-site/assets/img/portfolio/01-thumbnail.jpg": "3e9a5a1fecc4a5d6e773714ed1770776916ddf4e",
+    "./ae-material-site/assets/img/portfolio/02-full.jpg": "e45fa93a62b934433169bc5ad91fe64a026304eb",
+    "./ae-material-site/assets/img/portfolio/02-thumbnail.jpg": "3543c448de424aacc5f1008d90e67397695df428",
+    "./ae-material-site/assets/img/portfolio/03-full.jpg": "9581f315789db0e92b61b152005645528a1d309b",
+    "./ae-material-site/assets/img/portfolio/03-thumbnail.jpg": "11893c68ee89dfbd5bd668b41af1ef3ac0e3ac7a",
+    "./ae-material-site/assets/img/portfolio/04-full.jpg": "28593cb229b197dd98cd295a1cd697b2f709c627",
+    "./ae-material-site/assets/img/portfolio/04-thumbnail.jpg": "c5e1d7ad66cec4b4981e623ec59727cf9b8b0982",
+    "./ae-material-site/assets/img/portfolio/05-full.jpg": "b2589eef49dd3f65d36647f0f46a4e90136c2c56",
+    "./ae-material-site/assets/img/portfolio/05-thumbnail.jpg": "b633224e2a9d6565eba66a638c899f37aab7f8b1",
+    "./ae-material-site/assets/img/portfolio/06-full.jpg": "03eafd9ef5574e64a0c1cb58dca3803ad801c3dc",
+    "./ae-material-site/assets/img/portfolio/06-thumbnail.jpg": "235d6edaccc8622174d9fb1496e90f5f39b28575",
+    "./ae-material-site/assets/img/team/1.jpg": "1170ebafdd6b110fa655832f0325ab83cac43263",
+    "./ae-material-site/assets/img/team/2.jpg": "ff6dae5876c7101650859b91cd731429bc7e1ab0",
+    "./ae-material-site/assets/img/team/3.jpg": "b47599ac773d55f23b672f4ece839074cfa52994",
+    "./ae-material-site/assets/videos/hayta-pahali.mp4": "f68cc5261fbc4718a0cbe3bac4dc608811a8cb23",
+    "./ae-material-site/favicon.ico": "7e97850acee68f1e395fbdfcdba2aeca1140b9a6",
+    "./ae-material-site/index.html": "4161d8054f655654c10f3713f3cb8a52666f17a9",
+    "./ae-material-site/main.0ad79d38c5699c6830b9.js": "50f2d37c98246ce1c45a00d2563dffab5d12814a",
+    "./ae-material-site/manifest.webmanifest": "e84431aed73c6979d30bee3cc88e051f3e802050",
+    "./ae-material-site/polyfills.b5c4e956902aef71002b.js": "c7c2cba0924481ddf68ea864c783c27435be93c0",
+    "./ae-material-site/runtime.acf0dec4155e77772545.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
+    "./ae-material-site/styles.e5eea08a87d246da73e7.css": "53da9d44349f93e45d4f925c7bae2be18c89479d"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ]
+}
