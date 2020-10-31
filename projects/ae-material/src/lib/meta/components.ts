@@ -105,6 +105,13 @@ export const components: { [key: string]: AeView } = {
         component: 'AeTypingComponent',
         selector: 'ae-typing',
         interface: 'string'
+    },
+    social: {
+        name: 'Social Icons',
+        module: 'AeSocialModule',
+        component: 'AeSocialComponent',
+        selector: 'ae-social',
+        interface: 'AeSocial'
     }
 
     // TODO: Add the new components here.

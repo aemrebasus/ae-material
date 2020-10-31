@@ -54,6 +54,10 @@ export * from './lib/ae-slider/ae-slider.component';
 export * from './lib/ae-typing/ae-typing.module';
 export * from './lib/ae-typing/ae-typing.component';
 
+export * from './lib/ae-social/ae-social.module';
+export * from './lib/ae-social/ae-social.component';
+
+
 export * from './lib/common/IconType';
 export * from './lib/common/MenuItem';
 export * from './lib/ae-form/builtin-inputs';

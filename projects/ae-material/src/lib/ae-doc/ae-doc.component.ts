@@ -9,6 +9,7 @@ import { AeMessageComponent } from '../ae-message/ae-message.component';
 import { AeNavbarMenuComponent } from '../ae-navbar-menu/ae-navbar-menu.component';
 import { AeSideNav, AeSideNavComponent } from '../ae-side-nav/ae-side-nav.component';
 import { AeSliderComponent } from '../ae-slider/ae-slider.component';
+import { AeSocialComponent } from '../ae-social/ae-social.component';
 import { AeTableComponent } from '../ae-table/ae-table.component';
 import { AeToolbarComponent } from '../ae-toolbar/ae-toolbar.component';
 import { AeTypingComponent } from '../ae-typing/ae-typing.component';
@@ -38,6 +39,10 @@ export class AeDocComponent {
         {
           value: 'avatar', icon: 'image_search', tooltip: 'Avatar Component',
           action: () => { this.viewInput = components.avatar; this.component = AeAvatarComponent; }
+        },
+        {
+          value: 'social', icon: 'share', tooltip: 'Social Media',
+          action: () => { this.viewInput = components.social; this.component = AeSocialComponent; }
         },
         {
           value: 'card', icon: 'card_giftcard', tooltip: 'Card Component',
