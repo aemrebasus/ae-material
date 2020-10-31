@@ -1,6 +1,7 @@
 {
-  "name": "ae-material-project",
-  "version": "0.0.0",
+  "name": "ae-material",
+  "version": "1.6.0",
+  "homepage": "",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -9,8 +10,8 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "build:lib": "ng build --prod aeMaterial",
-    "build:site": "ng build --prod ae-material-project --base-href=./ae-material-project",
-    "deploy": "gh-pages -d dist/ae-material-project",
+    "build:site": "ng build --prod ae-material-site --base-href=./ae-material-site",
+    "deploy": "gh-pages -d dist/ae-material-site",
     "publish": "npm publish dist/ae-material"
   },
   "private": true,
@@ -41,10 +42,11 @@
     "@angular-devkit/build-angular": "0.1001.3",
     "@angular/cli": "10.1.3",
     "@angular/compiler-cli": "10.1.3",
-    "@types/node": "12.11.1",
     "@types/jasmine": "3.5.0",
     "@types/jasminewd2": "2.0.3",
+    "@types/node": "12.11.1",
     "codelyzer": "6.0.0",
+    "gh-pages": "^3.1.0",
     "jasmine-core": "3.6.0",
     "jasmine-spec-reporter": "5.0.0",
     "karma": "5.0.0",

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "project-management": {
+    "ae-material-site": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/project-management",
+            "outputPath": "dist/ae-material-site",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -70,18 +70,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "project-management:build"
+            "browserTarget": "ae-material-site:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "project-management:build:production"
+              "browserTarget": "ae-material-site:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "project-management:build"
+            "browserTarget": "ae-material-site:build"
           }
         },
         "test": {
@@ -120,11 +120,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "project-management:serve"
+            "devServerTarget": "ae-material-site:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "project-management:serve:production"
+              "devServerTarget": "ae-material-site:serve:production"
             }
           }
         }
@@ -450,7 +450,7 @@
         }
       }
     },
-    "aeMaterial": {
+    "ae-material": {
       "projectType": "library",
       "root": "projects/ae-material",
       "sourceRoot": "projects/ae-material/src",
@@ -491,5 +491,5 @@
       }
     }
   },
-  "defaultProject": "project-management"
+  "defaultProject": "ae-material-site"
 }

@@ -16,7 +16,6 @@ import { AeNavbarMenuModule } from '../ae-navbar-menu/ae-navbar-menu.module';
 import { AeMessageModule } from '../ae-message/ae-message.module';
 import { AeVideoComponent } from '../ae-video/ae-video.component';
 import { AeVideoModule } from '../ae-video/ae-video.module';
-import { AeLayoutModule } from '../ae-layout/ae-layout.module';
 import { AeSliderModule } from '../ae-slider/ae-slider.module';
 import { AeTypingModule } from '../ae-typing/ae-typing.module';
 
@@ -39,7 +38,6 @@ import { AeTypingModule } from '../ae-typing/ae-typing.module';
     AeNavbarMenuModule,
     AeMessageModule,
     AeVideoModule,
-    AeLayoutModule,
     AeSliderModule,
     AeTypingModule,
   ],
@@ -58,7 +56,6 @@ import { AeTypingModule } from '../ae-typing/ae-typing.module';
     AeNavbarMenuModule,
     AeMessageModule,
     AeVideoComponent,
-    AeLayoutModule,
     AeSliderModule,
     AeTypingModule,
   ],
