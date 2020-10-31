@@ -1,19 +1,23 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { sampleText } from './sample-text';
 
 @Component({
   selector: 'ae-typing',
   templateUrl: './ae-typing.component.html',
   styleUrls: ['./ae-typing.component.css']
 })
-export class AeTypingComponent implements OnInit {
+export class AeTypingComponent implements OnInit, OnDestroy {
 
-  @Input() input = 'Ahmet, highly passionate , self motivated full stack software engineer, expertise in Angular Framework, Java Spring Boot, and C# .Net Core.';
+  @ViewChild('content') contentElement: ElementRef<HTMLDivElement>;
+
+  @Input() input;
 
   currentTimeAsSeconds = 0;
   currentTime = '--:--';
   startLabel = 'start';
-  public letters: { correct?: true | null, wrong?: true | null, index: number, value: string }[];
+  scrollCount = 0;
 
+  public letters: { correct?: true | null, wrong?: true | null, index: number, value: string }[];
 
   public result: {
     correct: number,
@@ -28,19 +32,33 @@ export class AeTypingComponent implements OnInit {
 
   initProperties(): void {
     let index = 0;
-    this.letters = this.input.split('').map(l => ({ index: index++, value: l }));
+
+    setTimeout(() => {
+      this.input = sampleText;
+      this.letters = this.input.split('').map(l => ({ index: index++, value: l }));
+    }, 0);
+
     this.currentTimeAsSeconds = 0;
     this.currentTime = '--:--';
     this.startLabel = 'start';
     this.correctLetter = '';
     this.currentLetter = '';
     this.currentIndex = 0;
+
   }
 
 
   ngOnInit(): void {
+
+
+
+
     this.initProperties();
     const keypressHandler = (event) => {
+
+      if (event.code === 'Space') {
+        event.preventDefault();
+      }
 
       if (event.key === 'Shift' || event.key === 'CapsLock' || event.key === 'Alt') { return; }
 
@@ -74,11 +92,22 @@ export class AeTypingComponent implements OnInit {
         return;
       }
 
+      this.scrollCount++;
+
+      if (this.scrollCount > 60) {
+        this.contentElement.nativeElement.scrollBy({ top: 45 });
+        this.scrollCount = 0;
+      }
     };
 
     document.addEventListener('keydown', keypressHandler);
+
   }
 
+
+  ngOnDestroy(): void {
+
+  }
 
   // tslint:disable-next-line: member-ordering
   public timeInterval = null;

@@ -1,10 +1,10 @@
-<div class="content">
+<mat-spinner *ngIf="!letters"></mat-spinner>
+<div #content class="content" *ngIf="letters">
     <div style="margin-bottom:10px"> <button mat-raised-button>{{currentTime}}</button> </div>
     <div *ngIf="result" style="margin-bottom: 10px;">
         <div>
             <button mat-raised-button>You typed <strong> {{result.correct}} correct words </strong> and <strong>
-                    {{result.wrong}} wrong words </strong>. Your
-                typing speed is <strong>
+                    {{result.wrong}} wrong words </strong>. Your typing speed is <strong>
                     {{result.speed}} </strong>
                 .</button> </div>
     </div>

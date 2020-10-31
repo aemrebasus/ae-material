@@ -4,6 +4,7 @@ import { AeTypingComponent } from './ae-typing.component';
 
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 
@@ -12,7 +13,8 @@ import { MatButtonModule } from '@angular/material/button';
   imports: [
     CommonModule,
     FormsModule,
-    MatButtonModule
+    MatButtonModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     AeTypingComponent

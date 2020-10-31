@@ -21,17 +21,6 @@ button {
     transition: all ease-in-out 400ms;
 }
 
-button:hover {
-    background-color: rgba(42, 37, 37, 0.993);
-}
-
-.active {
-    background-color: rgba(42, 37, 37, 0.993);
-}
-
-
-
-.mat-toolbar{ 
+.mat-toolbar {
     margin-left: 0px;
-    
 }

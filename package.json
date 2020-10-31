@@ -7,8 +7,11 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e", 
-    "build:library":"ng build --prod aeMaterial"
+    "e2e": "ng e2e",
+    "build:lib": "ng build --prod aeMaterial",
+    "build:site": "ng build --prod ae-material-project --base-href=./ae-material-project",
+    "deploy": "gh-pages -d dist/ae-material-project",
+    "publish": "npm publish dist/ae-material"
   },
   "private": true,
   "dependencies": {
